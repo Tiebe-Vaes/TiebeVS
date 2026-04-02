@@ -143,9 +143,9 @@ const MANUAL_PROJECTS = [
     source: 'WordPress',
     name: 'PetalPurrs',
     description:
-      'Creatieve WordPress website met sterke visual identity en content-first aanpak.',
+      'Een cozy idle game waarin je een eigen cafe uitbaat, stap voor stap drankjes maakt voor klanten en met je inkomsten je zaak steeds gezelliger maakt.',
     language: 'CMS',
-    tech: ['WordPress', 'Custom Theme', 'Responsive Design'],
+    tech: ['Idle Gameplay', 'Cafe Management', 'Drink Crafting', 'Progression System'],
     repoUrl: 'https://petalpurrs.wordpress.com/',
     liveUrl: 'https://petalpurrs.wordpress.com/',
     updatedAt: '2026-04-02T00:00:00Z',
@@ -155,18 +155,14 @@ const MANUAL_PROJECTS = [
     source: 'GitLab',
     name: 'GoSmartLib',
     description:
-      'Full-stack bibliotheekplatform voor multi-campus scholen met Next.js 16, Spring Boot 3.5, MySQL, Docker en Traefik. Deze AP GitLab repository is afgeschermd en wordt daarom handmatig gepind.',
+      'Een digitaal bibliotheekplatform voor scholen waarmee leerlingen en leerkrachten boeken kunnen zoeken, uitlenen en beheren over meerdere campussen. Deze AP GitLab repository is afgeschermd en wordt daarom handmatig gepind.',
     language: 'Full Stack',
     tech: [
-      'Next.js 16',
-      'React 19',
-      'TypeScript 5',
-      'Tailwind CSS 4',
-      'Spring Boot 3.5',
-      'Java 21',
-      'MySQL 8',
-      'Docker',
-      'Traefik',
+      'Library Management',
+      'Search & Borrow Flow',
+      'Multi-campus Support',
+      'Student-friendly UX',
+      'Admin Management',
     ],
     repoUrl:
       'https://gitlab.apstudent.be/bachelor-it/software-project/25-26/team-06/gosmartlib',
@@ -177,11 +173,69 @@ const MANUAL_PROJECTS = [
 
 const GITHUB_DESCRIPTION_OVERRIDES = {
   'Tiebe-Vaes/intro-mobile-react':
-    'React oefenproject met mobiele focus en component-based UI, uitgewerkt als introductie in frontend development.',
+    'Een mobiele app voor karting waarmee je reservaties regelt, races aanmaakt of eraan deelneemt, chat met deelnemers gebruikt en gericht zoekt of filtert op races en racetracks.',
+  'TiebeVaes/intro-mobile-react':
+    'Een mobiele app voor karting waarmee je reservaties regelt, races aanmaakt of eraan deelneemt, chat met deelnemers gebruikt en gericht zoekt of filtert op races en racetracks.',
   'Tiebe-Vaes/LocalLend':
-    'Conceptproject rond lokaal uitlenen en delen, met focus op een heldere gebruikersflow en samenwerking.',
+    'Een Work in Progress Dart/Flutter app waarmee je huishoudelijke apparaten kan uitlenen of vinden, inclusief zoeken en verkennen via kaartweergave.',
+  'TiebeVaes/LocalLend':
+    'Een Work in Progress Dart/Flutter app waarmee je huishoudelijke apparaten kan uitlenen of vinden, inclusief zoeken en verkennen via kaartweergave.',
   'Tiebe-Vaes/Mono':
-    'C#/.NET solution (Mono.sln) met gestructureerde projectopbouw en basis voor verdere featureontwikkeling.',
+    'Een game waarin je als librarian door obstakels zoals tornado\'s en verwarrende bibliotheken, en langs monsters zoals bats, de gem moet halen en alle levels moet uitspelen.',
+  'TiebeVaes/Mono':
+    'Een game waarin je als librarian door obstakels zoals tornado\'s en verwarrende bibliotheken, en langs monsters zoals bats, de gem moet halen en alle levels moet uitspelen.',
+}
+
+const GITHUB_PROJECT_OVERRIDES = {
+  'Tiebe-Vaes/intro-mobile-react': { name: 'RedLine' },
+  'TiebeVaes/intro-mobile-react': { name: 'RedLine' },
+  'Tiebe-Vaes/LocalLend': { name: 'LocalLend (Work in Progress)' },
+  'TiebeVaes/LocalLend': { name: 'LocalLend (Work in Progress)' },
+}
+
+const GITHUB_TECH_OVERRIDES = {
+  'Tiebe-Vaes/intro-mobile-react': [
+    'Karting Reservations',
+    'Race Participation',
+    'Race Creation',
+    'Participant Chat',
+    'Search & Filters',
+  ],
+  'TiebeVaes/intro-mobile-react': [
+    'Karting Reservations',
+    'Race Participation',
+    'Race Creation',
+    'Participant Chat',
+    'Search & Filters',
+  ],
+  'Tiebe-Vaes/LocalLend': [
+    'Dart',
+    'Flutter',
+    'Map Discovery',
+    'Search & Filters',
+    'Peer Lending',
+  ],
+  'TiebeVaes/LocalLend': [
+    'Dart',
+    'Flutter',
+    'Map Discovery',
+    'Search & Filters',
+    'Peer Lending',
+  ],
+  'Tiebe-Vaes/Mono': [
+    '2D Game',
+    'Obstacle Gameplay',
+    'Level Progression',
+    'Enemy Encounters',
+    'Gem Objective',
+  ],
+  'TiebeVaes/Mono': [
+    '2D Game',
+    'Obstacle Gameplay',
+    'Level Progression',
+    'Enemy Encounters',
+    'Gem Objective',
+  ],
 }
 
 function getGithubDescription(repo) {
@@ -196,13 +250,16 @@ function getGithubDescription(repo) {
 }
 
 function normalizeGithubProject(repo) {
+  const projectOverride = GITHUB_PROJECT_OVERRIDES[repo.full_name] || {}
+  const techOverride = GITHUB_TECH_OVERRIDES[repo.full_name]
+
   return {
     id: `gh-${repo.id}`,
     source: 'GitHub',
-    name: repo.name,
+    name: projectOverride.name || repo.name,
     description: getGithubDescription(repo),
     language: repo.language || 'Other',
-    tech: [repo.language, ...(repo.topics || [])].filter(Boolean),
+    tech: techOverride || [repo.language, ...(repo.topics || [])].filter(Boolean),
     repoUrl: repo.html_url,
     liveUrl: repo.homepage || '',
     updatedAt: repo.updated_at,
@@ -591,7 +648,10 @@ function App() {
 
         const sortedProjects = uniqueProjects
           .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-          .filter((project) => !project.name.toLowerCase().includes('config'))
+          .filter((project) => {
+            const projectName = project.name.toLowerCase()
+            return !projectName.includes('config') && projectName !== 'tiebevs'
+          })
 
         setProjects(sortedProjects)
       } catch (fetchError) {
@@ -641,6 +701,56 @@ function App() {
         }`}
     >
       <div className="pointer-events-none absolute inset-0">
+        <div className="scene-sky" />
+        <div className="scene-stars" />
+        <div className="scene-horizon-glow" />
+        <div className="scene-ground" />
+        <svg
+          viewBox="0 0 1440 900"
+          className="scene-giant-mountain"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 900 120 900 260 710 390 560 520 660 680 430 820 610 960 520 1120 700 1260 620 1440 900Z"
+            fill="rgba(12, 24, 36, 0.93)"
+          />
+          <path
+            d="M80 900 270 650 390 560 520 660 600 760 700 540 820 610 900 700 1040 560 1160 700 1260 620 1320 760 1440 900Z"
+            fill="rgba(31, 48, 66, 0.82)"
+          />
+          <path
+            d="M650 520 680 430l34 56 44-10-26 46 24 34-50-18-38 32-12-46-42-18 32-16Z"
+            fill="rgba(225, 236, 247, 0.76)"
+          />
+          <path
+            d="M1010 565 1110 490 1180 560 1220 690 1100 720Z"
+            fill="rgba(19, 33, 48, 0.76)"
+          />
+          <path
+            d="M260 710 390 560 520 660M680 430 820 610 960 520M960 520 1120 700 1260 620"
+            stroke="rgba(142, 175, 206, 0.4)"
+            strokeWidth="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </svg>
+        <svg
+          viewBox="0 0 1440 260"
+          className="scene-trees"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 260V220l26-30 20 30 19-24 18 24 22-28 23 28 21-22 18 22 30-32 20 32 18-20 22 20 28-36 24 36 18-18 16 18 29-26 24 26 22-32 22 32 16-18 24 18 26-30 22 30 24-36 25 36 18-22 19 22 24-30 28 30 18-24 24 24 16-18 22 18 24-28 28 28 20-20 20 20 28-24 22 24 24-36 24 36 20-20 17 20 22-26 24 26 30-34 24 34 20-22 22 22 24-20 22 20 30-28 21 28 22-26 22 26 19-18 18 18 21-24 18 24 25-34 22 34 19-22 20 22 26-30 24 30 21-26 18 26 20-18 17 18v40H0Z"
+            fill="rgba(13, 24, 33, 0.9)"
+          />
+          <path
+            d="M0 260V236l34-26 30 26 28-22 32 22 30-20 34 20 24-18 30 18 28-24 36 24 24-22 32 22 28-20 34 20 24-18 28 18 30-22 36 22 24-20 28 20 30-22 32 22 28-20 30 20 34-24 28 24 32-20 30 20 26-18 28 18 30-20 34 20 26-18 30 18 26-16 34 16 30-20 28 20 30-18 36 18 24-16 32 16 28-20 34 20 28-18 30 18v24H0Z"
+            fill="rgba(22, 39, 53, 0.65)"
+          />
+        </svg>
         <div className="absolute -left-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="absolute right-0 top-80 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
       </div>
