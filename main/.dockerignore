@@ -1,0 +1,27 @@
+# Dependency and build output
+node_modules
+dist
+dist-ssr
+
+# Git and editor metadata
+.git
+.gitignore
+.vscode
+.idea
+
+# Env and local config
+.env
+.env.*
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Docs and misc not needed in container
+README.md
+.netlify
+coverage

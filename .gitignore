@@ -1,0 +1,27 @@
+# Root-level ignores for the full repository
+
+# Node / frontend app artifacts
+main/node_modules/
+main/dist/
+main/dist-ssr/
+main/.cache/
+main/.netlify/
+main/coverage/
+
+# Env files
+main/.env
+main/.env.*
+!main/.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

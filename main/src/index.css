@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-graphite: #0a1018;
+}
+
+@layer base {
+  :root {
+    font-family: 'Manrope', sans-serif;
+    color-scheme: dark;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(6, 182, 212, 0.08), transparent 40%),
+      radial-gradient(circle at 90% 35%, rgba(163, 230, 53, 0.08), transparent 35%),
+      #0a1018;
+  }
+
+  body.body-light {
+    background:
+      radial-gradient(circle at 10% 0%, rgba(14, 165, 233, 0.16), transparent 40%),
+      radial-gradient(circle at 90% 35%, rgba(234, 179, 8, 0.12), transparent 35%),
+      #f8fafc;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-zinc-800/90 bg-zinc-950/60 p-6 backdrop-blur-sm;
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold text-zinc-100 sm:text-3xl;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .chip {
+    @apply rounded-full border border-zinc-700 bg-zinc-900/80 px-3 py-1 text-xs font-medium tracking-wide text-zinc-300;
+  }
+
+  .project-card {
+    @apply rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5 transition duration-300 hover:border-cyan-400/60 hover:bg-zinc-900;
+  }
+
+  .filter-wrap {
+    @apply flex flex-col gap-1;
+  }
+
+  .filter-label {
+    @apply text-xs uppercase tracking-[0.12em] text-zinc-500;
+  }
+
+  .filter-select {
+    @apply rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-200 outline-none transition focus:border-cyan-400;
+  }
+
+  .contact-link {
+    @apply rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-3 transition hover:border-zinc-600;
+  }
+
+  .font-title {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+.theme-light .card {
+  border-color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.theme-light .project-card {
+  border-color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.theme-light .project-card:hover {
+  border-color: rgba(14, 116, 144, 0.7);
+  background: #ffffff;
+}
+
+.theme-light .chip {
+  border-color: #d4d4d8;
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+.theme-light .filter-select,
+.theme-light .contact-link {
+  border-color: #d4d4d8;
+  background: rgba(255, 255, 255, 0.95);
+  color: #111827;
+}
+
+.theme-light .text-white,
+.theme-light .text-zinc-100,
+.theme-light .text-zinc-300,
+.theme-light .text-zinc-400,
+.theme-light .text-zinc-500 {
+  color: #111827 !important;
+}
+
+.theme-light .filter-label {
+  color: #334155;
+}
+
+.theme-light .border-zinc-600,
+.theme-light .border-zinc-700,
+.theme-light .border-zinc-800,
+.theme-light .border-zinc-800\/90 {
+  border-color: #94a3b8 !important;
+}
+
+.theme-light .bg-cyan-400 {
+  background-color: #0891b2 !important;
+  color: #f8fafc !important;
+}
+
+.theme-light .hover\:bg-cyan-300:hover {
+  background-color: #0e7490 !important;
+}
+
+.theme-light .text-cyan-300 {
+  color: #0e7490 !important;
+}
+
+.theme-light .text-lime-300 {
+  color: #3f6212 !important;
+}
+
+.theme-light .hover\:text-cyan-200:hover {
+  color: #155e75 !important;
+}
+
+.theme-light .hover\:text-lime-200:hover {
+  color: #365314 !important;
+}
