@@ -110,6 +110,14 @@
   color: #111827 !important;
 }
 
+.theme-light .section-title {
+  color: #0f172a !important;
+}
+
+.theme-light h1 {
+  color: #0f172a !important;
+}
+
 .theme-light .filter-label {
   color: #334155;
 }
