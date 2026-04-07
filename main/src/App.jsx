@@ -500,6 +500,34 @@ function App() {
   }, [theme])
 
   useEffect(() => {
+    function updateFavicons(currentTheme) {
+      const icon = currentTheme === 'dark' ? '/TVbl.png' : '/TV.png'
+
+      const setLink = (selector, relValue) => {
+        let el = document.querySelector(selector)
+        if (!el) {
+          el = document.createElement('link')
+          el.rel = relValue
+          document.head.appendChild(el)
+        }
+        el.href = icon
+      }
+
+      setLink("link[rel='icon']", 'icon')
+      setLink("link[rel='shortcut icon']", 'shortcut icon')
+      setLink("link[rel='apple-touch-icon']", 'apple-touch-icon')
+
+      const msTile = document.querySelector("meta[name='msapplication-TileImage']")
+      if (msTile) msTile.content = icon
+
+      const themeColor = document.querySelector("meta[name='theme-color']")
+      if (themeColor) themeColor.content = currentTheme === 'dark' ? '#0b1220' : '#06b6d4'
+    }
+
+    updateFavicons(theme)
+  }, [theme])
+
+  useEffect(() => {
     localStorage.setItem('locale', locale)
   }, [locale])
 
@@ -826,9 +854,25 @@ function App() {
           <p className="mb-5 inline-block rounded-full border border-zinc-700 px-4 py-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
             Portfolio 2026
           </p>
-          <h1 className="max-w-3xl font-title text-4xl font-bold leading-tight text-white sm:text-6xl">
-            {PROFILE.name}
-          </h1>
+          <div className="flex items-center gap-4">
+            {(() => {
+              const logoSrc = theme === 'dark' ? '/TVbl.png' : '/TV.png'
+              return (
+                <img
+                  src={logoSrc}
+                  alt="Tiebe Vaes logo"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null
+                    e.currentTarget.src = '/TV.png'
+                  }}
+                  className="h-12 w-12 rounded object-cover"
+                />
+              )
+            })()}
+            <h1 className="max-w-3xl font-title text-4xl font-bold leading-tight text-white sm:text-6xl">
+              {PROFILE.name}
+            </h1>
+          </div>
           <p className="mt-4 max-w-2xl text-lg text-zinc-300 sm:text-xl">
             {t.tagline}
           </p>
@@ -1009,9 +1053,10 @@ function App() {
                       href={project.repoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="font-semibold text-cyan-300 transition hover:text-cyan-200"
+                      className="inline-flex items-center gap-2 font-semibold text-cyan-300 transition hover:text-cyan-200"
+                      aria-label={t.repo}
                     >
-                      {t.repo}
+                      <ContactIcon name="github" />
                     </a>
                     {project.liveUrl && (
                       <a

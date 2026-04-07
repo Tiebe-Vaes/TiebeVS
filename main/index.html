@@ -1,14 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" href="/TV.png" />
+    <link rel="shortcut icon" href="/TV.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/TV.png" />
+    <meta name="theme-color" content="#06b6d4" />
+    <meta name="msapplication-TileImage" content="/TV.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Tiebe Vaes" />
     <meta
       name="description"
       content="Portfolio van Tiebe Vaes, student Toegepaste Informatica met focus op moderne webontwikkeling."
     />
+    <meta name="keywords" content="Tiebe Vaes, Tiebe, portfolio, web developer, React, JavaScript, TypeScript, Toegepaste Informatica" />
+    <link rel="canonical" href="/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Tiebe Vaes | Portfolio" />
+    <meta property="og:description" content="Portfolio van Tiebe Vaes, student Toegepaste Informatica met focus op moderne webontwikkeling." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/TV.png" />
+    <meta property="og:site_name" content="Tiebe Vaes" />
+    <meta property="og:locale" content="nl_NL" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tiebe Vaes | Portfolio" />
+    <meta name="twitter:description" content="Portfolio van Tiebe Vaes, student Toegepaste Informatica met focus op moderne webontwikkeling." />
+    <meta name="twitter:image" content="/TV.png" />
+
     <title>Tiebe Vaes | Portfolio</title>
+
+    <!-- JSON-LD structured data (Person + WebSite). Uses runtime origin for absolute URLs. -->
+    <script>
+      (function () {
+        try {
+          const origin = (location && location.origin) || '';
+          const ldPerson = {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Tiebe Vaes",
+            "url": origin,
+            "sameAs": [
+              "https://github.com/Tiebe-Vaes",
+              "https://gitlab.com/tiebevaes"
+            ],
+            "jobTitle": "Student Toegepaste Informatica",
+            "knowsAbout": ["Web Development", "React", "JavaScript", "TypeScript"]
+          };
+
+          const ldWebsite = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "url": origin,
+            "name": "Tiebe Vaes | Portfolio",
+            "publisher": { "@type": "Person", "name": "Tiebe Vaes" }
+          };
+
+          const script = document.createElement('script');
+          script.type = 'application/ld+json';
+          script.text = JSON.stringify([ldPerson, ldWebsite]);
+          document.head.appendChild(script);
+        } catch (e) {
+          // silent
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
