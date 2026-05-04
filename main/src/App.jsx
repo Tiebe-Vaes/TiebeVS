@@ -173,17 +173,17 @@ const MANUAL_PROJECTS = [
 
 const GITHUB_DESCRIPTION_OVERRIDES = {
   'Tiebe-Vaes/intro-mobile-react':
-    'Een mobiele app voor karting waarmee je reservaties regelt, races aanmaakt of eraan deelneemt, chat met deelnemers gebruikt en gericht zoekt of filtert op races en racetracks.',
+    'Een React Native (Expo) app voor racers. Ontdek circuits, maak races aan, beheer reserveringen en overleg direct met andere deelnemers via in-app live chat. Gekoppeld aan Firebase voor authenticatie en recensies.',
   'TiebeVaes/intro-mobile-react':
-    'Een mobiele app voor karting waarmee je reservaties regelt, races aanmaakt of eraan deelneemt, chat met deelnemers gebruikt en gericht zoekt of filtert op races en racetracks.',
+    'Een React Native (Expo) app voor racers. Ontdek circuits, maak races aan, beheer reserveringen en overleg direct met andere deelnemers via in-app live chat. Gekoppeld aan Firebase voor authenticatie en recensies.',
   'Tiebe-Vaes/LocalLend':
-    'Een Work in Progress Dart/Flutter app waarmee je huishoudelijke apparaten kan uitlenen of vinden, inclusief zoeken en verkennen via kaartweergave.',
+    'Een Flutter app voor het lokaal huren en uitlenen van huishoudelijke spullen. Voorzien van een interactieve map (Google Maps API), slimme datumreserveringen zonder conflicten, Riverpod state management en reviews.',
   'TiebeVaes/LocalLend':
-    'Een Work in Progress Dart/Flutter app waarmee je huishoudelijke apparaten kan uitlenen of vinden, inclusief zoeken en verkennen via kaartweergave.',
+    'Een Flutter app voor het lokaal huren en uitlenen van huishoudelijke spullen. Voorzien van een interactieve map (Google Maps API), slimme datumreserveringen zonder conflicten, Riverpod state management en reviews.',
   'Tiebe-Vaes/Mono':
-    'Een game waarin je als librarian door obstakels zoals tornado\'s en verwarrende bibliotheken, en langs monsters zoals bats, de gem moet halen en alle levels moet uitspelen.',
+    'Een 2D game waarbij je als librarian door verwarrende levels vol obstakels (zoals tornado\'s en vleermuizen) navigeert om gems te verzamelen en de game tot een goed einde te brengen.',
   'TiebeVaes/Mono':
-    'Een game waarin je als librarian door obstakels zoals tornado\'s en verwarrende bibliotheken, en langs monsters zoals bats, de gem moet halen en alle levels moet uitspelen.',
+    'Een 2D game waarbij je als librarian door verwarrende levels vol obstakels (zoals tornado\'s en vleermuizen) navigeert om gems te verzamelen en de game tot een goed einde te brengen.',
 }
 
 const GITHUB_PROJECT_OVERRIDES = {
@@ -195,46 +195,40 @@ const GITHUB_PROJECT_OVERRIDES = {
 
 const GITHUB_TECH_OVERRIDES = {
   'Tiebe-Vaes/intro-mobile-react': [
-    'Karting Reservations',
-    'Race Participation',
-    'Race Creation',
-    'Participant Chat',
-    'Search & Filters',
+    'React Native',
+    'Expo',
+    'TypeScript',
+    'Firebase',
   ],
   'TiebeVaes/intro-mobile-react': [
-    'Karting Reservations',
-    'Race Participation',
-    'Race Creation',
-    'Participant Chat',
-    'Search & Filters',
+    'React Native',
+    'Expo',
+    'TypeScript',
+    'Firebase',
   ],
   'Tiebe-Vaes/LocalLend': [
-    'Dart',
     'Flutter',
-    'Map Discovery',
-    'Search & Filters',
-    'Peer Lending',
+    'Dart',
+    'Riverpod',
+    'Firebase',
+    'Google Maps API',
   ],
   'TiebeVaes/LocalLend': [
-    'Dart',
     'Flutter',
-    'Map Discovery',
-    'Search & Filters',
-    'Peer Lending',
+    'Dart',
+    'Riverpod',
+    'Firebase',
+    'Google Maps API',
   ],
   'Tiebe-Vaes/Mono': [
-    '2D Game',
-    'Obstacle Gameplay',
-    'Level Progression',
-    'Enemy Encounters',
-    'Gem Objective',
+    'C#',
+    'Game Development',
+    '2D Physics',
   ],
   'TiebeVaes/Mono': [
-    '2D Game',
-    'Obstacle Gameplay',
-    'Level Progression',
-    'Enemy Encounters',
-    'Gem Objective',
+    'C#',
+    'Game Development',
+    '2D Physics',
   ],
 }
 
@@ -824,12 +818,12 @@ function App() {
         </div>
       </div>
 
-      <main className="relative mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-10">
-        <div className="mb-8 flex flex-wrap justify-end gap-3">
+      <main className="main-shell relative mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-10">
+        <div className="top-toolbar mb-8 flex flex-wrap justify-end gap-3">
           <button
             type="button"
             onClick={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
-            className="inline-flex items-center gap-2 rounded-lg border border-zinc-600 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition hover:border-cyan-400"
+            className="control-btn inline-flex items-center gap-2 rounded-lg border border-zinc-600 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition hover:border-cyan-400"
           >
             <UiIcon name={theme === 'dark' ? 'sun' : 'moon'} className="h-4 w-4" />
             {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
@@ -837,7 +831,7 @@ function App() {
           <button
             type="button"
             onClick={() => setLocale((current) => (current === 'nl' ? 'en' : 'nl'))}
-            className="inline-flex items-center gap-2 rounded-lg border border-zinc-600 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition hover:border-cyan-400"
+            className="control-btn inline-flex items-center gap-2 rounded-lg border border-zinc-600 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition hover:border-cyan-400"
           >
             <UiIcon name="language" className="h-4 w-4" />
             <UiIcon name={locale === 'nl' ? 'en' : 'nl'} className="text-[11px] font-bold" />
@@ -846,12 +840,12 @@ function App() {
         </div>
 
         <motion.section
-          className="mb-20"
+          className="hero-panel mb-20"
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-5 inline-block rounded-full border border-zinc-700 px-4 py-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
+          <p className="hero-kicker mb-5 inline-block rounded-full border border-zinc-700 px-4 py-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
             Portfolio 2026
           </p>
           <div className="flex items-center gap-4">
@@ -865,29 +859,29 @@ function App() {
                     e.currentTarget.onerror = null
                     e.currentTarget.src = '/TV.png'
                   }}
-                  className="h-12 w-12 rounded object-cover"
+                  className="hero-logo h-12 w-12 rounded object-cover"
                 />
               )
             })()}
-            <h1 className="max-w-3xl font-title text-4xl font-bold leading-tight text-white sm:text-6xl">
+            <h1 className="hero-title max-w-3xl font-title text-4xl font-bold leading-tight text-white sm:text-6xl">
               {PROFILE.name}
             </h1>
           </div>
-          <p className="mt-4 max-w-2xl text-lg text-zinc-300 sm:text-xl">
+          <p className="hero-subtitle mt-4 max-w-2xl text-lg text-zinc-300 sm:text-xl">
             {t.tagline}
           </p>
-          <p className="mt-6 max-w-3xl text-zinc-400">{t.description}</p>
+          <p className="hero-copy mt-6 max-w-3xl text-zinc-400">{t.description}</p>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="#projects"
-              className="rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-black transition hover:-translate-y-0.5 hover:bg-cyan-300"
+              className="btn-primary rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-black transition hover:-translate-y-0.5 hover:bg-cyan-300"
             >
               {t.ctaProjects}
             </a>
             <a
               href="#contact"
-              className="rounded-xl border border-zinc-600 px-5 py-3 font-semibold transition hover:border-zinc-300"
+              className="btn-ghost rounded-xl border border-zinc-600 px-5 py-3 font-semibold transition hover:border-zinc-300"
             >
               {t.ctaContact}
             </a>
