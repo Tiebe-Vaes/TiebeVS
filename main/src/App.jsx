@@ -85,6 +85,7 @@ const CONTENT = {
       'Gemotiveerde student die zelfstandig en stipt werkt. Buiten code geef ik scoutsleiding, train ik in de fitness en bouw ik graag webprojecten met focus op kwaliteit.',
     ctaProjects: 'Bekijk Projecten',
     ctaContact: 'Contacteer Mij',
+    downloadCv: 'Download CV',
     aboutTitle: 'Over mij',
     aboutText:
       'Ik ben 19 jaar en studeer Toegepaste Informatica in Antwerpen. Mijn focus ligt op groeien als developer door constant bij te leren, echte problemen op te lossen en projecten af te werken met een hoge standaard.',
@@ -101,6 +102,7 @@ const CONTENT = {
     liveDemo: 'Live Demo',
     contactTitle: 'Contact',
     programming: 'Programming',
+    frameworks: 'Frameworks',
     tools: 'Tools',
     all: 'All',
   },
@@ -110,6 +112,7 @@ const CONTENT = {
       'Motivated student who works independently and punctually. Outside coding, I lead scouts activities, train in the gym, and build web projects with a quality-first mindset.',
     ctaProjects: 'View Projects',
     ctaContact: 'Contact Me',
+    downloadCv: 'Download CV',
     aboutTitle: 'About me',
     aboutText:
       'I am 19 years old and study Applied Computer Science in Antwerp. My focus is on growing as a developer by continuously learning, solving real problems, and finishing projects to a high standard.',
@@ -126,14 +129,143 @@ const CONTENT = {
     liveDemo: 'Live Demo',
     contactTitle: 'Contact',
     programming: 'Programming',
+    frameworks: 'Frameworks',
     tools: 'Tools',
     all: 'All',
   },
 }
 
+const SKILL_ICON_SLUGS = {
+  'c#': 'dotnet',
+  typescript: 'typescript',
+  javascript: 'javascript',
+  java: 'openjdk',
+  sql: 'mysql',
+  html: 'html5',
+  css: 'css',
+  react: 'react',
+  angular: 'angular',
+  'next.js': 'nextdotjs',
+  'spring boot': 'springboot',
+  'react native': 'react',
+  tailwind: 'tailwindcss',
+  flutter: 'flutter',
+  git: 'git',
+  github: 'github',
+  gitlab: 'gitlab',
+  mysql: 'mysql',
+  firebase: 'firebase',
+  docker: 'docker',
+  'vs code': 'visualstudiocode',
+}
+
+const DARK_BRAND_SLUGS = new Set([
+  'github',
+  'nextdotjs',
+  'dotnet',
+  'flutter',
+  'angular',
+  'openjdk',
+])
+
+const SKILL_ICON_OVERRIDES = {
+  visualstudiocode:
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
+  css: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+}
+
+function SkillIcon({ name, theme }) {
+  const slug = SKILL_ICON_SLUGS[name.toLowerCase()]
+  const [failed, setFailed] = useState(false)
+  if (!slug || failed) {
+    return <UiIcon name="code" className="h-4 w-4 text-cyan-300" />
+  }
+  const needsLight = theme === 'dark' && DARK_BRAND_SLUGS.has(slug)
+  const src = needsLight
+    ? `https://cdn.simpleicons.org/${slug}/ffffff`
+    : SKILL_ICON_OVERRIDES[slug] || `https://cdn.simpleicons.org/${slug}`
+  return (
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      className="h-4 w-4"
+      onError={() => setFailed(true)}
+    />
+  )
+}
+
+const PROJECT_SCREENSHOTS = {
+  gosmartlib: ['/GSLSS.png', '/GSLSS2.png', '/GSLSS3.png'],
+  redline: ['/Redline1.jpeg', '/Redline2.jpeg', '/Redline3.jpeg', '/Redline4.jpeg'],
+  locallend: ['/LLSS1.png', '/LLSS2.png', '/LLSS3.png', '/LLSS4.png'],
+  mono: ['/MONOSS1.png'],
+  petalpurrs: ['/PPSS1.png'],
+}
+
+function getProjectScreenshots(projectName) {
+  const key = projectName.trim().toLowerCase().split(' ')[0]
+  return PROJECT_SCREENSHOTS[key]
+}
+
+function ProjectGallery({ images, projectName }) {
+  const [index, setIndex] = useState(0)
+  if (!images || !images.length) return null
+  const total = images.length
+  const go = (dir) => setIndex((i) => (i + dir + total) % total)
+  return (
+    <div className="project-gallery">
+      <div className="project-gallery-frame">
+        <img
+          key={images[index]}
+          src={images[index]}
+          alt={`${projectName} screenshot ${index + 1}`}
+          loading="lazy"
+          className="project-gallery-img"
+        />
+        {total > 1 && (
+          <>
+            <button
+              type="button"
+              aria-label="Previous"
+              onClick={() => go(-1)}
+              className="project-gallery-nav project-gallery-nav-prev"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              aria-label="Next"
+              onClick={() => go(1)}
+              className="project-gallery-nav project-gallery-nav-next"
+            >
+              ›
+            </button>
+          </>
+        )}
+      </div>
+      {total > 1 && (
+        <div className="project-gallery-dots">
+          {images.map((src, i) => (
+            <button
+              key={src}
+              type="button"
+              aria-label={`Go to slide ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className={`project-gallery-dot${i === index ? ' is-active' : ''}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 const SKILLS = {
   programming: ['C#', 'TypeScript', 'JavaScript', 'Java', 'SQL', 'HTML', 'CSS'],
-  tools: ['Git', 'GitHub', 'GitLab', 'MySQL', 'VS Code', 'React', 'Tailwind'],
+  frameworks: ['React', 'Angular', 'Next.js', 'Spring Boot', 'React Native', 'Flutter', 'Tailwind'],
+  tools: ['Git', 'GitHub', 'GitLab', 'MySQL', 'Firebase', 'Docker', 'VS Code'],
   languages: ['Nederlands', 'Engels'],
 }
 
@@ -164,8 +296,7 @@ const MANUAL_PROJECTS = [
       'Student-friendly UX',
       'Admin Management',
     ],
-    repoUrl:
-      'https://gitlab.apstudent.be/bachelor-it/software-project/25-26/team-06/gosmartlib',
+    repoUrl: '',
     liveUrl: '',
     updatedAt: '2026-04-02T00:00:00Z',
   },
@@ -382,6 +513,20 @@ function UiIcon({ name, className = 'h-4 w-4' }) {
           stroke="currentColor"
           strokeWidth="1.8"
           strokeLinecap="round"
+        />
+      </svg>
+    )
+  }
+
+  if (name === 'download') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+        <path
+          d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     )
@@ -682,9 +827,28 @@ function App() {
           })
 
         setProjects(sortedProjects)
+        try {
+          localStorage.setItem(
+            'tv:projects-cache',
+            JSON.stringify({ at: Date.now(), projects: sortedProjects }),
+          )
+        } catch {}
       } catch (fetchError) {
         if (!ignore) {
-          setError(fetchError.message)
+          let usedFallback = false
+          try {
+            const raw = localStorage.getItem('tv:projects-cache')
+            if (raw) {
+              const cached = JSON.parse(raw)
+              if (Array.isArray(cached?.projects) && cached.projects.length) {
+                setProjects(cached.projects)
+                usedFallback = true
+              }
+            }
+          } catch {}
+          if (!usedFallback) {
+            setProjects(MANUAL_PROJECTS)
+          }
         }
       } finally {
         if (!ignore) {
@@ -891,6 +1055,14 @@ function App() {
             >
               {t.ctaContact}
             </a>
+            <a
+              href="/CV Tiebe Vaes.pdf"
+              download
+              className="btn-ghost inline-flex items-center gap-2 rounded-xl border border-zinc-600 px-5 py-3 font-semibold transition hover:border-zinc-300"
+            >
+              <UiIcon name="download" className="h-4 w-4" />
+              {t.downloadCv}
+            </a>
           </div>
         </motion.section>
 
@@ -950,11 +1122,20 @@ function App() {
             <div className="mt-2 flex flex-wrap gap-2">
               {SKILLS.programming.map((skill) => (
                 <span className="chip flex items-center gap-2" key={skill}>
-                  <UiIcon
-                    name={skill.toLowerCase() === 'java' ? 'java' : 'code'}
-                    className="h-4 w-4 text-cyan-300"
-                  />
+                  <SkillIcon name={skill} theme={theme} />
                   {skill}
+                </span>
+              ))}
+            </div>
+
+            <p className="mt-6 text-sm uppercase tracking-[0.14em] text-zinc-500">
+              {t.frameworks}
+            </p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {SKILLS.frameworks.map((framework) => (
+                <span className="chip flex items-center gap-2" key={framework}>
+                  <SkillIcon name={framework} theme={theme} />
+                  {framework}
                 </span>
               ))}
             </div>
@@ -965,7 +1146,7 @@ function App() {
             <div className="mt-2 flex flex-wrap gap-2">
               {SKILLS.tools.map((tool) => (
                 <span className="chip flex items-center gap-2" key={tool}>
-                  <UiIcon name="tool" className="h-4 w-4 text-cyan-300" />
+                  <SkillIcon name={tool} theme={theme} />
                   {tool}
                 </span>
               ))}
@@ -1027,10 +1208,14 @@ function App() {
               {filteredProjects.map((project) => (
                 <motion.article
                   key={project.id}
-                  className="project-card"
+                  className="project-card flex flex-col"
                   whileHover={{ y: -6 }}
                   transition={{ duration: 0.2 }}
                 >
+                  <ProjectGallery
+                    images={getProjectScreenshots(project.name)}
+                    projectName={project.name}
+                  />
                   <div className="mb-4 flex items-center justify-between text-xs uppercase tracking-[0.15em] text-zinc-500">
                     <span>{project.source}</span>
                     <span>{project.language}</span>
@@ -1048,25 +1233,18 @@ function App() {
                     ))}
                   </div>
 
-                  <div className="mt-6 flex gap-4 text-sm">
+                  <div className="mt-auto pt-6 flex text-sm">
+                    {project.repoUrl && (
                     <a
                       href={project.repoUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 font-semibold text-cyan-300 transition hover:text-cyan-200"
+                      className="project-link inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900/50 px-3 py-2 font-semibold text-cyan-300 transition hover:border-cyan-400/60 hover:bg-zinc-800"
                       aria-label={t.repo}
                     >
                       <ContactIcon name="github" />
+                      <span>Source</span>
                     </a>
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-lime-300 transition hover:text-lime-200"
-                      >
-                        {t.liveDemo}
-                      </a>
                     )}
                   </div>
                 </motion.article>
