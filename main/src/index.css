@@ -387,13 +387,13 @@
 }
 
 .theme-light .scene-giant-mountain {
-  display: none;
+  opacity: 0.72;
+  filter: drop-shadow(-10px 0 20px rgba(30, 41, 59, 0.18));
 }
 
 .theme-light .scene-trees {
-  display: none;
+  opacity: 0.78;
 }
-
 
 @media (max-width: 1300px) {
   .scene-giant-mountain {
