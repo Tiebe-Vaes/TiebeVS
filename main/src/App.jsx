@@ -811,11 +811,19 @@ function App() {
     x: 140,
     y: 140,
     angle: -12,
+    roll: 0,
   })
   const cursorTargetRef = useRef({ x: 140, y: 140 })
   const trailPointsRef = useRef(
     Array.from({ length: TRAIL_POINT_COUNT }, () => ({ x: 140, y: 140 })),
   )
+  const boostUntilRef = useRef(0)
+  const rollRef = useRef({ start: 0, active: false })
+  const planePosRef = useRef({ x: 140, y: 140 })
+  const puffIdRef = useRef(0)
+  const [puffs, setPuffs] = useState([])
+  const trailHotTimeoutRef = useRef(0)
+  const [trailHot, setTrailHot] = useState(false)
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
   const [locale, setLocale] = useState(() => localStorage.getItem('locale') || 'nl')
   const t = CONTENT[locale] || CONTENT.nl
@@ -870,19 +878,58 @@ function App() {
   }, [])
 
   useEffect(() => {
+    function onClick(event) {
+      const now = performance.now()
+      boostUntilRef.current = now + 650
+      rollRef.current = { start: now, active: true }
+      cursorTargetRef.current = { x: event.clientX, y: event.clientY }
+
+      const id = puffIdRef.current + 1
+      puffIdRef.current = id
+      const { x, y } = planePosRef.current
+      setPuffs((prev) => [...prev, { id, x, y }])
+      window.setTimeout(() => {
+        setPuffs((prev) => prev.filter((puff) => puff.id !== id))
+      }, 650)
+
+      setTrailHot(true)
+      window.clearTimeout(trailHotTimeoutRef.current)
+      trailHotTimeoutRef.current = window.setTimeout(() => setTrailHot(false), 1600)
+    }
+
+    window.addEventListener('pointerdown', onClick)
+
+    return () => {
+      window.removeEventListener('pointerdown', onClick)
+    }
+  }, [])
+
+  useEffect(() => {
     let frameId
 
     function tick() {
       const target = cursorTargetRef.current
+      const now = performance.now()
+      const boosting = now < boostUntilRef.current
+
+      let roll = 0
+      if (rollRef.current.active) {
+        const progress = (now - rollRef.current.start) / 600
+        if (progress >= 1) {
+          rollRef.current.active = false
+        } else {
+          roll = 360 * (1 - Math.pow(1 - progress, 3))
+        }
+      }
 
       setPlane((current) => {
-        const chase = 0.07
+        const chase = boosting ? 0.24 : 0.07
         const trailLag = 0.05
 
         const targetDirection =
           (Math.atan2(target.y - current.y, target.x - current.x) * 180) / Math.PI + 45
         const angleDelta = normalizeAngle(targetDirection - current.angle)
-        const nextAngle = current.angle + angleDelta * 0.12
+        const nextAngle = current.angle + angleDelta * (boosting ? 0.24 : 0.12)
 
         const noseVector = rotateVector(NOSE_OFFSET, -NOSE_OFFSET, nextAngle)
         const desiredCenterX = target.x - noseVector.x
@@ -891,7 +938,9 @@ function App() {
         const nextX = current.x + (desiredCenterX - current.x) * chase
         const nextY = current.y + (desiredCenterY - current.y) * chase
 
-        const nextNose = rotateVector(NOSE_OFFSET, -NOSE_OFFSET, nextAngle)
+        // Emit the trail from the plane's actual (rolling) nose so the trail
+        // curls into a natural loop during the barrel-roll.
+        const nextNose = rotateVector(NOSE_OFFSET, -NOSE_OFFSET, nextAngle + roll)
         const nosePoint = {
           x: nextX + nextNose.x,
           y: nextY + nextNose.y,
@@ -910,11 +959,14 @@ function App() {
         }
 
         trailPointsRef.current = nextTrail
+        planePosRef.current = { x: nextX, y: nextY }
 
         return {
           x: nextX,
           y: nextY,
           angle: nextAngle,
+          roll,
+          boost: boosting,
         }
       })
 
@@ -1130,26 +1182,59 @@ function App() {
 
       <div className="pointer-events-none fixed inset-0 z-0 hidden lg:block" aria-hidden="true">
         <svg className="absolute inset-0 h-full w-full overflow-visible">
+          <defs>
+            <linearGradient
+              id="trail-gradient"
+              gradientUnits="userSpaceOnUse"
+              x1="0"
+              y1="0"
+              x2="240"
+              y2="0"
+              spreadMethod="repeat"
+            >
+              <stop offset="0" stopColor="#22d3ee" stopOpacity="0.22" />
+              <stop offset="0.4" stopColor="#22d3ee" stopOpacity="0.45" />
+              <stop offset="0.5" stopColor="#fcd34d" stopOpacity="0.95" />
+              <stop offset="0.6" stopColor="#22d3ee" stopOpacity="0.45" />
+              <stop offset="1" stopColor="#22d3ee" stopOpacity="0.22" />
+              <animateTransform
+                attributeName="gradientTransform"
+                type="translate"
+                from="0 0"
+                to="240 0"
+                dur="0.7s"
+                repeatCount="indefinite"
+              />
+            </linearGradient>
+          </defs>
           <path
             d={trailPath}
-            stroke="rgba(34, 211, 238, 0.35)"
-            strokeWidth="2"
+            stroke={trailHot ? 'url(#trail-gradient)' : 'rgba(34, 211, 238, 0.35)'}
+            strokeWidth={trailHot ? 3 : 2}
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
           />
         </svg>
 
+        {puffs.map((puff) => (
+          <span
+            key={puff.id}
+            className="plane-puff"
+            style={{ left: `${puff.x}px`, top: `${puff.y}px` }}
+          />
+        ))}
+
         <div
           className="absolute left-0 top-0"
           style={{
-            transform: `translate(${plane.x - PLANE_HALF}px, ${plane.y - PLANE_HALF}px) rotate(${plane.angle}deg)`,
+            transform: `translate(${plane.x - PLANE_HALF}px, ${plane.y - PLANE_HALF}px) rotate(${plane.angle + (plane.roll || 0)}deg)`,
             transformOrigin: `${PLANE_HALF}px ${PLANE_HALF}px`,
           }}
         >
           <svg
             viewBox="0 0 48 48"
-            className="text-cyan-300/60 drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]"
+            className={`plane-craft drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]${plane.boost ? ' is-boost' : ''}`}
             style={{ width: `${PLANE_SIZE}px`, height: `${PLANE_SIZE}px` }}
             fill="none"
           >
@@ -1195,6 +1280,7 @@ function App() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          whileHover={{ y: -6, transition: { duration: 0.12, ease: 'easeOut' } }}
         >
           <p className="hero-kicker mb-5 inline-block rounded-full border border-zinc-700 px-4 py-1 text-xs uppercase tracking-[0.2em] text-zinc-400">
             Portfolio 2026
@@ -1458,6 +1544,7 @@ function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
+          whileHover={{ y: -6, transition: { duration: 0.12, ease: 'easeOut' } }}
         >
           <h2 className="section-title">{t.contactTitle}</h2>
           <div className="mt-4 grid gap-3 text-zinc-300 sm:grid-cols-2">

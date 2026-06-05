@@ -49,6 +49,21 @@
     background: var(--surface);
     border-color: var(--surface-border);
     box-shadow: 0 20px 50px -35px rgba(8, 47, 73, 0.85);
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card:hover {
+    border-color: rgba(103, 232, 249, 0.4);
+    box-shadow: 0 30px 60px -34px rgba(34, 211, 238, 0.45);
+  }
+
+  /* Plain cards lift via CSS; #contact is a motion element and lifts via framer. */
+  .card:not(#contact) {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card:not(#contact):hover {
+    transform: translateY(-6px);
   }
 
   .section-title {
@@ -385,6 +400,11 @@
   background: var(--surface);
 }
 
+.theme-light .hero-panel {
+  border-color: var(--surface-border);
+  background: var(--surface);
+}
+
 .theme-light .project-card {
   border-color: var(--surface-border);
   background: var(--surface);
@@ -508,6 +528,35 @@
   .scene-giant-mountain {
     display: none;
   }
+}
+
+.plane-craft {
+  color: rgba(103, 232, 249, 0.6);
+  transition: color 0.5s ease, filter 0.5s ease;
+}
+
+/* Quick flash to gold on click-boost, then it eases back to cyan. */
+.plane-craft.is-boost {
+  color: #fcd34d;
+  filter: drop-shadow(0 0 16px rgba(252, 211, 77, 0.7));
+  transition: color 0.05s ease, filter 0.05s ease;
+}
+
+.plane-puff {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-radius: 9999px;
+  border: 2px solid rgba(34, 211, 238, 0.55);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.28), rgba(34, 211, 238, 0));
+  pointer-events: none;
+  animation: plane-puff 0.6s ease-out forwards;
+}
+
+@keyframes plane-puff {
+  from { transform: scale(0.3); opacity: 0.8; }
+  to { transform: scale(2.6); opacity: 0; }
 }
 
 .modal-overlay {
