@@ -657,3 +657,88 @@
 .theme-light .modal-close:hover {
   color: #0f172a;
 }
+
+/* ----- Animated background ----- */
+.scene-stars {
+  animation: star-twinkle 4.5s ease-in-out infinite, star-drift 60s ease-in-out infinite alternate;
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.38; }
+  50% { opacity: 0.95; }
+}
+
+@keyframes star-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-60px); }
+}
+
+.scene-horizon-glow {
+  animation: horizon-pulse 7s ease-in-out infinite;
+}
+
+@keyframes horizon-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.floaty-glow {
+  will-change: transform;
+}
+
+.floaty-glow-a {
+  animation: floaty-a 16s ease-in-out infinite;
+}
+
+.floaty-glow-b {
+  animation: floaty-b 21s ease-in-out infinite;
+}
+
+@keyframes floaty-a {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(70px, 52px); }
+}
+
+@keyframes floaty-b {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-80px, -40px); }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 90px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 100%);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+  opacity: 0;
+}
+
+.shooting-star-1 {
+  top: 6%;
+  left: 8%;
+  animation: shoot 7s ease-in 1.5s infinite;
+}
+
+.shooting-star-2 {
+  top: 13%;
+  left: 42%;
+  animation: shoot 8s ease-in 4s infinite;
+}
+
+.shooting-star-3 {
+  top: 4%;
+  left: 64%;
+  animation: shoot 9s ease-in 7s infinite;
+}
+
+@keyframes shoot {
+  0% { opacity: 0; transform: translate(0, 0) rotate(18deg); }
+  2% { opacity: 1; }
+  16% { opacity: 0; transform: translate(460px, 150px) rotate(18deg); }
+  100% { opacity: 0; transform: translate(460px, 150px) rotate(18deg); }
+}
+
+.theme-light .shooting-star {
+  display: none;
+}

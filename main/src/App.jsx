@@ -1176,8 +1176,11 @@ function App() {
             fill="rgba(22, 39, 53, 0.65)"
           />
         </svg>
-        <div className="absolute -left-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="absolute right-0 top-80 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
+        <div className="floaty-glow floaty-glow-a absolute -left-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+        <div className="floaty-glow floaty-glow-b absolute right-0 top-80 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
+        <span className="shooting-star shooting-star-1" />
+        <span className="shooting-star shooting-star-2" />
+        <span className="shooting-star shooting-star-3" />
       </div>
 
       <div className="pointer-events-none fixed inset-0 z-0 hidden lg:block" aria-hidden="true">
