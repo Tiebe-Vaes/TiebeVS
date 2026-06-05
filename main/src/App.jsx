@@ -1,10 +1,32 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import ParticleSky from './ParticleSky'
 
 const PLANE_SIZE = 32
 const PLANE_HALF = PLANE_SIZE / 2
 const NOSE_OFFSET = 12.7
 const TRAIL_POINT_COUNT = 16
+
+// Shooting stars confined to the top sky band (top in px), spread horizontally.
+const METEORS = Array.from({ length: 10 }, (_, i) => ({
+  top: `${(i * 53) % 540}px`,
+  left: `${(i * 37 + 7) % 100}%`,
+  delay: `${((i * 1.3) % 9).toFixed(2)}s`,
+  dur: `${5 + (i % 5)}s`,
+}))
+
+// Aurora glow palette (mint -> teal -> blue -> indigo -> purple), spread down
+// the whole page as drifting radial gradients.
+const AURORA = [
+  { top: '3%', left: '-8%', size: '34rem', color: '#01cbae', op: 0.22, anim: 'a', dur: '19s' },
+  { top: '16%', left: '64%', size: '30rem', color: '#524096', op: 0.24, anim: 'b', dur: '24s' },
+  { top: '31%', left: '-6%', size: '32rem', color: '#2082a6', op: 0.20, anim: 'a', dur: '21s' },
+  { top: '45%', left: '62%', size: '30rem', color: '#5f2a84', op: 0.22, anim: 'b', dur: '26s' },
+  { top: '58%', left: '-7%', size: '30rem', color: '#01efac', op: 0.18, anim: 'a', dur: '23s' },
+  { top: '71%', left: '60%', size: '33rem', color: '#2082a6', op: 0.20, anim: 'b', dur: '22s' },
+  { top: '84%', left: '-5%', size: '29rem', color: '#524096', op: 0.20, anim: 'a', dur: '20s' },
+  { top: '94%', left: '58%', size: '31rem', color: '#01cbae', op: 0.18, anim: 'b', dur: '25s' },
+]
 
 function rotateVector(x, y, degrees) {
   const radians = (degrees * Math.PI) / 180
@@ -1122,10 +1144,10 @@ function App() {
 
   return (
     <div
-      className={`theme-${theme} relative min-h-screen overflow-x-hidden ${theme === 'dark' ? 'bg-graphite text-zinc-100' : 'bg-slate-50 text-slate-900'
+      className={`theme-${theme} relative min-h-screen ${theme === 'dark' ? 'bg-graphite text-zinc-100' : 'bg-slate-50 text-slate-900'
         }`}
     >
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="scene-sky" />
         <div className="scene-stars" />
         <div className="scene-horizon-glow" />
@@ -1176,12 +1198,36 @@ function App() {
             fill="rgba(22, 39, 53, 0.65)"
           />
         </svg>
-        <div className="floaty-glow floaty-glow-a absolute -left-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="floaty-glow floaty-glow-b absolute right-0 top-80 h-96 w-96 rounded-full bg-lime-400/10 blur-3xl" />
-        <span className="shooting-star shooting-star-1" />
-        <span className="shooting-star shooting-star-2" />
-        <span className="shooting-star shooting-star-3" />
+        {AURORA.map((blob, index) => (
+          <div
+            key={`aurora-${index}`}
+            className={`aurora-blob aurora-anim-${blob.anim}`}
+            style={{
+              top: blob.top,
+              left: blob.left,
+              width: blob.size,
+              height: blob.size,
+              background: `radial-gradient(circle, ${blob.color} 0%, transparent 70%)`,
+              opacity: blob.op,
+              animationDuration: blob.dur,
+            }}
+          />
+        ))}
+        {METEORS.map((meteor, index) => (
+          <span
+            key={`meteor-${index}`}
+            className="shooting-star"
+            style={{
+              top: meteor.top,
+              left: meteor.left,
+              animationDelay: meteor.delay,
+              animationDuration: meteor.dur,
+            }}
+          />
+        ))}
       </div>
+
+      <ParticleSky />
 
       <div className="pointer-events-none fixed inset-0 z-0 hidden lg:block" aria-hidden="true">
         <svg className="absolute inset-0 h-full w-full overflow-visible">
@@ -1257,29 +1303,10 @@ function App() {
         </div>
       </div>
 
-      <main className="main-shell relative mx-auto max-w-6xl px-6 pb-16 pt-10 sm:px-10">
-        <div className="top-toolbar mb-8 flex flex-wrap justify-end gap-3">
-          <button
-            type="button"
-            onClick={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
-            className="control-btn inline-flex items-center gap-2 rounded-lg border border-zinc-600 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition hover:border-cyan-400"
-          >
-            <UiIcon name={theme === 'dark' ? 'sun' : 'moon'} className="h-4 w-4" />
-            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-          </button>
-          <button
-            type="button"
-            onClick={() => setLocale((current) => (current === 'nl' ? 'en' : 'nl'))}
-            className="control-btn inline-flex items-center gap-2 rounded-lg border border-zinc-600 px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] transition hover:border-cyan-400"
-          >
-            <UiIcon name="language" className="h-4 w-4" />
-            <UiIcon name={locale === 'nl' ? 'en' : 'nl'} className="text-[11px] font-bold" />
-            {locale === 'nl' ? 'English' : 'Nederlands'}
-          </button>
-        </div>
-
+      <main className="main-shell relative mx-auto max-w-6xl px-6 pb-6 pt-6 sm:px-10">
+        <div className="snap-section">
         <motion.section
-          className="hero-panel mb-20"
+          className="hero-panel"
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -1335,9 +1362,11 @@ function App() {
             </a>
           </div>
         </motion.section>
+        </div>
 
+        <div className="snap-section">
         <motion.section
-          className="mb-20 grid gap-6 md:grid-cols-3"
+          className="grid gap-6 md:grid-cols-3"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -1362,9 +1391,11 @@ function App() {
             </div>
           </article>
         </motion.section>
+        </div>
 
+        <div className="snap-section">
         <motion.section
-          className="mb-20 grid gap-6 lg:grid-cols-2"
+          className="grid gap-6 lg:grid-cols-2"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -1423,10 +1454,12 @@ function App() {
             </div>
           </article>
         </motion.section>
+        </div>
 
+        <div className="snap-section">
         <motion.section
           id="projects"
-          className="mb-20"
+          className="w-full"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -1539,10 +1572,12 @@ function App() {
             </div>
           )}
         </motion.section>
+        </div>
 
+        <div className="snap-section">
         <motion.section
           id="contact"
-          className="card"
+          className="card w-full"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -1586,7 +1621,27 @@ function App() {
             </a>
           </div>
         </motion.section>
+        </div>
       </main>
+
+      <div className="fixed right-4 top-4 z-50 flex gap-2">
+        <button
+          type="button"
+          onClick={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
+          className="corner-toggle"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          <UiIcon name={theme === 'dark' ? 'sun' : 'moon'} className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => setLocale((current) => (current === 'nl' ? 'en' : 'nl'))}
+          className="corner-toggle"
+          aria-label={locale === 'nl' ? 'Schakel naar Engels' : 'Switch to Dutch'}
+        >
+          <UiIcon name={locale} className="text-xs font-bold" />
+        </button>
+      </div>
 
       {activeProject && (
         <ProjectModal

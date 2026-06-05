@@ -124,10 +124,23 @@
     z-index: -1;
   }
 
-  .top-toolbar {
-    position: sticky;
-    top: 1rem;
-    z-index: 20;
+  .corner-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--surface-border);
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    backdrop-filter: blur(12px);
+    color: inherit;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .corner-toggle:hover {
+    border-color: rgba(103, 232, 249, 0.6);
+    transform: translateY(-1px);
   }
 
   .control-btn {
@@ -316,20 +329,14 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 52% 12%, rgba(173, 207, 230, 0.2) 0%, rgba(10, 16, 24, 0) 42%),
+    radial-gradient(120% 80% at 52% 6%, rgba(173, 207, 230, 0.16) 0%, rgba(10, 16, 24, 0) 55%),
     linear-gradient(180deg,
-      #010207 0%,
-      #03050b 8%,
-      #060b13 16%,
-      #0a121d 25%,
-      #111f2f 36%,
-      #1a3146 48%,
-      #25485f 59%,
-      #3a6377 70%,
-      #517d84 79%,
-      #6a8f82 87%,
-      #7d9a79 93%,
-      #8aa376 100%);
+      #03060d 0%,
+      #0b1a29 32%,
+      #1d4255 58%,
+      #3c6b74 78%,
+      #6b9384 92%,
+      #86a578 100%);
 }
 
 .scene-stars {
@@ -659,6 +666,53 @@
 }
 
 /* ----- Animated background ----- */
+/* Full-page scroll snapping: one block at a time.
+   NB: no overflow-x:hidden on html/body or the root div — that turns them into
+   scroll containers and silently disables snapping. The background layer clips
+   its own horizontal overflow instead. */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 1rem;
+  scroll-behavior: smooth;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  padding-block: 4rem;
+}
+
+/* Star particles live only in the top sky band and fade out toward the page. */
+.particle-sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 78vh;
+  max-height: 900px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 100%);
+}
+
+.particle-sky canvas {
+  display: block;
+}
+
+/* Subtle noise dither to kill visible banding in the sky gradient. */
+.scene-sky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
 .scene-stars {
   animation: star-twinkle 4.5s ease-in-out infinite, star-drift 60s ease-in-out infinite alternate;
 }
@@ -682,54 +736,48 @@
   50% { opacity: 1; }
 }
 
-.floaty-glow {
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(50px);
+  mix-blend-mode: screen;
+  pointer-events: none;
   will-change: transform;
 }
 
-.floaty-glow-a {
-  animation: floaty-a 16s ease-in-out infinite;
+.aurora-anim-a {
+  animation-name: aurora-a;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
-.floaty-glow-b {
-  animation: floaty-b 21s ease-in-out infinite;
+.aurora-anim-b {
+  animation-name: aurora-b;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
-@keyframes floaty-a {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(70px, 52px); }
+@keyframes aurora-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(64px, 44px) scale(1.12); }
 }
 
-@keyframes floaty-b {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-80px, -40px); }
+@keyframes aurora-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-74px, -34px) scale(1.08); }
 }
 
 .shooting-star {
   position: absolute;
-  width: 90px;
+  width: 84px;
   height: 2px;
   border-radius: 2px;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 100%);
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
   opacity: 0;
-}
-
-.shooting-star-1 {
-  top: 6%;
-  left: 8%;
-  animation: shoot 7s ease-in 1.5s infinite;
-}
-
-.shooting-star-2 {
-  top: 13%;
-  left: 42%;
-  animation: shoot 8s ease-in 4s infinite;
-}
-
-.shooting-star-3 {
-  top: 4%;
-  left: 64%;
-  animation: shoot 9s ease-in 7s infinite;
+  animation-name: shoot;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
 }
 
 @keyframes shoot {
