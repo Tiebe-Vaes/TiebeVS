@@ -157,6 +157,20 @@ const SKILL_ICON_SLUGS = {
   firebase: 'firebase',
   docker: 'docker',
   'vs code': 'visualstudiocode',
+  dart: 'dart',
+  express: 'express',
+  expo: 'expo',
+  babel: 'babel',
+  'google maps': 'googlemaps',
+  traefik: 'traefikproxy',
+  monogame: 'monogame',
+  'docker swarm': 'docker',
+  '.net 9': 'dotnet',
+  node: 'nodedotjs',
+  'node.js': 'nodedotjs',
+  postgresql: 'postgresql',
+  rabbitmq: 'rabbitmq',
+  redis: 'redis',
 }
 
 const DARK_BRAND_SLUGS = new Set([
@@ -166,6 +180,9 @@ const DARK_BRAND_SLUGS = new Set([
   'flutter',
   'angular',
   'openjdk',
+  'express',
+  'expo',
+  'traefikproxy',
 ])
 
 const SKILL_ICON_OVERRIDES = {
@@ -202,6 +219,7 @@ const PROJECT_SCREENSHOTS = {
   locallend: ['/LLSS1.png', '/LLSS2.png', '/LLSS3.png', '/LLSS4.png'],
   mono: ['/MONOSS1.png'],
   petalpurrs: ['/PPSS1.png'],
+  travel: ['/c4-context.png', '/c4-containers.png', '/c4-deployment.png'],
 }
 
 function getProjectScreenshots(projectName) {
@@ -213,7 +231,10 @@ function ProjectGallery({ images, projectName }) {
   const [index, setIndex] = useState(0)
   if (!images || !images.length) return null
   const total = images.length
-  const go = (dir) => setIndex((i) => (i + dir + total) % total)
+  const go = (event, dir) => {
+    event.stopPropagation()
+    setIndex((i) => (i + dir + total) % total)
+  }
   return (
     <div className="project-gallery">
       <div className="project-gallery-frame">
@@ -229,7 +250,7 @@ function ProjectGallery({ images, projectName }) {
             <button
               type="button"
               aria-label="Previous"
-              onClick={() => go(-1)}
+              onClick={(event) => go(event, -1)}
               className="project-gallery-nav project-gallery-nav-prev"
             >
               ‹
@@ -237,7 +258,7 @@ function ProjectGallery({ images, projectName }) {
             <button
               type="button"
               aria-label="Next"
-              onClick={() => go(1)}
+              onClick={(event) => go(event, 1)}
               className="project-gallery-nav project-gallery-nav-next"
             >
               ›
@@ -252,7 +273,10 @@ function ProjectGallery({ images, projectName }) {
               key={src}
               type="button"
               aria-label={`Go to slide ${i + 1}`}
-              onClick={() => setIndex(i)}
+              onClick={(event) => {
+                event.stopPropagation()
+                setIndex(i)
+              }}
               className={`project-gallery-dot${i === index ? ' is-active' : ''}`}
             />
           ))}
@@ -262,135 +286,280 @@ function ProjectGallery({ images, projectName }) {
   )
 }
 
+function ProjectModal({ project, locale, theme, onClose, labels }) {
+  useEffect(() => {
+    function onKey(event) {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    document.addEventListener('keydown', onKey)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [onClose])
+
+  if (!project) {
+    return null
+  }
+
+  const images = getProjectScreenshots(project.name)
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div
+        className="modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.name}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="modal-close"
+          aria-label="Close"
+          onClick={onClose}
+        >
+          ×
+        </button>
+
+        <p className="modal-eyebrow">
+          {localizedText(project.category, locale) || project.source}
+        </p>
+        <h2 className="modal-title font-title">{project.name}</h2>
+
+        {images?.length > 0 && (
+          <div className="modal-gallery">
+            <ProjectGallery images={images} projectName={project.name} />
+          </div>
+        )}
+
+        <p className="modal-desc">
+          {localizedText(project.details || project.description, locale)}
+        </p>
+
+        {project.tech?.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.tech.map((tag) => (
+              <span
+                key={`modal-${project.id}-${tag}`}
+                className="chip flex items-center gap-2"
+              >
+                <SkillIcon name={tag} theme={theme} />
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {project.repoUrl && (
+          <div className="mt-6 flex text-sm">
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="project-link inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900/50 px-3 py-2 font-semibold text-cyan-300 transition hover:border-cyan-400/60 hover:bg-zinc-800"
+            >
+              <ContactIcon name="github" />
+              <span>{labels.repo}</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 const SKILLS = {
   programming: ['C#', 'TypeScript', 'JavaScript', 'Java', 'SQL', 'HTML', 'CSS'],
   frameworks: ['React', 'Angular', 'Next.js', 'Spring Boot', 'React Native', 'Flutter', 'Tailwind'],
   tools: ['Git', 'GitHub', 'GitLab', 'MySQL', 'Firebase', 'Docker', 'VS Code'],
-  languages: ['Nederlands', 'Engels'],
+  languages: [
+    { icon: 'nl', nl: 'Nederlands', en: 'Dutch' },
+    { icon: 'en', nl: 'Engels', en: 'English' },
+  ],
 }
 
 const MANUAL_PROJECTS = [
   {
-    id: 'manual-petalpurrs',
-    source: 'WordPress',
-    name: 'PetalPurrs',
-    description:
-      'Een cozy idle game waarin je een eigen cafe uitbaat, stap voor stap drankjes maakt voor klanten en met je inkomsten je zaak steeds gezelliger maakt.',
-    language: 'CMS',
-    tech: ['Idle Gameplay', 'Cafe Management', 'Drink Crafting', 'Progression System'],
-    repoUrl: 'https://petalpurrs.wordpress.com/',
-    liveUrl: 'https://petalpurrs.wordpress.com/',
-    updatedAt: '2026-04-02T00:00:00Z',
-  },
-  {
     id: 'manual-gosmartlib',
     source: 'GitLab',
     name: 'GoSmartLib',
-    description:
-      'Een digitaal bibliotheekplatform voor scholen waarmee leerlingen en leerkrachten boeken kunnen zoeken, uitlenen en beheren over meerdere campussen. Deze AP GitLab repository is afgeschermd en wordt daarom handmatig gepind.',
+    description: {
+      nl: 'Full-stack bibliotheekplatform voor scholen met Smartschool-login, uitleenbeheer, reviews en AI-aanbevelingen over meerdere campussen.',
+      en: 'Full-stack library platform for schools with Smartschool login, lending management, reviews and AI recommendations across multiple campuses.',
+    },
+    details: {
+      nl: 'GoSmartLib is een full-stack bibliotheekplatform voor onderwijsinstellingen die over meerdere scholen en campussen werken. Het combineert een gedeelde boekencatalogus, de volledige uitleenflow, sociale leesfeatures en AI-aanbevelingen achter één responsieve webinterface. Authenticatie verloopt volledig via Smartschool OAuth 2.0 met stateless JWT\'s en vier rollen (student, leerkracht, admin, super admin), met strikte data-isolatie per school. Gebouwd met Next.js & React op de frontend en Spring Boot (Java 21) op de backend, met MySQL, Traefik en Docker. (AP-teamproject, GitLab-repo afgeschermd.)',
+      en: 'GoSmartLib is a full-stack library platform for educational institutions operating across multiple schools and campuses. It combines a shared book catalog, the complete borrowing lifecycle, social reading features and AI-assisted recommendations behind a single responsive web interface. Authentication runs entirely on Smartschool OAuth 2.0 with stateless JWTs and four roles (student, teacher, admin, super admin), with strict per-school data isolation. Built with Next.js & React on the frontend and Spring Boot (Java 21) on the backend, with MySQL, Traefik and Docker. (AP team project, GitLab repo is private.)',
+    },
+    category: { nl: 'Full-stack webapp', en: 'Full-Stack Web App' },
     language: 'Full Stack',
-    tech: [
-      'Library Management',
-      'Search & Borrow Flow',
-      'Multi-campus Support',
-      'Student-friendly UX',
-      'Admin Management',
-    ],
+    tech: ['TypeScript', 'Java', 'Next.js', 'React', 'Spring Boot', 'MySQL', 'Docker'],
     repoUrl: '',
     liveUrl: '',
     updatedAt: '2026-04-02T00:00:00Z',
   },
 ]
 
+const KARTING_DESCRIPTION = {
+  nl: 'Mobiele app voor (kart)racers: bekijk circuits, maak races aan, reserveer een plek en chat live met de deelnemers.',
+  en: 'Mobile app for (kart) racers: browse tracks, create races, reserve a spot and chat live with the participants.',
+}
+const LOCALLEND_DESCRIPTION = {
+  nl: 'Peer-to-peer verhuurapp waarmee buren toestellen en gereedschap uitlenen, met zoeken op kaart, boekingen en reviews.',
+  en: 'Peer-to-peer rental app for neighbours to lend out appliances and tools, with map search, bookings and reviews.',
+}
+const MONO_DESCRIPTION = {
+  nl: '2D-platformer waarin je levels doorloopt, obstakels zoals spikes en tornado\'s ontwijkt en gems verzamelt.',
+  en: '2D platformer where you clear levels, dodge obstacles like spikes and tornadoes, and collect gems.',
+}
+const ICT_ARCH_DESCRIPTION = {
+  nl: 'Architectuur case study voor een reisplanning-platform: modulaire monoliet met C4-modellen, ADR\'s en vijf proof-of-concepts.',
+  en: 'Architecture case study for a travel-planning platform: modular monolith with C4 models, ADRs and five proofs of concept.',
+}
+const PETALPURRS_DESCRIPTION = {
+  nl: 'Cozy theewinkel-game waarin je thee zet voor kat-klanten, fooien verdient en nieuwe koppen en theesoorten ontgrendelt.',
+  en: 'Cozy tea-shop game where you brew tea for cat customers, earn tips and unlock new cups and tea types.',
+}
+
+// Longer descriptions shown in the project detail modal.
+const KARTING_DETAILS = {
+  nl: 'RedLine is een mobiele app voor (kart)racers, gebouwd met React Native, Expo en TypeScript. Je bekijkt beschikbare circuits, maakt zelf races aan op een track en reserveert een plek om mee te doen. Elke race heeft een eigen live chatroom zodat deelnemers kunnen afspreken, en je kan tracks en races beoordelen. Authenticatie en data verlopen via Firebase (Auth + Firestore).',
+  en: 'RedLine is a mobile app for (kart) racers, built with React Native, Expo and TypeScript. You browse available tracks, create your own races on a circuit and reserve a spot to join. Every race has its own live chatroom so participants can coordinate, and you can rate tracks and races. Authentication and data run on Firebase (Auth + Firestore).',
+}
+const LOCALLEND_DETAILS = {
+  nl: 'LocalLend is een peer-to-peer verhuurapp waarmee buren huishoudtoestellen en gereedschap aan elkaar uitlenen. Eigenaars plaatsen items met foto, prijs, categorie en een beschikbaarheidskalender; huurders zoeken items in de buurt via een lijst of een interactieve Google Map, boeken de dagen die ze nodig hebben en laten achteraf reviews achter. Gebouwd met Flutter en Riverpod, met Firebase (Auth + Firestore) en real-time sync zodat boekingen meteen bij iedereen verschijnen.',
+  en: 'LocalLend is a peer-to-peer rental app that lets neighbours lend household appliances and tools to each other. Owners list items with a photo, price, category and availability calendar; renters browse nearby items on a list or an interactive Google Map, book the days they need and leave reviews afterwards. Built with Flutter and Riverpod, backed by Firebase (Auth + Firestore) with real-time sync so bookings show up for everyone instantly.',
+}
+const MONO_DETAILS = {
+  nl: 'Mono is een 2D-platformer gebouwd met C# en het MonoGame-framework op .NET 9. Je navigeert door verschillende levels, ontwijkt obstakels zoals spikes, tornado\'s en boekenkasten, en verzamelt gems om je score te verhogen. Het project gebruikt eigen animaties, een state-systeem voor de gamestates en factories voor de obstakels, met een oplopende moeilijkheidsgraad per level.',
+  en: 'Mono is a 2D platformer built with C# and the MonoGame framework on .NET 9. You navigate through multiple levels, dodge obstacles like spikes, tornadoes and bookshelves, and collect gems to boost your score. The project uses custom animations, a state system for the game states and factories for the obstacles, with difficulty that ramps up per level.',
+}
+const ICT_ARCH_DETAILS = {
+  nl: 'Een software-architectuur case study (AP Hogeschool, team van vijf) voor een platform waarmee vrienden samen reizen plannen met gedeelde budgetten, activiteiten en integraties naar externe reisproviders. De gekozen stijl is een modulaire monoliet in Node.js, met ACID-transacties voor gedeelde budgetten en duidelijke modulegrenzen richting microservices. De uitwerking omvat zeven kwaliteitsattributen, een C4-model in Structurizr, zes ADR\'s (MADR) en vijf deploybare proof-of-concepts op Docker Swarm. Mijn bijdrage: ADR-003 (authenticatie) en POC 1 (OAuth2 + eigen JWT).',
+  en: 'A software architecture case study (AP University, team of five) for a platform where friends plan trips together with shared budgets, activities and integrations to external travel providers. The chosen style is a modular monolith in Node.js, with ACID transactions for shared budgets and clear module boundaries that keep a path open to microservices. The work covers seven quality attributes, a C4 model in Structurizr, six ADRs (MADR) and five deployable proofs of concept on Docker Swarm. My contribution: ADR-003 (authentication) and POC 1 (OAuth2 + own JWT).',
+}
+const PETALPURRS_DETAILS = {
+  nl: 'PetalPurrs is een cozy theewinkel-game waarin je bestellingen van kat-klanten serveert. Lees de wens in hun tekstballon en zet de juiste thee met de juiste kop, temperatuur (ijs/warm/heet) en extra\'s; een perfecte match levert bovenop de basismunten ook fooi op. Werk de wachtrij af, level op en ontgrendel nieuwe koppen en zeldzamere theesoorten, en beheer ondertussen je tuin om je voorraad theeblaadjes aan te vullen. Gebouwd met React (via CDN) en Babel, zonder buildstap.',
+  en: 'PetalPurrs is a cozy tea-shop game where you serve orders to cat customers. Read each cat\'s request in their speech bubble and brew the right tea with the right cup, temperature (iced/warm/hot) and extras; a perfect match earns a tip on top of the base coins. Work through the queue, level up and unlock new cups and rarer tea types, and manage your garden to keep your tea-leaf stock full. Built with React (via CDN) and Babel, with no build step.',
+}
+
 const GITHUB_DESCRIPTION_OVERRIDES = {
-  'Tiebe-Vaes/intro-mobile-react':
-    'Een mobiele app voor karting waarmee je reservaties regelt, races aanmaakt of eraan deelneemt, chat met deelnemers gebruikt en gericht zoekt of filtert op races en racetracks.',
-  'TiebeVaes/intro-mobile-react':
-    'Een mobiele app voor karting waarmee je reservaties regelt, races aanmaakt of eraan deelneemt, chat met deelnemers gebruikt en gericht zoekt of filtert op races en racetracks.',
-  'Tiebe-Vaes/LocalLend':
-    'Een Work in Progress Dart/Flutter app waarmee je huishoudelijke apparaten kan uitlenen of vinden, inclusief zoeken en verkennen via kaartweergave.',
-  'TiebeVaes/LocalLend':
-    'Een Work in Progress Dart/Flutter app waarmee je huishoudelijke apparaten kan uitlenen of vinden, inclusief zoeken en verkennen via kaartweergave.',
-  'Tiebe-Vaes/Mono':
-    'Een game waarin je als librarian door obstakels zoals tornado\'s en verwarrende bibliotheken, en langs monsters zoals bats, de gem moet halen en alle levels moet uitspelen.',
-  'TiebeVaes/Mono':
-    'Een game waarin je als librarian door obstakels zoals tornado\'s en verwarrende bibliotheken, en langs monsters zoals bats, de gem moet halen en alle levels moet uitspelen.',
+  'Tiebe-Vaes/intro-mobile-react': KARTING_DESCRIPTION,
+  'TiebeVaes/intro-mobile-react': KARTING_DESCRIPTION,
+  'Tiebe-Vaes/LocalLend': LOCALLEND_DESCRIPTION,
+  'TiebeVaes/LocalLend': LOCALLEND_DESCRIPTION,
+  'Tiebe-Vaes/Mono': MONO_DESCRIPTION,
+  'TiebeVaes/Mono': MONO_DESCRIPTION,
+  'Tiebe-Vaes/ICT-arch': ICT_ARCH_DESCRIPTION,
+  'TiebeVaes/ICT-arch': ICT_ARCH_DESCRIPTION,
+  'Tiebe-Vaes/PetalPurrs': PETALPURRS_DESCRIPTION,
+  'TiebeVaes/PetalPurrs': PETALPURRS_DESCRIPTION,
 }
 
 const GITHUB_PROJECT_OVERRIDES = {
   'Tiebe-Vaes/intro-mobile-react': { name: 'RedLine' },
   'TiebeVaes/intro-mobile-react': { name: 'RedLine' },
-  'Tiebe-Vaes/LocalLend': { name: 'LocalLend (Work in Progress)' },
-  'TiebeVaes/LocalLend': { name: 'LocalLend (Work in Progress)' },
+  'Tiebe-Vaes/LocalLend': { name: 'LocalLend' },
+  'TiebeVaes/LocalLend': { name: 'LocalLend' },
+  'Tiebe-Vaes/ICT-arch': { name: 'Travel Planning Platform' },
+  'TiebeVaes/ICT-arch': { name: 'Travel Planning Platform' },
 }
 
-const GITHUB_TECH_OVERRIDES = {
-  'Tiebe-Vaes/intro-mobile-react': [
-    'Karting Reservations',
-    'Race Participation',
-    'Race Creation',
-    'Participant Chat',
-    'Search & Filters',
-  ],
-  'TiebeVaes/intro-mobile-react': [
-    'Karting Reservations',
-    'Race Participation',
-    'Race Creation',
-    'Participant Chat',
-    'Search & Filters',
-  ],
-  'Tiebe-Vaes/LocalLend': [
-    'Dart',
-    'Flutter',
-    'Map Discovery',
-    'Search & Filters',
-    'Peer Lending',
-  ],
-  'TiebeVaes/LocalLend': [
-    'Dart',
-    'Flutter',
-    'Map Discovery',
-    'Search & Filters',
-    'Peer Lending',
-  ],
-  'Tiebe-Vaes/Mono': [
-    '2D Game',
-    'Obstacle Gameplay',
-    'Level Progression',
-    'Enemy Encounters',
-    'Gem Objective',
-  ],
-  'TiebeVaes/Mono': [
-    '2D Game',
-    'Obstacle Gameplay',
-    'Level Progression',
-    'Enemy Encounters',
-    'Gem Objective',
-  ],
+// Languages + frameworks per repo, taken from the actual code in each repo.
+// GitHub's languages API is noisy here (Flutter ships C++/CMake/Swift platform
+// folders, ICT-arch ships Mermaid/Dockerfile), so these are curated to the real
+// languages/frameworks rather than the raw byte counts.
+const REPO_TECH = {
+  'intro-mobile-react': {
+    category: { nl: 'Mobiele app', en: 'Mobile App' },
+    languages: ['TypeScript'],
+    frameworks: ['React Native', 'Expo', 'Firebase'],
+    details: KARTING_DETAILS,
+  },
+  LocalLend: {
+    category: { nl: 'Mobiele app', en: 'Mobile App' },
+    languages: ['Dart'],
+    frameworks: ['Flutter', 'Riverpod', 'Firebase', 'Google Maps'],
+    details: LOCALLEND_DETAILS,
+  },
+  Mono: {
+    category: { nl: '2D-platformer', en: '2D Platformer' },
+    languages: ['C#'],
+    frameworks: ['MonoGame', '.NET 9'],
+    details: MONO_DETAILS,
+  },
+  'ICT-arch': {
+    category: { nl: 'Software-architectuur', en: 'Software Architecture' },
+    languages: ['JavaScript', 'HTML'],
+    frameworks: ['Express', 'React', 'Docker Swarm', 'Traefik'],
+    details: ICT_ARCH_DETAILS,
+  },
+  PetalPurrs: {
+    category: { nl: 'Browsergame', en: 'Browser Game' },
+    languages: ['JavaScript', 'CSS', 'HTML'],
+    frameworks: ['React', 'Babel'],
+    details: PETALPURRS_DETAILS,
+  },
+}
+
+// Expand to both username variants (Tiebe-Vaes/ and TiebeVaes/).
+const GITHUB_TECH_OVERRIDES = Object.fromEntries(
+  Object.entries(REPO_TECH).flatMap(([repo, value]) => [
+    [`Tiebe-Vaes/${repo}`, value],
+    [`TiebeVaes/${repo}`, value],
+  ]),
+)
+
+// Pick the right language from a { nl, en } object (falls back gracefully,
+// and tolerates plain strings from older cached data).
+function localizedText(value, locale) {
+  if (!value) return ''
+  if (typeof value === 'string') return value
+  return value[locale] || value.nl || value.en || ''
 }
 
 function getGithubDescription(repo) {
-  if (repo.description) {
-    return repo.description
+  const override = GITHUB_DESCRIPTION_OVERRIDES[repo.full_name]
+  if (override) {
+    return override
   }
 
-  return (
-    GITHUB_DESCRIPTION_OVERRIDES[repo.full_name] ||
-    `${repo.name} is een ${repo.language || 'software'} project dat ik heb opgebouwd als onderdeel van mijn leer- en projecttraject.`
-  )
+  if (repo.description) {
+    return { nl: repo.description, en: repo.description }
+  }
+
+  return {
+    nl: `${repo.name} is een ${repo.language || 'software'} project dat ik heb opgebouwd als onderdeel van mijn leer- en projecttraject.`,
+    en: `${repo.name} is a ${repo.language || 'software'} project I built as part of my learning and project journey.`,
+  }
 }
 
 function normalizeGithubProject(repo) {
   const projectOverride = GITHUB_PROJECT_OVERRIDES[repo.full_name] || {}
-  const techOverride = GITHUB_TECH_OVERRIDES[repo.full_name]
+  const techOverride = GITHUB_TECH_OVERRIDES[repo.full_name] || {}
+
+  const languages =
+    techOverride.languages || [repo.language].filter(Boolean)
+  const frameworks = techOverride.frameworks || repo.topics || []
 
   return {
     id: `gh-${repo.id}`,
     source: 'GitHub',
     name: projectOverride.name || repo.name,
     description: getGithubDescription(repo),
+    category: techOverride.category || repo.language || 'Project',
     language: repo.language || 'Other',
-    tech: techOverride || [repo.language, ...(repo.topics || [])].filter(Boolean),
+    languages,
+    frameworks,
+    tech: [...languages, ...frameworks],
+    details: techOverride.details || getGithubDescription(repo),
     repoUrl: repo.html_url,
     liveUrl: repo.homepage || '',
     updatedAt: repo.updated_at,
@@ -398,13 +567,24 @@ function normalizeGithubProject(repo) {
 }
 
 function normalizeGitlabProject(project) {
+  const languages = [project.language].filter(Boolean)
+  const frameworks = project.tag_list || []
+
   return {
     id: `gl-${project.id}`,
     source: 'GitLab',
     name: project.name,
-    description: project.description || 'Geen beschrijving toegevoegd.',
+    description: project.description
+      ? { nl: project.description, en: project.description }
+      : { nl: 'Geen beschrijving toegevoegd.', en: 'No description provided.' },
+    category: project.language || 'Project',
     language: project.language || 'Other',
-    tech: [project.language, ...(project.tag_list || [])].filter(Boolean),
+    languages,
+    frameworks,
+    tech: [...languages, ...frameworks],
+    details: project.description
+      ? { nl: project.description, en: project.description }
+      : { nl: 'Geen beschrijving toegevoegd.', en: 'No description provided.' },
     repoUrl: project.web_url,
     liveUrl: project.homepage || '',
     updatedAt: project.last_activity_at,
@@ -626,6 +806,7 @@ function App() {
   const [error, setError] = useState('')
   const [sourceFilter, setSourceFilter] = useState('all')
   const [languageFilter, setLanguageFilter] = useState('all')
+  const [activeProject, setActiveProject] = useState(null)
   const [plane, setPlane] = useState({
     x: 140,
     y: 140,
@@ -1081,12 +1262,12 @@ function App() {
             <h2 className="section-title">{t.languagesTitle}</h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {SKILLS.languages.map((language) => (
-                <span className="chip flex items-center gap-2" key={language}>
+                <span className="chip flex items-center gap-2" key={language.icon}>
                   <UiIcon
-                    name={language.toLowerCase()}
+                    name={language.icon}
                     className="text-[11px] font-bold text-cyan-300"
                   />
-                  {language}
+                  {localizedText(language, locale)}
                 </span>
               ))}
             </div>
@@ -1208,30 +1389,46 @@ function App() {
               {filteredProjects.map((project) => (
                 <motion.article
                   key={project.id}
-                  className="project-card flex flex-col"
+                  className="project-card flex cursor-pointer flex-col"
                   whileHover={{ y: -6 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.12, ease: 'easeOut' }}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setActiveProject(project)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault()
+                      setActiveProject(project)
+                    }
+                  }}
                 >
                   <ProjectGallery
                     images={getProjectScreenshots(project.name)}
                     projectName={project.name}
                   />
-                  <div className="mb-4 flex items-center justify-between text-xs uppercase tracking-[0.15em] text-zinc-500">
-                    <span>{project.source}</span>
-                    <span>{project.language}</span>
+                  <div className="mb-4 text-xs uppercase tracking-[0.15em] text-zinc-500">
+                    {localizedText(project.category, locale) || project.source}
                   </div>
                   <h3 className="font-title text-xl font-semibold text-white">
                     {project.name}
                   </h3>
-                  <p className="mt-3 text-sm text-zinc-300">{project.description}</p>
+                  <p className="mt-3 text-sm text-zinc-300">
+                    {localizedText(project.description, locale)}
+                  </p>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tech.slice(0, 5).map((tag) => (
-                      <span key={`${project.id}-${tag}`} className="chip">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {project.tech?.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.tech.map((tag) => (
+                        <span
+                          key={`${project.id}-${tag}`}
+                          className="chip flex items-center gap-2"
+                        >
+                          <SkillIcon name={tag} theme={theme} />
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   <div className="mt-auto pt-6 flex text-sm">
                     {project.repoUrl && (
@@ -1239,6 +1436,7 @@ function App() {
                       href={project.repoUrl}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={(event) => event.stopPropagation()}
                       className="project-link inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900/50 px-3 py-2 font-semibold text-cyan-300 transition hover:border-cyan-400/60 hover:bg-zinc-800"
                       aria-label={t.repo}
                     >
@@ -1299,6 +1497,16 @@ function App() {
           </div>
         </motion.section>
       </main>
+
+      {activeProject && (
+        <ProjectModal
+          project={activeProject}
+          locale={locale}
+          theme={theme}
+          labels={t}
+          onClose={() => setActiveProject(null)}
+        />
+      )}
     </div>
   )
 }
