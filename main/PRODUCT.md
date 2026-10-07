@@ -34,8 +34,9 @@ Visitors come from profile links on desktop and phone. Content must match the Li
 - Curated, static project list in code; no project is featured above the others.
 - Public GitHub contribution calendar, fetched at build time and refreshed daily.
 - Project detail view with screenshot gallery and long description.
-- CV download: keep the existing `public/CV Tiebe Vaes.pdf`.
-- Contact: e-mail, phone, location (2660 Hoboken), GitHub, LinkedIn stay public (confirmed 2026-10-06). No GitLab link.
+- Contact: e-mail, location (2660 Hoboken), GitHub and LinkedIn. No phone number, no CV download, no GitLab link (confirmed 2026-10-07).
+- Education: AP Hogeschool Sep 2024 – Dec 2026, then the final semester and degree at OsloMet (Jan – Jun 2027).
+- Languages: Dutch C2, English C1.
 - The website for the cleaning company is never mentioned, not even anonymously (rule in TVerse `AIOS/me.md`).
 - Hosting: Vercel Hobby (non-commercial personal site).
 - Routes: `/` Dutch, `/en` English.
@@ -44,7 +45,7 @@ Visitors come from profile links on desktop and phone. Content must match the Li
 
 ## Brand Commitments
 
-- Name "Tiebe Vaes"; existing TV monogram logos `public/TV.png` (light) and `public/TVbl.png` (dark).
+- Name "Tiebe Vaes". Favicon: mountain mark (orange tile, granite ridge, flag on the summit), drawn from the route profile.
 - Voice: direct, concrete, no hype, no "passionate developer" filler.
 
 ## Evidence on Hand
@@ -52,7 +53,8 @@ Visitors come from profile links on desktop and phone. Content must match the Li
 - Screenshots: GO!SmartLib (`GSLSS*.png`), Kart Race App / RedLine (`Redline*.jpeg`), LocalLend (`LLSS*.png`), Mono (`MONOSS1.png`), PetalPurrs (`PPSS1.png`), Travel planning C4 diagrams (`c4-*.png`).
 - No screenshots yet for Antwerp BMX Raceday, Ripple or Study Countdown; they show a technical drawing of their layers. Do not fabricate screenshots.
 - Project facts: vault context notes (GoSmartLib, Antwerp BMX Raceday, Ripple, TravelTogether, Eigen projecten) and the descriptions from the previous site.
-- Interests on the route: Hoboken, AP Hogeschool, scouts (leader 2024–2026), gym, mountains/hiking, Erasmus Oslo 2027.
+- Interests on the route: Hoboken, AP Hogeschool, scouts (leader 2024–2026), maker lab (3D printers, laser cutters), photography, mountains/hiking, side projects and new technology, Oslo 2027.
+- Antwerp BMX Raceday stack (Stack A): React + TypeScript + MUI, Spring Boot (Java 21), PostgreSQL, WebSocket/STOMP, PWA, JUnit 5 + Testcontainers, Docker + GitLab CI.
 - No testimonials, metrics or client quotes exist. Do not invent any.
 
 ## Product Principles

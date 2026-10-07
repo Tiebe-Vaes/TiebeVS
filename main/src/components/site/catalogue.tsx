@@ -88,7 +88,8 @@ function CatalogueItem({ project, locale, t }: { project: Project; locale: Local
             <button
               type="button"
               onClick={() => open(project.slug)}
-              className="text-left outline-none after:absolute after:inset-0 group-hover:text-tag-ink focus-visible:underline"
+              // Buttons reset word-spacing in the UA stylesheet; inherit the display face's gaps.
+              className="text-left [word-spacing:inherit] outline-none after:absolute after:inset-0 group-hover:text-tag-ink focus-visible:underline"
             >
               {project.name}
             </button>
@@ -114,7 +115,6 @@ function CatalogueItem({ project, locale, t }: { project: Project; locale: Local
 
       <Plate
         project={project}
-        locale={locale}
         drawingLabel={t.drawingLabel}
         sizes="(min-width: 768px) 288px, 100vw"
         className="aspect-[16/11] w-full"

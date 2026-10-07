@@ -35,7 +35,7 @@ export function SpecSheet({
       {project ? (
         <DialogContent className="max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto p-0 sm:max-w-4xl">
           <div className="grid md:grid-cols-[1.15fr_1fr]">
-            <Gallery project={project} locale={locale} drawingLabel={catalogue.drawingLabel} sheet={sheet} />
+            <Gallery project={project} drawingLabel={catalogue.drawingLabel} sheet={sheet} />
 
             <div className="flex flex-col gap-5 p-5 md:p-7">
               <div className="flex flex-col gap-2">
@@ -76,20 +76,16 @@ export function SpecSheet({
                 ) : null}
                 <dt className="font-mono text-xs text-muted-foreground uppercase">{sheet.stack}</dt>
                 <dd>
-                  {project.tech.length ? (
-                    <ul className="flex flex-wrap gap-1.5">
-                      {project.tech.map((tech) => (
-                        <li key={tech}>
-                          <Badge variant="outline" className="gap-1.5 font-normal">
-                            <TechIcon name={tech} />
-                            {tech}
-                          </Badge>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <span className="text-muted-foreground">{sheet.stackPending}</span>
-                  )}
+                  <ul className="flex flex-wrap gap-1.5">
+                    {project.tech.map((tech) => (
+                      <li key={tech}>
+                        <Badge variant="outline" className="gap-1.5 font-normal">
+                          <TechIcon name={tech} />
+                          {tech}
+                        </Badge>
+                      </li>
+                    ))}
+                  </ul>
                 </dd>
               </dl>
 
@@ -132,12 +128,10 @@ export function SpecSheet({
 
 function Gallery({
   project,
-  locale,
   drawingLabel,
   sheet,
 }: {
   project: Project
-  locale: Locale
   drawingLabel: string
   sheet: Dictionary["sheet"]
 }) {
@@ -146,7 +140,6 @@ function Gallery({
     return (
       <Plate
         project={project}
-        locale={locale}
         drawingLabel={drawingLabel}
         sizes="(min-width: 768px) 480px, 100vw"
         className="aspect-[4/3] rounded-none border-0 border-b md:aspect-auto md:min-h-full md:border-r md:border-b-0"

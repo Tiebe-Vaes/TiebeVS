@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useReducedMotion, useSpring } from "motion/react"
-import { DownloadIcon } from "lucide-react"
+import { MailIcon } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import type { Dictionary } from "@/content/dictionary"
@@ -70,22 +70,25 @@ export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] })
           {profile.name}
         </h1>
         <p className="mt-4 text-xl font-semibold">{profile.role[locale]}</p>
-        <p className="mt-1 font-mono text-xs text-balance">{profile.stackLine}</p>
+        {/* A wrapping row instead of dot separators: no line can start or end on a stray dot. */}
+        <ul className="mt-1.5 flex flex-wrap gap-x-3 gap-y-0.5 font-mono text-xs">
+          {profile.stack.map((item) => (
+            <li key={item} className="whitespace-nowrap">
+              {item}
+            </li>
+          ))}
+        </ul>
 
         <Separator className="my-5 bg-primary-foreground/30" />
 
         <p className="font-mono text-[0.7rem] tracking-wider uppercase">{t.graduates}</p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <a href="#catalogue" className={buttonVariants({ variant: "ink", size: "lg" })}>
+          <a href="#catalogue" className={buttonVariants({ variant: "tag", size: "lg" })}>
             {t.viewCatalogue}
           </a>
-          <a
-            href={profile.cv}
-            download
-            className={buttonVariants({ variant: "ghost", size: "lg" })}
-          >
-            <DownloadIcon data-icon="inline-start" />
-            {t.downloadCv}
+          <a href="#contact" className={buttonVariants({ variant: "ghost", size: "lg" })}>
+            <MailIcon data-icon="inline-start" />
+            {t.contact}
           </a>
         </div>
       </motion.div>

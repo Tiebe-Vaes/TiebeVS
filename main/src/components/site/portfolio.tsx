@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowUpRightIcon, DownloadIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react"
+import { ArrowUpRightIcon, MailIcon, MapPinIcon } from "lucide-react"
 import SlideTextButton from "@/components/kokonutui/slide-text-button"
 import SwitchButton from "@/components/kokonutui/switch-button"
 import { buttonVariants } from "@/components/ui/button"
@@ -7,13 +7,13 @@ import { getDictionary, type Dictionary } from "@/content/dictionary"
 import { SITE_URL, education, profile, skillGroups, spokenLanguages } from "@/content/profile"
 import { projects } from "@/content/projects"
 import type { Locale } from "@/content/types"
-import { cn } from "@/lib/utils"
 import { getContributions } from "@/lib/github"
 import { Catalogue } from "./catalogue"
 import { CatalogueProvider } from "./catalogue-provider"
 import { GearBoard } from "./gear-board"
 import GithubHeatmap, { type HeatmapDay } from "./github-heatmap"
 import { HangTag } from "./hang-tag"
+import { LanguageMeter } from "./language-meter"
 import { RouteProfile } from "./route-profile"
 import { LinkedInIcon, TechIcon } from "./tech-icon"
 
@@ -77,7 +77,7 @@ export async function Portfolio({ locale }: { locale: Locale }) {
 
           <About locale={locale} t={t.about} />
 
-          <Contact t={t.contact} />
+          <Contact locale={locale} t={t.contact} />
         </main>
       </CatalogueProvider>
 
@@ -147,8 +147,9 @@ function About({ locale, t }: { locale: Locale; t: Dictionary["about"] }) {
             {education.map((item) => (
               <li key={item.title.en} className="flex flex-col gap-1.5 border-b py-5">
                 <span className="text-lg font-semibold">{item.title[locale]}</span>
+                {item.detail ? <span className="text-muted-foreground">{item.detail[locale]}</span> : null}
                 <span className="font-mono text-xs text-muted-foreground tabular">
-                  {item.period} · {item.place}
+                  {item.period[locale]} · {item.place}
                 </span>
               </li>
             ))}
@@ -158,8 +159,13 @@ function About({ locale, t }: { locale: Locale; t: Dictionary["about"] }) {
           <h3 className="border-b-2 border-foreground pb-3 font-display text-3xl font-bold">{t.languages}</h3>
           <ul className="flex flex-col">
             {spokenLanguages.map((language) => (
-              <li key={language.en} className="border-b py-5 text-lg">
-                {language[locale]}
+              <li key={language.name.en} className="border-b py-6">
+                <LanguageMeter
+                  name={language.name[locale]}
+                  level={language.level}
+                  share={language.share}
+                  hint={t.levelHint}
+                />
               </li>
             ))}
           </ul>
@@ -210,22 +216,18 @@ function GithubSection({
         </a>
       </div>
       {heatmapDays ? (
-        // row-reverse makes a narrow screen start scrolled to the most recent months.
-        <div className="flex min-w-0 flex-row-reverse overflow-x-auto rounded-sm border bg-card p-5 sm:p-8">
-          <div className="min-w-[44rem] flex-1">
-            <GithubHeatmap days={heatmapDays} />
-          </div>
+        <div className="min-w-0 rounded-sm border bg-card p-5 sm:p-8">
+          <GithubHeatmap days={heatmapDays} locale={t.intlLocale} labels={t.heatmap} />
         </div>
       ) : null}
     </section>
   )
 }
 
-function Contact({ t }: { t: Dictionary["contact"] }) {
+function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
   const rows = [
     { label: t.email, value: profile.email, href: `mailto:${profile.email}`, icon: MailIcon },
-    { label: t.phone, value: profile.phone, href: profile.phoneHref, icon: PhoneIcon },
-    { label: t.location, value: profile.location, icon: MapPinIcon },
+    { label: t.location, value: profile.location[locale], icon: MapPinIcon },
   ]
   const profiles = [
     { name: "LinkedIn", href: profile.links.linkedin, icon: <LinkedInIcon /> },
@@ -243,12 +245,8 @@ function Contact({ t }: { t: Dictionary["contact"] }) {
           {t.title}
         </h2>
         <p className="max-w-[44ch] text-lg">{t.body}</p>
-        <div className="flex flex-wrap gap-2">
+        <div>
           <SlideTextButton href={`mailto:${profile.email}`} text={profile.email} hoverText={t.email} />
-          <a href={profile.cv} download className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "h-12 px-5")}>
-            <DownloadIcon data-icon="inline-start" />
-            {t.cv}
-          </a>
         </div>
       </div>
 

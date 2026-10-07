@@ -19,6 +19,7 @@ import {
   siJest,
   siJunit5,
   siMonogame,
+  siMui,
   siMysql,
   siNextdotjs,
   siNodedotjs,
@@ -36,16 +37,15 @@ import {
   siVitest,
   type SimpleIcon,
 } from "simple-icons"
+import { BracesIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const ICONS: Record<string, SimpleIcon> = {
   TypeScript: siTypescript,
   JavaScript: siJavascript,
   Java: siOpenjdk,
-  "C#": siDotnet,
   ".NET": siDotnet,
   Dart: siDart,
-  SQL: siMysql,
   MySQL: siMysql,
   HTML: siHtml5,
   CSS: siCss,
@@ -67,6 +67,8 @@ const ICONS: Record<string, SimpleIcon> = {
   Git: siGit,
   GitHub: siGithub,
   GitLab: siGitlab,
+  "GitLab CI": siGitlab,
+  MUI: siMui,
   Vercel: siVercel,
   "JUnit 5": siJunit5,
   Jest: siJest,
@@ -83,9 +85,11 @@ export function techIconPath(name: string) {
   return ICONS[name]?.path
 }
 
+/** Brand mark when simple-icons has the right one; otherwise a neutral braces glyph, never a stand-in brand. */
 export function TechIcon({ name, className }: { name: string; className?: string }) {
   const icon = ICONS[name]
-  if (!icon) return null
+  if (!icon) return <BracesIcon aria-hidden="true" className={cn("size-3.5 shrink-0 opacity-70", className)} />
+
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className={cn("size-3.5 shrink-0 fill-current", className)}>
       <path d={icon.path} />

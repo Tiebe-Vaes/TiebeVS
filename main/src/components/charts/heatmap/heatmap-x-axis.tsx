@@ -9,14 +9,16 @@ import { getHeatmapColumnMonthAnchor } from "./heatmap-utils";
 export interface HeatmapXAxisProps {
   /** Additional class name for labels */
   className?: string;
+  /** Local patch: BCP 47 locale for month names. Default: `"en-US"`. */
+  locale?: string;
 }
-
-const monthFmt = new Intl.DateTimeFormat("en-US", { month: "short" });
 
 export const HeatmapXAxis = memo(function HeatmapXAxis({
   className,
+  locale = "en-US",
 }: HeatmapXAxisProps) {
   const { containerRef, data, margin, xScale } = useHeatmap();
+  const monthFmt = useMemo(() => new Intl.DateTimeFormat(locale, { month: "short" }), [locale]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ export const HeatmapXAxis = memo(function HeatmapXAxis({
     }
 
     return ticks;
-  }, [data, margin.left, xScale]);
+  }, [data, margin.left, monthFmt, xScale]);
 
   const container = containerRef.current;
   if (!(mounted && container)) {

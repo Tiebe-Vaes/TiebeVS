@@ -18,6 +18,8 @@ const RIDGE: [number, number][] = [
 ]
 // Where each waypoint sits along x; order matches the waypoints passed in.
 const STOPS = [40, 130, 215, 300, 390, 490, 600, 710]
+// The hiker starts on the summit.
+const START = 490
 
 function ridgeY(x: number) {
   for (let i = 1; i < RIDGE.length; i++) {
@@ -52,7 +54,7 @@ export function RouteProfile({
   const reduceMotion = useReducedMotion()
   const svgRef = useRef<SVGSVGElement>(null)
   const clipId = useId()
-  const [x, setX] = useState(STOPS[STOPS.length - 2])
+  const [x, setX] = useState(START)
   const springX = useSpring(x, { stiffness: 220, damping: 28 })
   const springY = useSpring(ridgeY(x), { stiffness: 220, damping: 28 })
 

@@ -49,13 +49,6 @@ export function buildMetadata(locale: Locale): Metadata {
       locale: locale === "nl" ? "nl_BE" : "en_GB",
     },
     twitter: { card: "summary_large_image", title: t.meta.title, description: t.meta.description },
-    icons: {
-      icon: [
-        { url: "/TV.png", media: "(prefers-color-scheme: light)" },
-        { url: "/TVbl.png", media: "(prefers-color-scheme: dark)" },
-      ],
-      apple: "/TV.png",
-    },
   }
 }
 

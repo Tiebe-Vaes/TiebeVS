@@ -14,7 +14,7 @@ export default function SlideTextButton({
   return (
     <a
       className={cn(
-        "group relative inline-flex h-12 items-center overflow-hidden rounded-sm bg-foreground px-6 font-semibold text-background transition-colors hover:bg-foreground/85",
+        "group relative inline-flex h-12 items-center overflow-hidden rounded-sm bg-primary-foreground px-6 font-semibold text-primary transition-colors hover:bg-primary-foreground/85",
         className,
       )}
       {...props}

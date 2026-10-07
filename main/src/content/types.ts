@@ -22,8 +22,6 @@ export type Project = {
   /** Tiebe's own part, shown on team projects. */
   role?: Localized
   tech: string[]
-  /** Layers for the technical drawing when there is no stack to draw. Defaults to `tech`. */
-  drawing?: Record<Locale, string[]>
   /** Screenshots in /public. Without them the catalogue shows the project's technical drawing. */
   images?: string[]
   repoUrl?: string

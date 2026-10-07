@@ -5,14 +5,10 @@ export const SITE_URL = "https://tiebe.vercel.app"
 export const profile = {
   name: "Tiebe Vaes",
   role: { nl: "Full-stack developer", en: "Full-stack developer" } satisfies Localized,
-  // Non-breaking space before each dot so a wrapped line never starts with "·".
-  stackLine: "TypeScript · React · Next.js · Java · Spring Boot",
+  stack: ["TypeScript", "React", "Next.js", "Java", "Spring Boot"],
   email: "tiebevaes@gmail.com",
-  phone: "+32 468 54 71 53",
-  phoneHref: "tel:+32468547153",
-  location: "2660 Hoboken, Belgium",
+  location: { nl: "2660 Hoboken, België", en: "2660 Hoboken, Belgium" } satisfies Localized,
   timeZone: "Europe/Brussels",
-  cv: "/CV Tiebe Vaes.pdf",
   links: {
     github: "https://github.com/Tiebe-Vaes",
     githubUser: "Tiebe-Vaes",
@@ -20,29 +16,34 @@ export const profile = {
   },
 }
 
-export const education: { title: Localized; period: string; place: string }[] = [
+// Newest first: the degree is completed in Oslo after the semesters at AP.
+export const education: { title: Localized; detail?: Localized; period: Localized; place: string }[] = [
+  {
+    title: {
+      nl: "Toegepaste Informatica (software), OsloMet",
+      en: "Applied Computer Science (software), OsloMet",
+    },
+    detail: {
+      nl: "Laatste semester via Erasmus, diploma in juni 2027.",
+      en: "Final semester through Erasmus, degree in June 2027.",
+    },
+    period: { nl: "jan – jun 2027", en: "Jan – Jun 2027" },
+    place: "Oslo",
+  },
   {
     title: {
       nl: "Toegepaste Informatica (software), AP Hogeschool",
       en: "Applied Computer Science (software), AP University of Applied Sciences",
     },
-    period: "2024 – 2027",
+    period: { nl: "sep 2024 – dec 2026", en: "Sep 2024 – Dec 2026" },
     place: "Antwerpen",
-  },
-  {
-    title: {
-      nl: "Erasmus-uitwisseling, OsloMet",
-      en: "Erasmus exchange, OsloMet",
-    },
-    period: "jan – jun 2027",
-    place: "Oslo",
   },
   {
     title: {
       nl: "Boekhouden-Informatica, H. Pius X-Instituut",
       en: "Accounting & IT, H. Pius X Institute",
     },
-    period: "2022 – 2024",
+    period: { nl: "2022 – 2024", en: "2022 – 2024" },
     place: "Wilrijk",
   },
   {
@@ -50,7 +51,7 @@ export const education: { title: Localized; period: string; place: string }[] = 
       nl: "Wetenschappen, H. Pius X-Instituut",
       en: "Sciences, H. Pius X Institute",
     },
-    period: "2018 – 2022",
+    period: { nl: "2018 – 2022", en: "2018 – 2022" },
     place: "Wilrijk",
   },
 ]
@@ -86,7 +87,8 @@ export const skillGroups: { label: Localized; items: string[] }[] = [
   },
 ]
 
-export const spokenLanguages: Localized[] = [
-  { nl: "Nederlands (moedertaal)", en: "Dutch (native)" },
-  { nl: "Engels", en: "English" },
+// CEFR level; share is the bar fill (C2 is the top of the scale).
+export const spokenLanguages: { name: Localized; level: "C2" | "C1"; share: number }[] = [
+  { name: { nl: "Nederlands", en: "Dutch" }, level: "C2", share: 100 },
+  { name: { nl: "Engels", en: "English" }, level: "C1", share: 84 },
 ]

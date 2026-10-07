@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T00:00:00Z",
+  "title": "Design System: Tiebe Vaes",
+  "extensions": {
+    "colorMeta": {
+      "signal-orange": { "role": "primary", "displayName": "Signal Orange", "canonical": "oklch(0.68 0.21 38)", "dark": "oklch(0.68 0.21 38)", "tonalRamp": ["oklch(0.15 0.05 38)", "oklch(0.27 0.09 38)", "oklch(0.39 0.13 38)", "oklch(0.52 0.18 38)", "oklch(0.68 0.21 38)", "oklch(0.78 0.15 40)", "oklch(0.87 0.08 42)", "oklch(0.95 0.03 42)"] },
+      "tag-ink": { "role": "primary", "displayName": "Tag Ink", "canonical": "oklch(0.52 0.18 38)", "dark": "oklch(0.76 0.17 45)", "tonalRamp": ["oklch(0.15 0.05 38)", "oklch(0.27 0.09 38)", "oklch(0.39 0.13 38)", "oklch(0.52 0.18 38)", "oklch(0.64 0.19 40)", "oklch(0.76 0.17 45)", "oklch(0.86 0.09 45)", "oklch(0.95 0.03 45)"] },
+      "fjord-line": { "role": "secondary", "displayName": "Fjord Line", "canonical": "oklch(0.42 0.09 250)", "dark": "oklch(0.74 0.09 245)", "tonalRamp": ["oklch(0.15 0.04 250)", "oklch(0.27 0.07 250)", "oklch(0.42 0.09 250)", "oklch(0.53 0.09 248)", "oklch(0.64 0.09 246)", "oklch(0.74 0.09 245)", "oklch(0.85 0.06 245)", "oklch(0.95 0.02 245)"] },
+      "moss-shipped": { "role": "tertiary", "displayName": "Moss", "canonical": "oklch(0.43 0.06 140)", "dark": "oklch(0.74 0.1 140)", "tonalRamp": ["oklch(0.15 0.03 140)", "oklch(0.28 0.05 140)", "oklch(0.43 0.06 140)", "oklch(0.54 0.08 140)", "oklch(0.64 0.09 140)", "oklch(0.74 0.1 140)", "oklch(0.85 0.06 140)", "oklch(0.95 0.02 140)"] },
+      "glacier-white": { "role": "neutral", "displayName": "Glacier White", "canonical": "oklch(0.954 0.007 135)", "tonalRamp": ["oklch(0.15 0.007 135)", "oklch(0.3 0.007 135)", "oklch(0.45 0.007 135)", "oklch(0.6 0.007 135)", "oklch(0.75 0.007 135)", "oklch(0.84 0.01 135)", "oklch(0.92 0.008 135)", "oklch(0.954 0.007 135)"] },
+      "glacier-card": { "role": "neutral", "displayName": "Glacier Card", "canonical": "oklch(0.977 0.005 135)", "dark": "oklch(0.245 0.009 255)", "tonalRamp": ["oklch(0.15 0.005 135)", "oklch(0.3 0.005 135)", "oklch(0.45 0.005 135)", "oklch(0.6 0.005 135)", "oklch(0.75 0.005 135)", "oklch(0.88 0.005 135)", "oklch(0.94 0.005 135)", "oklch(0.977 0.005 135)"] },
+      "granite-ink": { "role": "neutral", "displayName": "Granite Ink", "canonical": "oklch(0.255 0.008 255)", "dark": "oklch(0.95 0.007 135)", "tonalRamp": ["oklch(0.15 0.008 255)", "oklch(0.2 0.008 255)", "oklch(0.255 0.008 255)", "oklch(0.35 0.01 255)", "oklch(0.5 0.01 255)", "oklch(0.65 0.01 255)", "oklch(0.8 0.008 255)", "oklch(0.95 0.005 255)"] },
+      "granite-deep": { "role": "neutral", "displayName": "Granite Deep", "canonical": "oklch(0.2 0.008 255)", "tonalRamp": ["oklch(0.15 0.008 255)", "oklch(0.2 0.008 255)", "oklch(0.29 0.01 255)", "oklch(0.4 0.01 255)", "oklch(0.55 0.01 255)", "oklch(0.7 0.01 255)", "oklch(0.83 0.008 255)", "oklch(0.95 0.005 255)"] },
+      "scree-muted": { "role": "neutral", "displayName": "Scree", "canonical": "oklch(0.46 0.012 250)", "dark": "oklch(0.76 0.01 135)", "tonalRamp": ["oklch(0.15 0.012 250)", "oklch(0.25 0.012 250)", "oklch(0.36 0.012 250)", "oklch(0.46 0.012 250)", "oklch(0.58 0.012 250)", "oklch(0.7 0.01 250)", "oklch(0.83 0.008 250)", "oklch(0.95 0.005 250)"] },
+      "frost-border": { "role": "neutral", "displayName": "Frost Border", "canonical": "oklch(0.84 0.01 135)", "dark": "oklch(1 0 0 / 13%)", "tonalRamp": ["oklch(0.15 0.01 135)", "oklch(0.3 0.01 135)", "oklch(0.45 0.01 135)", "oklch(0.6 0.01 135)", "oklch(0.72 0.01 135)", "oklch(0.84 0.01 135)", "oklch(0.9 0.01 135)", "oklch(0.95 0.007 135)"] },
+      "night-card": { "role": "neutral", "displayName": "Night Card", "canonical": "oklch(0.245 0.009 255)", "tonalRamp": ["oklch(0.15 0.009 255)", "oklch(0.2 0.008 255)", "oklch(0.245 0.009 255)", "oklch(0.29 0.01 255)", "oklch(0.32 0.01 255)", "oklch(0.45 0.01 255)", "oklch(0.7 0.01 255)", "oklch(0.95 0.005 255)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The name on the hang tag only. Archivo condensed (wdth 62), word-spacing 0.14em." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings; 3.75rem below 640px. Contact heading one step larger (4.5rem to 6rem)." },
+      "title": { "displayName": "Title", "purpose": "Catalogue item names, spec sheet titles; 1.875rem ruled sub-headings; 1.5rem figure captions." },
+      "body": { "displayName": "Body", "purpose": "Project summaries, max 62ch." },
+      "body-lead": { "displayName": "Body lead", "purpose": "About paragraphs and section intros, max 60ch." },
+      "label": { "displayName": "Mono label", "purpose": "Martian Mono for article numbers, times, dates, status labels, field names; 0.65rem to 0.75rem, uppercase, tabular." }
+    },
+    "shadows": [
+      { "name": "hanging-tag", "value": "0 18px 40px -18px oklch(0.25 0.05 40 / 0.55)", "purpose": "Soft warm drop under the hang tag." },
+      { "name": "lifted-patch", "value": "0 14px 28px -12px oklch(0.25 0.02 255 / 0.45)", "purpose": "Only while a kit patch is dragged." }
+    ],
+    "motion": [
+      { "name": "ease-expo-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Drawing explode (700ms), catalogue filter fade (250ms), language meter fill (1400ms)." },
+      { "name": "spring-tag-sway", "value": "stiffness 60, damping 9, mass 1.2", "purpose": "Hang tag swings toward the pointer, clamped to ±7deg, pivot at the punch hole." },
+      { "name": "spring-hiker", "value": "stiffness 220, damping 28", "purpose": "Hiker follows the pointer along the ridge." },
+      { "name": "spring-patch", "value": "stiffness 260, damping 20", "purpose": "Kit patches settling into view and on hover." },
+      { "name": "explode", "value": "--explode: 0.45 rest, 0.95 on row hover/focus", "purpose": "Single registered number property driving every stack drawing." },
+      { "name": "reduced-motion", "value": "prefers-reduced-motion: reduce", "purpose": "Disables sway, springs (jump instead), drag, explode transition, smooth scroll." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ],
+    "dependencies": [
+      "shadcn/ui (base-nova on Base UI) in src/components/ui, with added Button variants ink and tag",
+      "bklit heatmap in src/components/charts, with local locale patches",
+      "Kokonut UI slide-text-button and switch-button, restyled",
+      "motion (motion/react) for springs, drag and layout",
+      "lucide-react icons"
+    ]
+  },
+  "components": [
+    {
+      "name": "Tag Button",
+      "kind": "button",
+      "refersTo": "button-tag",
+      "description": "Primary action on orange: granite block, orange text.",
+      "html": "<div class=\"ds-on-orange\"><a class=\"ds-btn-tag\" href=\"#\">View catalogue</a></div>",
+      "css": ".ds-on-orange { background: oklch(0.68 0.21 38); padding: 24px; } .ds-btn-tag { display: inline-flex; align-items: center; height: 36px; padding: 0 10px; border-radius: 4px; background: oklch(0.2 0.008 255); color: oklch(0.68 0.21 38); font-family: Archivo, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 150ms; } .ds-btn-tag:hover { background: oklch(0.2 0.008 255 / 0.85); } .ds-btn-tag:active { transform: translateY(1px); } .ds-btn-tag:focus-visible { outline: 2px solid oklch(0.42 0.09 250); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Primary action on the ground: granite fill, glacier text.",
+      "html": "<a class=\"ds-btn-ink\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.3 1.9 1.3 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3\"/></svg>Repository</a>",
+      "css": ".ds-btn-ink { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px 0 8px; border-radius: 4px; background: oklch(0.255 0.008 255); color: oklch(0.954 0.007 135); font-family: Archivo, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 150ms; } .ds-btn-ink:hover { background: oklch(0.255 0.008 255 / 0.85); } .ds-btn-ink:active { transform: translateY(1px); } .ds-btn-ink:focus-visible { outline: 2px solid oklch(0.42 0.09 250); outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "External links: hairline border, ground fill, up-right arrow.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Live site<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/></svg></a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 8px 0 10px; border-radius: 4px; border: 1px solid oklch(0.84 0.01 135); background: oklch(0.954 0.007 135); color: oklch(0.255 0.008 255); font-family: Archivo, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 150ms; } .ds-btn-outline:hover { background: oklch(0.92 0.008 135); } .ds-btn-outline:focus-visible { outline: 2px solid oklch(0.42 0.09 250); outline-offset: 3px; }"
+    },
+    {
+      "name": "Status Labels",
+      "kind": "chip",
+      "refersTo": "status-sewn",
+      "description": "Sewn (shipped, moss, dashed) and basted (in development, tag ink, dotted).",
+      "html": "<span class=\"ds-status ds-status-sewn\">Shipped</span> <span class=\"ds-status ds-status-basted\">In development</span>",
+      "css": ".ds-status { display: inline-flex; align-items: center; padding: 6px 10px; font-family: 'Martian Mono', monospace; font-size: 0.65rem; line-height: 1; letter-spacing: 0.05em; text-transform: uppercase; } .ds-status-sewn { color: oklch(0.43 0.06 140); outline: 1.5px dashed currentColor; outline-offset: -5px; } .ds-status-basted { color: oklch(0.52 0.18 38); outline: 2px dotted currentColor; outline-offset: -5px; }"
+    },
+    {
+      "name": "Kit Patch",
+      "kind": "chip",
+      "refersTo": "kit-patch",
+      "description": "Draggable sewn patch on the kit board.",
+      "html": "<span class=\"ds-patch\">TypeScript</span>",
+      "css": ".ds-patch { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 2.4px; background: oklch(0.954 0.007 135); color: oklch(0.255 0.008 255); font-family: Archivo, sans-serif; font-size: 14px; font-weight: 600; outline: 1.5px dashed currentColor; outline-offset: -5px; transform: rotate(-2deg); cursor: grab; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-patch:hover { transform: translateY(-3px) scale(1.04); } .ds-patch:active { cursor: grabbing; transform: scale(1.1) rotate(4deg); box-shadow: 0 14px 28px -12px oklch(0.25 0.02 255 / 0.45); }"
+    },
+    {
+      "name": "Hang Tag",
+      "kind": "custom",
+      "refersTo": "hang-tag",
+      "description": "Signature: orange tag with punch hole, mono readouts and condensed name, tilted and shadowed.",
+      "html": "<div class=\"ds-tag\"><span class=\"ds-tag-hole\"></span><div class=\"ds-tag-row\"><span>Art. no. TV-2027</span><span>Hoboken 15:19</span></div><div class=\"ds-tag-name\">Tiebe Vaes</div><p class=\"ds-tag-role\">Full-stack developer</p><ul class=\"ds-tag-stack\"><li>TypeScript</li><li>React</li><li>Next.js</li><li>Java</li><li>Spring Boot</li></ul></div>",
+      "css": ".ds-tag { position: relative; max-width: 28rem; padding: 36px 32px 24px; border-radius: 2.4px; background: oklch(0.68 0.21 38); color: oklch(0.2 0.008 255); transform: rotate(-2.5deg); transform-origin: 50% 0; box-shadow: 0 18px 40px -18px oklch(0.25 0.05 40 / 0.55); font-family: Archivo, sans-serif; } .ds-tag-hole { position: absolute; top: 12px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 9999px; background: oklch(0.954 0.007 135); box-shadow: 0 0 0 3px oklch(0.2 0.008 255 / 0.8); } .ds-tag-row { display: flex; justify-content: space-between; font-family: 'Martian Mono', monospace; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; font-variant-numeric: tabular-nums; } .ds-tag-name { margin-top: 24px; font-size: clamp(3.4rem, 9vw, 6rem); line-height: 0.86; font-weight: 800; font-variation-settings: 'wdth' 62; letter-spacing: -0.02em; word-spacing: 0.14em; } .ds-tag-role { margin: 16px 0 0; font-size: 1.25rem; font-weight: 600; } .ds-tag-stack { display: flex; flex-wrap: wrap; gap: 2px 12px; margin: 6px 0 0; padding: 0; list-style: none; font-family: 'Martian Mono', monospace; font-size: 0.75rem; }"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat bordered surface for figures, the kit board and the heatmap; ripstop variant for drawing plates.",
+      "html": "<div class=\"ds-panel\"><span class=\"ds-panel-art\">Art. 03</span></div> <div class=\"ds-panel ds-ripstop\"><span class=\"ds-panel-art\">Art. 07</span></div>",
+      "css": ".ds-panel { position: relative; display: inline-block; width: 240px; height: 165px; border: 1px solid oklch(0.84 0.01 135); border-radius: 2.4px; background: oklch(0.977 0.005 135); } .ds-ripstop { background-image: linear-gradient(oklch(0.84 0.01 135) 1px, transparent 1px), linear-gradient(90deg, oklch(0.84 0.01 135) 1px, transparent 1px); background-size: 14px 14px; background-position: -1px -1px; } .ds-panel-art { position: absolute; top: 10px; left: 12px; font-family: 'Martian Mono', monospace; font-size: 0.65rem; color: oklch(0.46 0.012 250); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "description": "Sticky strip: condensed name, text links, mono language code.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-name\">Tiebe Vaes</span><span class=\"ds-nav-links\"><a href=\"#\">Catalogue</a><a href=\"#\">About</a><a href=\"#\">Contact</a><a class=\"ds-nav-lang\" href=\"#\">NL</a></span></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 32px; border-bottom: 1px solid oklch(0.84 0.01 135); background: oklch(0.954 0.007 135 / 0.9); font-family: Archivo, sans-serif; } .ds-nav-name { font-size: 1.25rem; font-weight: 700; font-variation-settings: 'wdth' 62; letter-spacing: -0.02em; color: oklch(0.255 0.008 255); } .ds-nav-links { display: flex; gap: 4px; } .ds-nav-links a { padding: 8px 12px; border-radius: 2.4px; font-size: 14px; color: oklch(0.255 0.008 255); text-decoration: none; } .ds-nav-links a:hover { background: oklch(0.92 0.008 135); } .ds-nav-links a:focus-visible { outline: 2px solid oklch(0.42 0.09 250); outline-offset: 3px; } .ds-nav-links .ds-nav-lang { font-family: 'Martian Mono', monospace; font-size: 12px; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Gear Catalogue",
+    "overview": "The site reads as a technical outdoor gear catalogue: the maker is a product with a hang tag, his interests are a route drawn as an elevation profile, and his work is a numbered list of catalogue articles, each with a spec sheet and a plate. Everything is printed matter or sewn material, never glowing screen material. The ground is cold and pale like glacier ice, the ink is granite, and one loud signal orange is reserved for what you would see first on a shelf: the tag, the active waypoint, the main action.\n\nDensity is catalogue density: long ruled lists separated by hairlines, large condensed headings, small mono readouts for article numbers and dates. Depth comes from borders and tone; only physical objects that are lifted (the hanging tag, a dragged patch) cast a shadow. Technical lines (contours, leader lines, isometric stack drawings) are fjord-blue hairlines. Motion is physical: the tag sways on a spring from its punch hole, the hiker follows the pointer along the ridge, drawings explode on hover. All of it stops under reduced motion.\n\nNight mode keeps the world: the ground turns granite, the orange stays the same orange, and lines lighten to a pale fjord blue. The confirmed anti-reference is the dark neon developer portfolio with a bento grid and glowing cards.",
+    "keyCharacteristics": [
+      "Glacier-white ground, granite ink, one signal orange used as material, not as text.",
+      "Condensed Archivo (wdth 62, extrabold) for display; Archivo at normal width for reading; Martian Mono for data.",
+      "Status is stitching: dashed \"sewn\" for shipped, dotted \"basted\" for in development.",
+      "Fjord-blue hairline drawings: route profile, topographic rings, isometric stack plates.",
+      "Flat bordered panels with sharp 2.4px corners; shadows only on lifted objects.",
+      "Ruled catalogue rows with fixed article numbers (01-09), reachable by keys 1-9."
+    ],
+    "rules": [
+      { "name": "The Signal Orange Rule", "body": "Signal orange is a material: tags, the active waypoint, the primary action, the activity scale. Small orange text on the light ground uses Tag Ink instead, because signal orange is too light to read there.", "section": "colors" },
+      { "name": "The Granite-on-Orange Rule", "body": "Anything placed on orange is granite (Granite Deep) in both themes; the orange never changes between day and night.", "section": "colors" },
+      { "name": "The Stitch Status Rule", "body": "Shipped is moss with a dashed sewn stitch; in development is Tag Ink with a dotted basted stitch. Status is never a filled pill or a colored dot.", "section": "colors" },
+      { "name": "The Condensed Display Rule", "body": "Every heading uses the condensed face: Archivo at wdth 62, -0.02em tracking, with word spacing added back (0.14em) because the condensed width swallows word gaps. Buttons inside headings inherit that word spacing.", "section": "typography" },
+      { "name": "The Mono Is Data Rule", "body": "Martian Mono is for things a catalogue would stamp or measure: article numbers, dates, times, counts, field names, levels. Numbers in it are always tabular. It never sets prose or headings.", "section": "typography" },
+      { "name": "The Hanging Object Rule", "body": "Only objects that physically leave the surface cast a shadow: the swaying tag and a patch in the hand. Panels and rows never do.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** keep signal orange identical in both themes and put Granite Deep on it.",
+      "**Do** use Tag Ink, not signal orange, for any orange text on the light ground.",
+      "**Do** mark project status with the sewn (shipped, moss) or basted (in development, Tag Ink) stitch label.",
+      "**Do** draw technical content (profiles, contours, stacks, leader lines) as fjord hairlines, and drive any exploded drawing through the single `--explode` property.",
+      "**Do** set every heading in condensed Archivo (wdth 62) with the restored 0.14em word spacing, and every number, date and article code in tabular Martian Mono.",
+      "**Do** separate list items with hairlines and keep panels flat with a 1px border and 2.4px corners.",
+      "**Do** give every pointer interaction a keyboard path (slider, keys 1-9, focusable rows) and stop springs, sways and transitions under reduced motion.",
+      "**Do** lay out wrapping lists (the tag's stack line, tech lists) as gapped rows, so no line starts or ends on a separator."
+    ],
+    "donts": [
+      "**Don't** build a dark neon developer portfolio: no bento grids, no glowing cards, no gradients.",
+      "**Don't** put shadows on panels, rows or cards; shadows belong only to the hanging tag and a dragged patch.",
+      "**Don't** use the ripstop grid outside technical-drawing plates.",
+      "**Don't** set prose or headings in Martian Mono, and don't put mono labels above section headings; mono labels belong to data.",
+      "**Don't** show status as a colored dot or filled pill.",
+      "**Don't** feature one catalogue item above the others; every article gets the same row."
+    ]
+  }
+}

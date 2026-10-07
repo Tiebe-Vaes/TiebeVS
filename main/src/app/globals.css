@@ -123,8 +123,9 @@
   --card-foreground: var(--foreground);
   --popover: oklch(0.245 0.009 255);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.7 0.2 38);
-  --primary-foreground: oklch(0.18 0.008 255);
+  /* Same signal orange and granite ink as by day. */
+  --primary: oklch(0.68 0.21 38);
+  --primary-foreground: oklch(0.2 0.008 255);
   --secondary: oklch(0.29 0.01 255);
   --secondary-foreground: var(--foreground);
   --muted: oklch(0.28 0.01 255);
@@ -214,6 +215,8 @@
     font-family: var(--font-archivo);
     font-variation-settings: "wdth" 62;
     letter-spacing: -0.02em;
+    /* The condensed width eats word gaps; give them back. */
+    word-spacing: 0.14em;
   }
   /* Faint ripstop weave on panels. */
   .ripstop {

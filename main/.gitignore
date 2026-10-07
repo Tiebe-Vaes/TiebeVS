@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# impeccable: local review captures and build scratch
+/.impeccable/review/
+/.impeccable/build/
+/.impeccable/mocks/
+/.impeccable/config.local.json

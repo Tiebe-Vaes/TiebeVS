@@ -39,15 +39,10 @@ export const projects: Project[] = [
       en: "App to run Antwerp BMX club races: registration, building MOTOs, start gate, finish registration and standings.",
     },
     details: {
-      nl: "Antwerp BMX (±140 leden, riders van 5 tot 65 jaar) organiseert binnenclubwedstrijden met 80 tot 500 riders en elke minuut een start. Vandaag loopt dat via Google Forms, een eigen tool en papier. De app vervangt die keten: accounts voor ouders en riders, verzekeringscontrole, rollen per wedstrijd (jury, parc fermé, starthek, finish, speaker), realtime resultaten op de gsm en traceerbare correcties. Loopt in vijf sprints tot de eindpresentatie in januari 2027.",
-      en: "Antwerp BMX (about 140 members, riders aged 5 to 65) runs club races with 80 to 500 riders and a start every minute. Today that runs on Google Forms, a home-made tool and paper. The app replaces that chain: accounts for parents and riders, insurance checks, per-race roles (jury, parc fermé, start gate, finish, speaker), real-time results on mobile and traceable corrections. Runs in five sprints until the final presentation in January 2027.",
+      nl: "Antwerp BMX (±140 leden, riders van 5 tot 65 jaar) organiseert binnenclubwedstrijden met 80 tot 500 riders en elke minuut een start. Vandaag loopt dat via Google Forms, een eigen tool en papier. De app vervangt die keten: accounts voor ouders en riders, verzekeringscontrole, rollen per wedstrijd (jury, parc fermé, starthek, finish, speaker) en traceerbare correcties. Een React-frontend met MUI werkt op kioskschermen langs de baan en op desktop; een Spring Boot-backend (Java 21) met PostgreSQL bewaakt de score- en knock-outlogica. Het live klassement komt binnen via WebSocket, en als PWA houdt de app een offline cache bij voor parc fermé. Getest met JUnit 5 en Testcontainers, uitgerold met Docker en GitLab CI. Loopt in vijf sprints tot de eindpresentatie in januari 2027.",
+      en: "Antwerp BMX (about 140 members, riders aged 5 to 65) runs club races with 80 to 500 riders and a start every minute. Today that runs on Google Forms, a home-made tool and paper. The app replaces that chain: accounts for parents and riders, insurance checks, per-race roles (jury, parc fermé, start gate, finish, speaker) and traceable corrections. A React frontend with MUI works on trackside kiosk screens and on desktop; a Spring Boot backend (Java 21) with PostgreSQL guards the scoring and knockout logic. Live standings arrive over WebSocket, and as a PWA the app keeps an offline cache for parc fermé. Tested with JUnit 5 and Testcontainers, deployed with Docker and GitLab CI. Runs in five sprints until the final presentation in January 2027.",
     },
-    tech: [],
-    // No stack chosen yet: the drawing shows the race-day flow it digitises instead.
-    drawing: {
-      nl: ["Inschrijven", "MOTO's", "Starthek", "Finish", "Klassement"],
-      en: ["Registration", "MOTOs", "Start gate", "Finish", "Standings"],
-    },
+    tech: ["TypeScript", "React", "MUI", "Java", "Spring Boot", "PostgreSQL", "WebSocket", "Docker", "GitLab CI"],
   },
   {
     artNo: "03",
