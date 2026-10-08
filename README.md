@@ -2,12 +2,12 @@
 
 My personal portfolio, live at **[tiebe.vercel.app](https://tiebe.vercel.app)**.
 
-The site presents me and my work as a technical outdoor gear catalogue: a hang tag for the maker, a route profile for the person and numbered catalogue items with spec sheets for the projects. Dutch on `/`, English on `/en`.
+The site presents me and my work as a technical outdoor gear catalogue on a topographic map: a hang tag for the maker, a route profile for the person and numbered catalogue items with spec sheets for the projects. Dutch on `/`, English on `/en`.
 
 ## What's on it
 
-- **Hang tag hero**: name, role and stack on an orange tag that swings toward the pointer, with live local time in Hoboken.
-- **Route Hoboken – Oslo**: an elevation profile of my interests (AP, scouts, maker lab, photography, mountains, side projects, Oslo 2027). A hiker follows the pointer along the ridge; a slider does the same for keyboard users.
+- **Hang tag hero**: name, role and stack on an amber tag that swings toward the pointer, with live local time in Hoboken, over a topographic map sheet with live Vanta.js contour lines.
+- **About me**: a route profile of my interests (AP, scouts, maker lab, photography, mountains, side projects, Oslo 2027). A hiker follows the pointer along the ridge; a slider does the same for keyboard users.
 - **Catalogue**: nine projects with filters, a spec sheet per project (keys 1–9 open them directly) and a screenshot gallery. Projects without screenshots get an isometric drawing of their own stack.
 - **Kit**: every tool I use as a draggable patch on a contour map that drifts with the pointer.
 - **GitHub activity**: my public contribution calendar, fetched at build time and refreshed daily.
@@ -19,7 +19,7 @@ The site presents me and my work as a technical outdoor gear catalogue: a hang t
 | --- | --- |
 | Framework | Next.js 16 (App Router, static generation with daily revalidation), React 19, TypeScript |
 | UI | Tailwind CSS 4, shadcn/ui on Base UI, Kokonut UI, bklit UI (heatmap), lucide and Simple Icons |
-| Motion | Motion (motion.dev) |
+| Motion | Motion (motion.dev), GSAP (ScrollTrigger, SplitText), Lenis smooth scroll, Vanta.js TOPOLOGY, React Bits (Spotlight Card, Tilted Card) |
 | Type | Archivo (variable width) and Martian Mono via `next/font` |
 | Hosting | Vercel |
 

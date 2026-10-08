@@ -19,7 +19,7 @@ const RIDGE: [number, number][] = [
 // Where each waypoint sits along x; order matches the waypoints passed in.
 const STOPS = [40, 130, 215, 300, 390, 490, 600, 710]
 // The hiker starts on the summit.
-const START = 490
+const START = STOPS.indexOf(490)
 
 function ridgeY(x: number) {
   for (let i = 1; i < RIDGE.length; i++) {
@@ -32,21 +32,25 @@ function ridgeY(x: number) {
   return RIDGE[RIDGE.length - 1][1]
 }
 
+function nearestStop(x: number) {
+  return STOPS.reduce((best, sx, i) => (Math.abs(sx - x) < Math.abs(STOPS[best] - x) ? i : best), 0)
+}
+
 const ridgePath = `M${RIDGE.map(([x, y]) => `${x} ${y}`).join(" L")}`
 const fillPath = `${ridgePath} L${W} ${BASE} L0 ${BASE} Z`
 
 // Contour lines: the ridge repeated lower and flatter, like a map's relief.
-const contours = [0.82, 0.66, 0.5, 0.34].map((k) =>
-  `M${RIDGE.map(([x, y]) => `${x} ${(BASE - (BASE - y) * k).toFixed(1)}`).join(" L")}`,
+const contours = [0.82, 0.66, 0.5, 0.34].map(
+  (k) => `M${RIDGE.map(([x, y]) => `${x} ${(BASE - (BASE - y) * k).toFixed(1)}`).join(" L")}`,
 )
 
 export function RouteProfile({
-  title,
+  label,
   hint,
   sliderLabel,
   waypoints,
 }: {
-  title: string
+  label: string
   hint: string
   sliderLabel: string
   waypoints: Waypoint[]
@@ -54,20 +58,22 @@ export function RouteProfile({
   const reduceMotion = useReducedMotion()
   const svgRef = useRef<SVGSVGElement>(null)
   const clipId = useId()
-  const [x, setX] = useState(START)
-  const springX = useSpring(x, { stiffness: 220, damping: 28 })
-  const springY = useSpring(ridgeY(x), { stiffness: 220, damping: 28 })
+  // React state changes only when the nearest stop changes; the hiker itself moves on motion values.
+  const [active, setActive] = useState(START)
+  const hikerX = useSpring(STOPS[START], { stiffness: 220, damping: 28 })
+  const hikerY = useSpring(ridgeY(STOPS[START]), { stiffness: 220, damping: 28 })
 
-  function moveTo(next: number) {
-    const clamped = Math.max(0, Math.min(W, next))
-    setX(clamped)
+  function moveTo(x: number) {
+    const clamped = Math.max(0, Math.min(W, x))
     if (reduceMotion) {
-      springX.jump(clamped)
-      springY.jump(ridgeY(clamped))
+      hikerX.jump(clamped)
+      hikerY.jump(ridgeY(clamped))
     } else {
-      springX.set(clamped)
-      springY.set(ridgeY(clamped))
+      hikerX.set(clamped)
+      hikerY.set(ridgeY(clamped))
     }
+    const stop = nearestStop(clamped)
+    if (stop !== active) setActive(stop)
   }
 
   function fromPointer(clientX: number) {
@@ -76,26 +82,30 @@ export function RouteProfile({
     moveTo(((clientX - rect.left) / rect.width) * W)
   }
 
-  // Nearest waypoint to the hiker.
-  const active = STOPS.reduce((best, sx, i) => (Math.abs(sx - x) < Math.abs(STOPS[best] - x) ? i : best), 0)
   const current = waypoints[active]
 
   return (
     <figure className="flex flex-col gap-4">
-      <figcaption className="flex items-baseline justify-between gap-4">
-        <span className="font-display text-2xl font-bold">{title}</span>
+      <div className="flex items-baseline justify-between gap-4">
+        <span className="font-mono text-xs text-muted-foreground uppercase">{hint}</span>
         <span className="font-mono text-xs text-muted-foreground tabular">
           {String(active + 1).padStart(2, "0")} / {String(waypoints.length).padStart(2, "0")}
         </span>
-      </figcaption>
+      </div>
 
       <div className="relative rounded-sm border bg-card">
+        {/* Readout: above the drawing on small screens, over its quiet top-left corner from md up. */}
+        <div aria-live="polite" className="border-b px-4 py-3 md:pointer-events-none md:absolute md:top-3 md:left-4 md:max-w-[58%] md:border-0 md:p-0">
+          <p className="font-display text-3xl leading-none font-bold">{current.title}</p>
+          <p className="mt-1.5 text-sm text-pretty text-muted-foreground">{current.detail}</p>
+        </div>
+
         <svg
           ref={svgRef}
           viewBox={`0 0 ${W} ${H}`}
           role="img"
-          aria-label={`${title}: ${waypoints.map((w) => w.title).join(", ")}`}
-          className="h-auto w-full touch-none text-line select-none"
+          aria-label={`${label}: ${waypoints.map((w) => w.title).join(", ")}`}
+          className="h-auto w-full touch-pan-y text-line select-none"
           onPointerMove={(e) => fromPointer(e.clientX)}
           onPointerDown={(e) => fromPointer(e.clientX)}
         >
@@ -119,14 +129,25 @@ export function RouteProfile({
           {STOPS.map((sx, i) => {
             const sy = ridgeY(sx)
             const on = i === active
+            const anchor = i === 0 ? "start" : i === STOPS.length - 1 ? "end" : "middle"
             return (
               <g key={waypoints[i].key}>
                 <line x1={sx} y1={sy} x2={sx} y2={BASE} stroke="currentColor" strokeDasharray="3 4" opacity={on ? 0.9 : 0.4} />
-                <circle cx={sx} cy={sy} r={on ? 8 : 5} className={on ? "fill-primary" : "fill-card"} stroke="currentColor" strokeWidth="1.5" />
+                {/* Larger markers on phones, where the drawing scales to under half size. */}
+                <circle
+                  cx={sx}
+                  cy={sy}
+                  r={on ? 8 : 5}
+                  className={cn(
+                    on ? "fill-primary [r:16] md:[r:8]" : "fill-card [r:11] md:[r:5]",
+                  )}
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
                 <text
                   x={sx}
                   y={BASE + 26}
-                  textAnchor={i === 0 ? "start" : i === STOPS.length - 1 ? "end" : "middle"}
+                  textAnchor={anchor}
                   className={cn("max-md:hidden", on ? "fill-foreground font-semibold" : "fill-muted-foreground")}
                   style={{ fontSize: 15 }}
                 >
@@ -135,12 +156,12 @@ export function RouteProfile({
                 {/* On small screens only the numbers show; the readout names the stop. */}
                 <text
                   x={sx}
-                  textAnchor={i === 0 ? "start" : i === STOPS.length - 1 ? "end" : "middle"}
+                  y={BASE}
+                  textAnchor={anchor}
                   className={cn(
-                    "font-mono [font-size:24px] [translate:0_34px] md:[font-size:11px] md:[translate:0_48px]",
+                    "font-mono [font-size:34px] [translate:0_44px] md:[font-size:11px] md:[translate:0_48px]",
                     on ? "fill-foreground" : "fill-muted-foreground",
                   )}
-                  y={BASE}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </text>
@@ -149,25 +170,29 @@ export function RouteProfile({
           })}
 
           {/* The hiker follows the pointer along the ridge. */}
-          <motion.g style={{ x: springX, y: springY }}>
+          <motion.g style={{ x: hikerX, y: hikerY }}>
             <line x1="0" y1="0" x2="0" y2="-34" className="stroke-foreground" strokeWidth="2" />
             <path d="M0 -34 L22 -27 L0 -20 Z" className="fill-primary stroke-foreground" strokeWidth="1.5" strokeLinejoin="round" />
             <circle r="4" className="fill-foreground" />
           </motion.g>
         </svg>
-
-        <div className="pointer-events-none absolute top-3 left-4 max-w-[60%]">
-          <p className="font-display text-3xl leading-none font-bold">{current.title}</p>
-          <p className="mt-1.5 text-sm text-muted-foreground text-pretty">{current.detail}</p>
-        </div>
-        <p className="pointer-events-none absolute top-3 right-4 hidden font-mono text-[0.65rem] text-muted-foreground uppercase sm:block">
-          {hint}
-        </p>
       </div>
 
+      {/* Keyboard and touch: one step per waypoint. */}
       <label className="flex items-center gap-3 text-sm">
         <span className="shrink-0 text-muted-foreground">{sliderLabel}</span>
-        <Slider value={[x]} onValueChange={(v) => moveTo(Array.isArray(v) ? v[0] : v)} min={0} max={W} aria-label={sliderLabel} />
+        <Slider
+          value={[active]}
+          onValueChange={(v) => {
+            const i = Array.isArray(v) ? v[0] : v
+            moveTo(STOPS[i])
+            setActive(i)
+          }}
+          min={0}
+          max={STOPS.length - 1}
+          step={1}
+          aria-label={sliderLabel}
+        />
       </label>
 
       {/* Same waypoints as text for screen readers. */}

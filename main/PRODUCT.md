@@ -45,7 +45,7 @@ Visitors come from profile links on desktop and phone. Content must match the Li
 
 ## Brand Commitments
 
-- Name "Tiebe Vaes". Favicon: mountain mark (orange tile, granite ridge, flag on the summit), drawn from the route profile.
+- Name "Tiebe Vaes". Favicon: mountain mark (amber tile, fjord-ink ridge, flag on the summit), drawn from the route profile.
 - Voice: direct, concrete, no hype, no "passionate developer" filler.
 
 ## Evidence on Hand

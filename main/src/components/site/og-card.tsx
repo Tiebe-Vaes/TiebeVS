@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og"
 // Static Archivo instances (SIL OFL), vendored so the build needs no font download.
 const FONTS = join(process.cwd(), "src/assets/fonts")
 
-/** Share card: the orange hang tag on glacier white, with the route ridge behind it. */
+/** Share card: the amber hang tag on map paper, with the route ridge behind it. */
 export async function renderOgCard() {
   const [display, body] = await Promise.all([
     readFile(join(FONTS, "archivo-extracondensed-800.ttf")),
@@ -13,12 +13,12 @@ export async function renderOgCard() {
   ])
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#eef1ec", position: "relative" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#f3f6f3", position: "relative" }}>
         <svg viewBox="0 0 760 420" width="1200" height="663" style={{ position: "absolute", left: 0, bottom: -40 }}>
           <path
             d="M0 330 L70 318 L120 300 L170 270 L215 286 L265 236 L320 250 L375 190 L420 150 L455 96 L490 70 L525 112 L570 150 L615 196 L660 220 L710 248 L760 262 L760 420 L0 420 Z"
-            fill="#dfe6ea"
-            stroke="#1f4e79"
+            fill="#e2eaee"
+            stroke="#2f7fc1"
             strokeWidth="2"
           />
         </svg>
@@ -30,11 +30,11 @@ export async function renderOgCard() {
             margin: "96px 0 0 96px",
             padding: "44px 56px 52px",
             width: 690,
-            background: "#ff5b1f",
-            color: "#23262a",
+            background: "#f4b942",
+            color: "#10202f",
             transform: "rotate(-2.5deg)",
             borderRadius: 6,
-            boxShadow: "0 24px 48px -24px rgba(60, 30, 10, 0.55)",
+            boxShadow: "0 24px 48px -24px rgba(15, 30, 46, 0.45)",
             fontFamily: "Archivo",
           }}
         >

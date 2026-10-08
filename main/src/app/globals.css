@@ -34,6 +34,7 @@
   --color-line: var(--line);
   --color-shipped: var(--shipped);
   --color-tag-ink: var(--tag-ink);
+  --color-contour: var(--contour);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -61,96 +62,99 @@
   --color-chart-background: var(--chart-background);
 }
 
-/* Field Gear Catalogue: glacier white, granite ink, signal orange tags,
-   fjord-blue technical lines, moss for shipped. */
+/* Fjord & topo map. Light: topographic map paper with fjord ink, fjord-blue
+   lines and an amber hang tag. Dark: fjord night with mist lines, the same
+   amber and aurora green for shipped work. */
 :root {
-  --background: oklch(0.954 0.007 135);
-  --foreground: oklch(0.255 0.008 255);
-  --card: oklch(0.977 0.005 135);
+  --background: oklch(0.967 0.005 160);
+  --foreground: oklch(0.235 0.035 245);
+  --card: oklch(0.988 0.003 160);
   --card-foreground: var(--foreground);
-  --popover: oklch(0.977 0.005 135);
+  --popover: oklch(0.988 0.003 160);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.68 0.21 38);
-  --primary-foreground: oklch(0.2 0.008 255);
-  --secondary: oklch(0.91 0.012 135);
+  --primary: oklch(0.82 0.15 80);
+  --primary-foreground: oklch(0.22 0.04 245);
+  --secondary: oklch(0.93 0.01 220);
   --secondary-foreground: var(--foreground);
-  --muted: oklch(0.92 0.008 135);
-  --muted-foreground: oklch(0.46 0.012 250);
-  --accent: oklch(0.9 0.02 245);
-  --accent-foreground: oklch(0.36 0.09 250);
-  --destructive: oklch(0.55 0.2 27);
-  --border: oklch(0.84 0.01 135);
-  --input: oklch(0.84 0.01 135);
-  --ring: oklch(0.42 0.09 250);
-  --line: oklch(0.42 0.09 250);
-  --shipped: oklch(0.43 0.06 140);
-  /* Orange for text on the light ground (signal orange itself is too light for small text). */
-  --tag-ink: oklch(0.52 0.18 38);
+  --muted: oklch(0.935 0.008 220);
+  --muted-foreground: oklch(0.47 0.03 240);
+  --accent: oklch(0.92 0.03 240);
+  --accent-foreground: oklch(0.4 0.12 245);
+  --destructive: oklch(0.55 0.19 27);
+  --border: oklch(0.87 0.014 220);
+  --input: oklch(0.87 0.014 220);
+  --ring: oklch(0.5 0.13 245);
+  --line: oklch(0.56 0.13 245);
+  --contour: oklch(0.8 0.035 230);
+  --shipped: oklch(0.5 0.11 160);
+  /* Amber for text on the paper ground (the tag amber itself is too light for small text). */
+  --tag-ink: oklch(0.5 0.11 70);
   --radius: 0.25rem;
 
-  --chart-1: oklch(0.68 0.21 38);
-  --chart-2: oklch(0.42 0.09 250);
-  --chart-3: oklch(0.43 0.06 140);
-  --chart-4: oklch(0.6 0.05 250);
-  --chart-5: oklch(0.75 0.03 135);
+  --chart-1: oklch(0.82 0.15 80);
+  --chart-2: oklch(0.56 0.13 245);
+  --chart-3: oklch(0.5 0.11 160);
+  --chart-4: oklch(0.65 0.05 240);
+  --chart-5: oklch(0.8 0.03 220);
   --chart-background: var(--card);
   --chart-foreground: var(--foreground);
   --chart-foreground-muted: var(--muted-foreground);
   --chart-line-primary: var(--chart-1);
   --chart-line-secondary: var(--chart-2);
   --chart-crosshair: var(--line);
-  --chart-grid: oklch(0.88 0.01 135);
+  --chart-grid: oklch(0.9 0.01 220);
   --chart-brush-border: var(--chart-grid);
-  --chart-tooltip-background: oklch(0.255 0.008 255 / 0.92);
-  --chart-tooltip-foreground: oklch(0.977 0.005 135);
-  --chart-tooltip-muted: oklch(0.75 0.01 135);
+  --chart-tooltip-background: oklch(0.235 0.035 245 / 0.94);
+  --chart-tooltip-foreground: oklch(0.97 0.005 160);
+  --chart-tooltip-muted: oklch(0.78 0.02 220);
   --chart-marker-background: var(--card);
   --chart-marker-border: var(--border);
   --chart-marker-foreground: var(--foreground);
   --chart-label: var(--muted-foreground);
-  --chart-scale-01: oklch(0.9 0.01 135);
-  --chart-scale-02: oklch(0.86 0.09 42);
-  --chart-scale-03: oklch(0.8 0.14 40);
-  --chart-scale-04: oklch(0.72 0.19 38);
-  --chart-scale-05: oklch(0.62 0.2 36);
+  --chart-scale-01: oklch(0.91 0.01 220);
+  --chart-scale-02: oklch(0.9 0.08 85);
+  --chart-scale-03: oklch(0.84 0.13 80);
+  --chart-scale-04: oklch(0.74 0.15 72);
+  --chart-scale-05: oklch(0.6 0.13 65);
   --chart-scale-pattern-color: var(--muted);
 }
 
 .dark {
-  --background: oklch(0.2 0.008 255);
-  --foreground: oklch(0.95 0.007 135);
-  --card: oklch(0.245 0.009 255);
+  --background: oklch(0.235 0.04 245);
+  --foreground: oklch(0.95 0.01 210);
+  --card: oklch(0.27 0.045 245);
   --card-foreground: var(--foreground);
-  --popover: oklch(0.245 0.009 255);
+  --popover: oklch(0.27 0.045 245);
   --popover-foreground: var(--foreground);
-  /* Same signal orange and granite ink as by day. */
-  --primary: oklch(0.68 0.21 38);
-  --primary-foreground: oklch(0.2 0.008 255);
-  --secondary: oklch(0.29 0.01 255);
+  /* Same amber tag and fjord ink as by day. */
+  --primary: oklch(0.82 0.15 80);
+  --primary-foreground: oklch(0.22 0.04 245);
+  --secondary: oklch(0.31 0.045 245);
   --secondary-foreground: var(--foreground);
-  --muted: oklch(0.28 0.01 255);
-  --muted-foreground: oklch(0.76 0.01 135);
-  --accent: oklch(0.32 0.04 250);
-  --accent-foreground: oklch(0.85 0.06 245);
+  --muted: oklch(0.3 0.045 245);
+  --muted-foreground: oklch(0.76 0.03 230);
+  --accent: oklch(0.34 0.06 245);
+  --accent-foreground: oklch(0.86 0.06 230);
   --destructive: oklch(0.7 0.19 22);
-  --border: oklch(1 0 0 / 13%);
+  --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.74 0.09 245);
-  --line: oklch(0.74 0.09 245);
-  --shipped: oklch(0.74 0.1 140);
-  --tag-ink: oklch(0.76 0.17 45);
+  --ring: oklch(0.86 0.16 160);
+  --line: oklch(0.7 0.06 235);
+  --contour: oklch(0.38 0.05 240);
+  --shipped: oklch(0.86 0.16 160);
+  --tag-ink: oklch(0.84 0.14 80);
 
-  --chart-2: oklch(0.74 0.09 245);
-  --chart-3: oklch(0.74 0.1 140);
-  --chart-grid: oklch(0.32 0.01 255);
-  --chart-tooltip-background: oklch(0.95 0.007 135 / 0.95);
-  --chart-tooltip-foreground: oklch(0.2 0.008 255);
-  --chart-tooltip-muted: oklch(0.45 0.01 255);
-  --chart-scale-01: oklch(0.29 0.01 255);
-  --chart-scale-02: oklch(0.42 0.09 40);
-  --chart-scale-03: oklch(0.55 0.15 39);
-  --chart-scale-04: oklch(0.66 0.19 38);
-  --chart-scale-05: oklch(0.78 0.17 45);
+  --chart-2: oklch(0.7 0.06 235);
+  --chart-3: oklch(0.86 0.16 160);
+  --chart-grid: oklch(0.33 0.04 245);
+  --chart-tooltip-background: oklch(0.95 0.01 210 / 0.95);
+  --chart-tooltip-foreground: oklch(0.22 0.04 245);
+  --chart-tooltip-muted: oklch(0.45 0.03 240);
+  --chart-scale-01: oklch(0.32 0.045 245);
+  --chart-scale-02: oklch(0.45 0.08 75);
+  --chart-scale-03: oklch(0.6 0.12 78);
+  --chart-scale-04: oklch(0.72 0.14 80);
+  --chart-scale-05: oklch(0.85 0.15 82);
 }
 
 @layer base {
@@ -159,7 +163,6 @@
   }
   html {
     @apply font-sans;
-    scroll-behavior: smooth;
     scrollbar-color: var(--muted-foreground) var(--background);
   }
   body {
@@ -181,11 +184,6 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
 }
 
 /* Registered so the explode state of the technical drawings can transition. */
@@ -201,7 +199,12 @@
     --explode: 0.45;
     transition: --explode 700ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .group:hover .plate-drawing,
+  /* Hover only on real pointers, so a tap on a phone does not leave the drawing open. */
+  @media (hover: hover) {
+    .group:hover .plate-drawing {
+      --explode: 0.95;
+    }
+  }
   .group:focus-within .plate-drawing {
     --explode: 0.95;
   }

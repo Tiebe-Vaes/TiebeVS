@@ -15,7 +15,7 @@ export function StatusLabel({
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2.5 py-1.5 font-mono text-[0.65rem] leading-none tracking-wider uppercase",
+        "inline-flex items-center px-2.5 py-1.5 font-mono text-xs leading-none tracking-wider uppercase",
         shipped ? "stitch-sewn text-shipped" : "stitch-basted text-tag-ink",
         className,
       )}

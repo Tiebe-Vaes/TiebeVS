@@ -14,8 +14,11 @@ import { GearBoard } from "./gear-board"
 import GithubHeatmap, { type HeatmapDay } from "./github-heatmap"
 import { HangTag } from "./hang-tag"
 import { LanguageMeter } from "./language-meter"
+import { Reveals } from "./motion-shell"
 import { RouteProfile } from "./route-profile"
 import { LinkedInIcon, TechIcon } from "./tech-icon"
+import { HeroMap } from "./hero-map"
+import { TopoBackground } from "./topo-background"
 
 export async function Portfolio({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
@@ -48,36 +51,49 @@ export async function Portfolio({ locale }: { locale: Locale }) {
         locale={locale}
         labels={{ sheet: t.sheet, catalogue: t.catalogue }}
       >
-        <main id="main" className="mx-auto flex max-w-7xl flex-col gap-36 px-4 pb-28 sm:px-8 lg:gap-44">
-          <section className="grid items-start gap-14 pt-4 lg:grid-cols-12 lg:gap-12 lg:pt-12">
+        <main id="main" className="mx-auto max-w-7xl px-4 pb-28 sm:px-8">
+          <Reveals>
+          <div className="flex flex-col gap-36 lg:gap-44">
+          <section className="relative isolate grid min-h-[calc(100svh-3.5rem)] items-center gap-14 py-10 lg:grid-cols-12 lg:gap-12">
+            {/* Vanta topology contours, full bleed behind the hero, fading into the page. */}
+            <TopoBackground className="absolute inset-y-0 left-1/2 -z-20 w-screen -translate-x-1/2 opacity-70 [mask-image:linear-gradient(to_bottom,black_70%,transparent)]" />
+            {/* Static map sheet over the live contours: index lines, heights, ticks, scale, coordinates. */}
+            <HeroMap className="absolute inset-y-0 left-1/2 -z-10 h-full w-screen -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]" />
             <div className="lg:col-span-5">
               <HangTag locale={locale} t={t.tag} />
             </div>
-            <div className="lg:col-span-7 lg:pt-6">
-              <RouteProfile
-                title={t.route.title}
-                hint={t.route.hint}
-                sliderLabel={t.route.slider}
-                waypoints={t.route.waypoints}
-              />
+            <div className="flex flex-col gap-8 lg:col-span-6 lg:col-start-7">
+              <p className="font-display text-4xl leading-[1.02] font-bold text-balance sm:text-5xl">{t.hero.pitch}</p>
+              <dl className="grid gap-x-8 gap-y-3 border-t-2 border-foreground pt-5 sm:grid-cols-[auto_1fr]">
+                {t.hero.facts.map((fact) => (
+                  <div key={fact.label} className="contents">
+                    <dt className="font-mono text-xs tracking-wider text-muted-foreground uppercase sm:pt-1">{fact.label}</dt>
+                    <dd className="text-lg font-semibold">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </section>
 
           <Catalogue projects={projects} locale={locale} t={t.catalogue} />
 
+          <About locale={locale} t={t} />
+
           <section aria-labelledby="gear-title" className="flex flex-col gap-10">
             <SectionHeading id="gear-title" title={t.gear.title} intro={t.gear.intro} />
-            <GearBoard
-              groups={skillGroups.map((g) => ({ label: g.label[locale], items: g.items }))}
-              resetLabel={t.gear.reset}
-            />
+            <div data-reveal>
+              <GearBoard
+                groups={skillGroups.map((g) => ({ label: g.label[locale], items: g.items }))}
+                resetLabel={t.gear.reset}
+              />
+            </div>
           </section>
 
           <GithubSection t={t.github} days={contributions} />
 
-          <About locale={locale} t={t.about} />
-
           <Contact locale={locale} t={t.contact} />
+          </div>
+          </Reveals>
         </main>
       </CatalogueProvider>
 
@@ -101,13 +117,13 @@ function SiteHeader({ t }: { t: Dictionary }) {
           Tiebe Vaes
         </Link>
         <nav aria-label="Primary" className="flex items-center gap-1 text-sm">
-          <a href="#catalogue" className="hidden rounded-sm px-3 py-2 hover:bg-muted sm:inline-block">
+          <a href="#catalogue" className="rounded-sm px-2 py-2 hover:bg-muted sm:px-3">
             {t.nav.catalogue}
           </a>
           <a href="#about" className="hidden rounded-sm px-3 py-2 hover:bg-muted sm:inline-block">
             {t.nav.about}
           </a>
-          <a href="#contact" className="rounded-sm px-3 py-2 hover:bg-muted">
+          <a href="#contact" className="rounded-sm px-2 py-2 hover:bg-muted sm:px-3">
             {t.nav.contact}
           </a>
           <Link
@@ -126,23 +142,32 @@ function SiteHeader({ t }: { t: Dictionary }) {
   )
 }
 
-function About({ locale, t }: { locale: Locale; t: Dictionary["about"] }) {
+function About({ locale, t }: { locale: Locale; t: Dictionary }) {
   return (
-    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 grid gap-16 lg:grid-cols-12">
-      <div className="flex flex-col gap-6 lg:col-span-5">
-        <h2 id="about-title" className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
-          {t.title}
-        </h2>
-        {t.body.map((paragraph) => (
-          <p key={paragraph} className="max-w-[60ch] text-pretty text-lg leading-relaxed">
-            {paragraph}
-          </p>
-        ))}
+    <section id="about" aria-labelledby="about-title" className="flex scroll-mt-20 flex-col gap-16">
+      <SectionHeading id="about-title" title={t.about.title} />
+
+      <div className="grid gap-14 lg:grid-cols-12">
+        <div data-reveal className="flex flex-col gap-6 lg:col-span-5">
+          {t.about.body.map((paragraph) => (
+            <p key={paragraph} className="max-w-[60ch] text-pretty text-lg leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+        <div data-reveal className="lg:col-span-7">
+          <RouteProfile
+            label={t.route.label}
+            hint={t.route.hint}
+            sliderLabel={t.route.slider}
+            waypoints={t.route.waypoints}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-col gap-16 lg:col-span-6 lg:col-start-7">
-        <div className="flex flex-col gap-2">
-          <h3 className="border-b-2 border-foreground pb-3 font-display text-3xl font-bold">{t.education}</h3>
+      <div className="grid gap-16 lg:grid-cols-2">
+        <div data-reveal className="flex flex-col gap-2">
+          <h3 className="border-b-2 border-foreground pb-3 font-display text-3xl font-bold">{t.about.education}</h3>
           <ol className="flex flex-col">
             {education.map((item) => (
               <li key={item.title.en} className="flex flex-col gap-1.5 border-b py-5">
@@ -155,16 +180,16 @@ function About({ locale, t }: { locale: Locale; t: Dictionary["about"] }) {
             ))}
           </ol>
         </div>
-        <div className="flex flex-col gap-2">
-          <h3 className="border-b-2 border-foreground pb-3 font-display text-3xl font-bold">{t.languages}</h3>
+        <div data-reveal className="flex flex-col gap-2">
+          <h3 className="border-b-2 border-foreground pb-3 font-display text-3xl font-bold">{t.about.languages}</h3>
           <ul className="flex flex-col">
             {spokenLanguages.map((language) => (
-              <li key={language.name.en} className="border-b py-6">
+              <li key={language.name.en} className="border-b py-5">
                 <LanguageMeter
                   name={language.name[locale]}
                   level={language.level}
                   share={language.share}
-                  hint={t.levelHint}
+                  hint={t.about.levelHint}
                 />
               </li>
             ))}
@@ -175,13 +200,14 @@ function About({ locale, t }: { locale: Locale; t: Dictionary["about"] }) {
   )
 }
 
+/** Section heading with the catalogue's closing 2px rule; words rise in on scroll. */
 function SectionHeading({ id, title, intro }: { id: string; title: string; intro?: string }) {
   return (
-    <div className="flex max-w-2xl flex-col gap-4">
-      <h2 id={id} className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
+    <div className="flex flex-col gap-4 border-b-2 border-foreground pb-6">
+      <h2 id={id} data-split className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
         {title}
       </h2>
-      {intro ? <p className="text-lg text-pretty text-muted-foreground">{intro}</p> : null}
+      {intro ? <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{intro}</p> : null}
     </div>
   )
 }
@@ -198,12 +224,27 @@ function GithubSection({
     : null
   return (
     <section aria-labelledby="github-title" className="flex flex-col gap-10">
-      <div className="flex flex-wrap items-end justify-between gap-6">
-        <SectionHeading
-          id="github-title"
-          title={t.title}
-          intro={days ? `${t.summary(days.total, days.activeDays)} ${t.note}` : t.unavailable}
-        />
+      <SectionHeading id="github-title" title={t.title} intro={days ? t.note : t.unavailable} />
+      <div data-reveal className="flex flex-wrap items-end justify-between gap-6">
+        {days ? (
+          <dl className="flex flex-wrap gap-x-12 gap-y-4">
+            {(
+              [
+                [t.stats.contributions, days.total],
+                [t.stats.activeDays, days.activeDays],
+              ] as const
+            ).map(([label, value]) => (
+              <div key={label} className="flex flex-col gap-1">
+                <dt className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{label}</dt>
+                <dd className="font-display text-5xl leading-none font-bold tabular">{value}</dd>
+              </div>
+            ))}
+            <div className="flex flex-col gap-1">
+              <dt className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{t.stats.period}</dt>
+              <dd className="pt-3 font-semibold">{t.stats.periodValue}</dd>
+            </div>
+          </dl>
+        ) : null}
         <a
           href={profile.links.github}
           target="_blank"
@@ -216,7 +257,7 @@ function GithubSection({
         </a>
       </div>
       {heatmapDays ? (
-        <div className="min-w-0 rounded-sm border bg-card p-5 sm:p-8">
+        <div data-reveal className="min-w-0 rounded-sm border bg-card p-5 sm:p-8">
           <GithubHeatmap days={heatmapDays} locale={t.intlLocale} labels={t.heatmap} />
         </div>
       ) : null}
@@ -238,10 +279,11 @@ function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="scroll-mt-20 grid gap-10 rounded-sm bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-14 lg:grid-cols-12"
+      data-reveal
+      className="scroll-mt-20 grid gap-10 rounded-sm bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-14 lg:grid-cols-12 [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
     >
       <div className="flex flex-col gap-5 lg:col-span-6">
-        <h2 id="contact-title" className="font-display text-7xl leading-none font-extrabold sm:text-8xl">
+        <h2 id="contact-title" data-split className="font-display text-7xl leading-none font-extrabold sm:text-8xl">
           {t.title}
         </h2>
         <p className="max-w-[44ch] text-lg">{t.body}</p>
@@ -260,7 +302,7 @@ function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
               </dt>
               <dd className="font-semibold">
                 {href ? (
-                  <a href={href} className="underline-offset-4 hover:underline">
+                  <a href={href} className="underline decoration-primary-foreground/40 underline-offset-4 hover:decoration-primary-foreground">
                     {value}
                   </a>
                 ) : (

@@ -11,7 +11,7 @@ export const projects: Project[] = [
     years: "2025 – 2026",
     team: { nl: "AP-teamproject voor GO! scholen", en: "AP team project for GO! schools" },
     summary: {
-      nl: "Bibliotheekplatform voor scholen met Smartschool-login, uitleenbeheer, reviews en aanbevelingen over meerdere campussen.",
+      nl: "Bibliotheekplatform voor scholen met Smartschool-login, uitleenbeheer, beoordelingen en aanbevelingen over meerdere campussen.",
       en: "Library platform for schools with Smartschool login, lending management, reviews and recommendations across multiple campuses.",
     },
     details: {
@@ -19,11 +19,11 @@ export const projects: Project[] = [
       en: "GO!SmartLib combines a shared book catalogue, the full lending flow, social reading features and recommendations behind one responsive web interface. Sign-in runs on Smartschool OAuth 2.0 with stateless JWTs and four roles (student, teacher, admin, super admin), with strict data isolation per school. The GitLab repo is private.",
     },
     role: {
-      nl: "Rolgebaseerde routing en dashboardtegels, leeslijsten, gamification en aankondigingen.",
+      nl: "Rolgebaseerde routing en dashboardtegels, leeslijsten, spelelementen (XP, badges) en aankondigingen.",
       en: "Role-based routing and dashboard tiles, reading lists, gamification and announcements.",
     },
     tech: ["TypeScript", "Next.js", "React", "Java", "Spring Boot", "MySQL", "Traefik", "Docker"],
-    images: ["/GSLSS.png", "/GSLSS2.png", "/GSLSS3.png"],
+    images: ["/GSLSS.webp", "/GSLSS2.webp", "/GSLSS3.webp"],
   },
   {
     artNo: "02",
@@ -39,8 +39,8 @@ export const projects: Project[] = [
       en: "App to run Antwerp BMX club races: registration, building MOTOs, start gate, finish registration and standings.",
     },
     details: {
-      nl: "Antwerp BMX (±140 leden, riders van 5 tot 65 jaar) organiseert binnenclubwedstrijden met 80 tot 500 riders en elke minuut een start. Vandaag loopt dat via Google Forms, een eigen tool en papier. De app vervangt die keten: accounts voor ouders en riders, verzekeringscontrole, rollen per wedstrijd (jury, parc fermé, starthek, finish, speaker) en traceerbare correcties. Een React-frontend met MUI werkt op kioskschermen langs de baan en op desktop; een Spring Boot-backend (Java 21) met PostgreSQL bewaakt de score- en knock-outlogica. Het live klassement komt binnen via WebSocket, en als PWA houdt de app een offline cache bij voor parc fermé. Getest met JUnit 5 en Testcontainers, uitgerold met Docker en GitLab CI. Loopt in vijf sprints tot de eindpresentatie in januari 2027.",
-      en: "Antwerp BMX (about 140 members, riders aged 5 to 65) runs club races with 80 to 500 riders and a start every minute. Today that runs on Google Forms, a home-made tool and paper. The app replaces that chain: accounts for parents and riders, insurance checks, per-race roles (jury, parc fermé, start gate, finish, speaker) and traceable corrections. A React frontend with MUI works on trackside kiosk screens and on desktop; a Spring Boot backend (Java 21) with PostgreSQL guards the scoring and knockout logic. Live standings arrive over WebSocket, and as a PWA the app keeps an offline cache for parc fermé. Tested with JUnit 5 and Testcontainers, deployed with Docker and GitLab CI. Runs in five sprints until the final presentation in January 2027.",
+      nl: "Antwerp BMX (±140 leden, riders van 5 tot 65 jaar) organiseert clubwedstrijden met 80 tot 500 riders en elke minuut een start. Vandaag loopt dat via Google Forms, een eigen tool en papier. De app vervangt die keten: accounts voor ouders en riders, verzekeringscontrole, rollen per wedstrijd (jury, parc fermé, starthek, finish, speaker) en traceerbare correcties. Een React-frontend met MUI werkt op kioskschermen langs de baan en op desktop; een Spring Boot-backend (Java 21) met PostgreSQL bewaakt de score- en knock-outlogica. Het live klassement komt binnen via WebSocket, en als PWA houdt de app een offline cache bij voor parc fermé. De opzet: tests met JUnit 5 en Testcontainers, uitrol met Docker en GitLab CI. Loopt in vijf sprints tot de eindpresentatie in januari 2027.",
+      en: "Antwerp BMX (about 140 members, riders aged 5 to 65) runs club races with 80 to 500 riders and a start every minute. Today that runs on Google Forms, a home-made tool and paper. The app replaces that chain: accounts for parents and riders, insurance checks, per-race roles (jury, parc fermé, start gate, finish, speaker) and traceable corrections. A React frontend with MUI works on trackside kiosk screens and on desktop; a Spring Boot backend (Java 21) with PostgreSQL guards the scoring and knockout logic. Live standings arrive over WebSocket, and as a PWA the app keeps an offline cache for parc fermé. The setup: tests with JUnit 5 and Testcontainers, deployment with Docker and GitLab CI. Runs in five sprints until the final presentation in January 2027.",
     },
     tech: ["TypeScript", "React", "MUI", "Java", "Spring Boot", "PostgreSQL", "WebSocket", "Docker", "GitLab CI"],
   },
@@ -86,7 +86,7 @@ export const projects: Project[] = [
       en: "ADR-003 (authentication) and POC 1: OAuth2 with our own JWT.",
     },
     tech: ["JavaScript", "Node.js", "Express", "React", "Docker", "Traefik"],
-    images: ["/c4-context.png", "/c4-containers.png", "/c4-deployment.png"],
+    images: ["/c4-context.webp", "/c4-containers.webp", "/c4-deployment.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/travel-planning-architecture",
   },
   {
@@ -97,15 +97,15 @@ export const projects: Project[] = [
     category: { nl: "Mobiele app", en: "Mobile app" },
     status: "shipped",
     summary: {
-      nl: "Verhuurapp waarmee buren toestellen en gereedschap uitlenen, met zoeken op kaart, boekingen en reviews.",
+      nl: "Verhuurapp waarmee buren toestellen en gereedschap uitlenen, met zoeken op kaart, boekingen en beoordelingen.",
       en: "Rental app for neighbours to lend out appliances and tools, with map search, bookings and reviews.",
     },
     details: {
-      nl: "Eigenaars plaatsen items met foto, prijs, categorie en een beschikbaarheidskalender. Huurders zoeken items in de buurt via een lijst of een interactieve Google Map, boeken de dagen die ze nodig hebben en laten achteraf een review achter. Realtime sync via Firestore, zodat boekingen meteen bij iedereen verschijnen.",
+      nl: "Eigenaars plaatsen items met foto, prijs, categorie en een beschikbaarheidskalender. Huurders zoeken items in de buurt via een lijst of een interactieve Google Map, boeken de dagen die ze nodig hebben en laten achteraf een beoordeling achter. Realtime synchronisatie via Firestore, zodat boekingen meteen bij iedereen verschijnen.",
       en: "Owners list items with a photo, price, category and availability calendar. Renters find nearby items in a list or on an interactive Google Map, book the days they need and leave a review afterwards. Real-time sync through Firestore, so bookings show up for everyone instantly.",
     },
     tech: ["Dart", "Flutter", "Riverpod", "Firebase", "Google Maps"],
-    images: ["/LLSS1.png", "/LLSS2.png", "/LLSS3.png", "/LLSS4.png"],
+    images: ["/LLSS1.webp", "/LLSS2.webp", "/LLSS3.webp", "/LLSS4.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/LocalLend",
   },
   {
@@ -121,11 +121,11 @@ export const projects: Project[] = [
       en: "App for kart racers (RedLine): browse tracks, create races, reserve a spot and chat live with the participants.",
     },
     details: {
-      nl: "Je bekijkt beschikbare circuits, maakt zelf races aan op een track en reserveert een plek. Elke race heeft een eigen live chatroom zodat deelnemers kunnen afspreken, en je kan tracks en races beoordelen. Authenticatie en data via Firebase Auth en Firestore.",
+      nl: "Je bekijkt beschikbare circuits, maakt zelf races aan op een circuit en reserveert een plek. Elke race heeft een eigen live chatroom zodat deelnemers kunnen afspreken, en je kunt circuits en races beoordelen. Authenticatie en data via Firebase Auth en Firestore.",
       en: "You browse available tracks, create your own races on a circuit and reserve a spot. Every race has its own live chatroom so participants can coordinate, and you can rate tracks and races. Authentication and data via Firebase Auth and Firestore.",
     },
     tech: ["TypeScript", "React Native", "Expo", "Firebase"],
-    images: ["/Redline1.jpeg", "/Redline2.jpeg", "/Redline3.jpeg", "/Redline4.jpeg"],
+    images: ["/Redline1.webp", "/Redline2.webp", "/Redline3.webp", "/Redline4.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/kart-race-app",
   },
   {
@@ -140,11 +140,11 @@ export const projects: Project[] = [
       en: "Cozy tea-shop game: brew tea for cat customers, earn tips and unlock new cups and tea types.",
     },
     details: {
-      nl: "Lees de wens in de tekstballon van elke kat en zet de juiste thee met de juiste kop, temperatuur en extra's. Een perfecte match levert een fooi op. Werk de wachtrij af, level op, ontgrendel zeldzamere theesoorten en beheer je tuin om je voorraad aan te vullen. Gebouwd met React via CDN, zonder buildstap.",
+      nl: "Lees de wens in de tekstballon van elke kat en zet de juiste thee met de juiste kop, temperatuur en extra's. Een perfecte match levert een fooi op. Werk de wachtrij af, stijg in niveau, ontgrendel zeldzamere theesoorten en beheer je tuin om je voorraad aan te vullen. Gebouwd met React via CDN, zonder buildstap.",
       en: "Read each cat's wish in its speech bubble and brew the right tea with the right cup, temperature and extras. A perfect match earns a tip. Work through the queue, level up, unlock rarer teas and tend your garden to restock. Built with React via CDN, with no build step.",
     },
     tech: ["JavaScript", "React", "CSS"],
-    images: ["/PPSS1.png"],
+    images: ["/PPSS1.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/PetalPurrs",
     liveUrl: "https://petalpurrs.wordpress.com/",
   },
@@ -157,15 +157,15 @@ export const projects: Project[] = [
     status: "shipped",
     years: "2025 – 2026",
     summary: {
-      nl: "2D-platformer: levels doorlopen, spikes en tornado's ontwijken en gems verzamelen.",
+      nl: "2D-platformer: niveaus doorlopen, spikes en tornado's ontwijken en edelstenen verzamelen.",
       en: "2D platformer: clear levels, dodge spikes and tornadoes and collect gems.",
     },
     details: {
-      nl: "Gebouwd met C# en MonoGame op .NET 9. Eigen animaties, een state-systeem voor de gamestates en factories voor de obstakels, met een moeilijkheidsgraad die per level oploopt.",
+      nl: "Gebouwd met C# en MonoGame op .NET 9. Eigen animaties, een systeem voor de spelfases en factories voor de obstakels. De moeilijkheid stijgt per niveau.",
       en: "Built with C# and MonoGame on .NET 9. Custom animations, a state system for the game states and factories for the obstacles, with difficulty that ramps up per level.",
     },
     tech: ["C#", ".NET", "MonoGame"],
-    images: ["/MONOSS1.png"],
+    images: ["/MONOSS1.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/Mono",
   },
   {

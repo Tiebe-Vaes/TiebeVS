@@ -1,9 +1,10 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useSyncExternalStore } from "react"
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react"
 import { RotateCcwIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { TechIcon } from "./tech-icon"
 
 type Group = { label: string; items: string[] }
@@ -18,10 +19,20 @@ const RINGS = [1, 0.82, 0.64, 0.47, 0.31, 0.16].map((k) => {
   return `M${pts.map(([x, y]) => `${x.toFixed(0)} ${y.toFixed(0)}`).join(" L")} Z`
 })
 
+// Dragging needs a real mouse; on touch the patches must not block page scrolling.
+function subscribeFinePointer(onChange: () => void) {
+  const mq = window.matchMedia("(pointer: fine)")
+  mq.addEventListener("change", onChange)
+  return () => mq.removeEventListener("change", onChange)
+}
+const isFinePointer = () => window.matchMedia("(pointer: fine)").matches
+
 export function GearBoard({ groups, resetLabel }: { groups: Group[]; resetLabel: string }) {
   const boardRef = useRef<HTMLDivElement>(null)
   const reduceMotion = useReducedMotion()
   const [round, setRound] = useState(0)
+  const finePointer = useSyncExternalStore(subscribeFinePointer, isFinePointer, () => false)
+  const canDrag = finePointer && !reduceMotion
 
   // The relief drifts gently against the pointer.
   const px = useMotionValue(0)
@@ -36,7 +47,7 @@ export function GearBoard({ groups, resetLabel }: { groups: Group[]; resetLabel:
       ref={boardRef}
       className="relative overflow-hidden rounded-sm border bg-card px-5 pt-8 pb-16 sm:px-8 sm:pt-10"
       onPointerMove={(e) => {
-        if (reduceMotion) return
+        if (reduceMotion || e.pointerType !== "mouse") return
         const r = e.currentTarget.getBoundingClientRect()
         px.set((e.clientX - r.left) / r.width - 0.5)
         py.set((e.clientY - r.top) / r.height - 0.5)
@@ -47,7 +58,7 @@ export function GearBoard({ groups, resetLabel }: { groups: Group[]; resetLabel:
         viewBox="0 0 1000 520"
         preserveAspectRatio="xMidYMid slice"
         style={{ x: tx, y: ty }}
-        className="pointer-events-none absolute -inset-8 h-[calc(100%+4rem)] w-[calc(100%+4rem)] text-line opacity-25"
+        className="pointer-events-none absolute -inset-8 h-[calc(100%+4rem)] w-[calc(100%+4rem)] text-line opacity-40 dark:opacity-60"
       >
         {RINGS.map((d) => (
           <path key={d} d={d} fill="none" stroke="currentColor" strokeWidth="1.2" />
@@ -62,17 +73,21 @@ export function GearBoard({ groups, resetLabel }: { groups: Group[]; resetLabel:
               {group.items.map((item, ii) => (
                 <motion.li
                   key={item}
-                  drag={!reduceMotion}
+                  drag={canDrag}
                   dragConstraints={boardRef}
                   dragElastic={0.18}
                   dragMomentum
                   initial={reduceMotion ? false : { opacity: 0, y: 14, rotate: 0 }}
-                  whileInView={{ opacity: 1, y: 0, rotate: ((gi * 7 + ii * 3) % 5) - 2 }}
+                  whileInView={{ opacity: 1, y: 0, rotate: reduceMotion ? 0 : ((gi * 7 + ii * 3) % 5) - 2 }}
                   viewport={{ once: true, amount: 0.4 }}
                   transition={{ delay: reduceMotion ? 0 : gi * 0.06 + ii * 0.03, type: "spring", stiffness: 260, damping: 20 }}
-                  whileHover={reduceMotion ? undefined : { y: -3, rotate: 0, scale: 1.04 }}
+                  whileHover={canDrag ? { y: -3, rotate: 0, scale: 1.04 } : undefined}
                   whileDrag={{ scale: 1.1, rotate: 4, zIndex: 10, boxShadow: "0 14px 28px -12px oklch(0.25 0.02 255 / 0.45)" }}
-                  className="stitch-sewn flex cursor-grab touch-none items-center gap-2 rounded-sm bg-background px-3.5 py-2.5 text-sm font-semibold text-foreground select-none active:cursor-grabbing"
+                  className={cn(
+                    "stitch-sewn flex items-center",
+                    canDrag && "cursor-grab touch-none active:cursor-grabbing",
+                    " gap-2 rounded-sm bg-background px-3.5 py-2.5 text-sm font-semibold text-foreground select-none",
+                  )}
                 >
                   <TechIcon name={item} className="size-4" />
                   {item}
@@ -83,6 +98,7 @@ export function GearBoard({ groups, resetLabel }: { groups: Group[]; resetLabel:
         ))}
       </div>
 
+      {canDrag ? (
       <Button
         variant="ghost"
         size="sm"
@@ -92,6 +108,7 @@ export function GearBoard({ groups, resetLabel }: { groups: Group[]; resetLabel:
         <RotateCcwIcon data-icon="inline-start" />
         {resetLabel}
       </Button>
+      ) : null}
     </div>
   )
 }

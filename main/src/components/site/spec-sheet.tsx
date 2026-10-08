@@ -33,7 +33,7 @@ export function SpecSheet({
   return (
     <Dialog open={project !== null} onOpenChange={onOpenChange}>
       {project ? (
-        <DialogContent className="max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto p-0 sm:max-w-4xl">
+        <DialogContent closeLabel={sheet.close} className="max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto p-0 sm:max-w-4xl">
           <div className="grid md:grid-cols-[1.15fr_1fr]">
             <Gallery project={project} drawingLabel={catalogue.drawingLabel} sheet={sheet} />
 
@@ -46,7 +46,7 @@ export function SpecSheet({
                 </DialogDescription>
               </div>
 
-              <p className="text-[0.95rem] leading-relaxed text-pretty">{project.details[locale]}</p>
+              <p className="text-base leading-relaxed text-pretty">{project.details[locale]}</p>
 
               <dl className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-2.5 border-t pt-4 text-sm">
                 <dt className="font-mono text-xs text-muted-foreground uppercase">{sheet.status}</dt>

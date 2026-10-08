@@ -3,7 +3,10 @@
 import { createContext, use, useCallback, useEffect, useMemo, useState } from "react"
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project } from "@/content/types"
-import { SpecSheet } from "./spec-sheet"
+import dynamic from "next/dynamic"
+
+// The dialog and its carousel (embla) load only once a project is opened.
+const SpecSheet = dynamic(() => import("./spec-sheet").then((m) => m.SpecSheet), { ssr: false })
 
 type CatalogueContextValue = { open: (slug: string) => void }
 
@@ -34,11 +37,13 @@ export function CatalogueProvider({
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const open = useCallback((slug: string) => setOpenSlug(slug), [])
 
-  // Keys 1-9 open catalogue items 01-09 directly.
+  // Keys 1-9 open catalogue items 01-09 directly, only while focus is inside the catalogue,
+  // so single-key shortcuts never fire elsewhere on the page (WCAG 2.1.4).
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.metaKey || event.ctrlKey || event.altKey || isTypingTarget(event.target)) return
       if (!/^[1-9]$/.test(event.key)) return
+      if (!(event.target instanceof Element) || !event.target.closest("#catalogue")) return
       const artNo = `0${event.key}`
       const match = projects.find((p) => p.artNo === artNo)
       if (match) setOpenSlug(match.slug)
@@ -53,6 +58,7 @@ export function CatalogueProvider({
   return (
     <CatalogueContext value={value}>
       {children}
+      {active ? (
       <SpecSheet
         project={active}
         locale={locale}
@@ -61,6 +67,7 @@ export function CatalogueProvider({
           if (!next) setOpenSlug(null)
         }}
       />
+      ) : null}
     </CatalogueContext>
   )
 }

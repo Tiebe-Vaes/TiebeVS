@@ -32,7 +32,7 @@ export function Plate({
 
   return (
     <div className={cn("ripstop plate-drawing relative flex items-center overflow-hidden rounded-sm border bg-card", className)}>
-      <span className="absolute top-2.5 left-3 font-mono text-[0.65rem] text-muted-foreground tabular">
+      <span className="absolute top-2.5 left-3 font-mono text-xs text-muted-foreground tabular">
         Art. {project.artNo}
       </span>
       <StackDrawing
