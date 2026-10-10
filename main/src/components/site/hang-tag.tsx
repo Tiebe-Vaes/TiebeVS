@@ -56,7 +56,7 @@ export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] })
   const swingRef = useRef<HTMLDivElement>(null)
 
   // The tag swings toward the pointer, only while the pointer is on the tag itself; the
-  // overshooting transition in the class list does the swinging.
+  // long ease-out in the class list lets it settle like a hanging weight.
   function swing(e: React.PointerEvent<HTMLDivElement>) {
     const el = swingRef.current
     if (!el || e.pointerType !== "mouse" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
@@ -77,7 +77,7 @@ export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] })
         onPointerMove={swing}
         onPointerLeave={() => swingRef.current?.style.setProperty("rotate", `${REST}deg`)}
         style={{ rotate: `${REST}deg` }}
-        className="w-full max-w-md origin-top drop-shadow-[0_18px_20px_oklch(0.25_0.05_60/0.35)] transition-[rotate] duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none dark:drop-shadow-[0_24px_28px_oklch(0_0_0/0.6)]"
+        className="w-full max-w-md origin-top drop-shadow-[0_18px_20px_oklch(0.25_0.05_60/0.35)] transition-[rotate] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none dark:drop-shadow-[0_24px_28px_oklch(0_0_0/0.6)]"
       >
         <div className="ticket-edge relative rounded-t-sm bg-primary px-6 pt-9 pb-8 text-primary-foreground sm:px-8 [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground">
           <span

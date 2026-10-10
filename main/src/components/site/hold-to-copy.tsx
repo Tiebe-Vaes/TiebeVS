@@ -47,8 +47,8 @@ export function HoldToCopy({ text, label, done }: { text: string; label: string;
     >
       <span
         aria-hidden="true"
-        className="absolute inset-y-0 left-0 bg-primary-foreground/20 ease-linear"
-        style={{ width: holding ? "100%" : "0%", transition: `width ${holding ? HOLD_MS : 150}ms` }}
+        className="absolute inset-0 origin-left bg-primary-foreground/20 ease-linear"
+        style={{ scale: holding ? "1 1" : "0 1", transition: `scale ${holding ? HOLD_MS : 150}ms` }}
       />
       {copied ? <CheckIcon className="relative size-3.5" /> : <CopyIcon className="relative size-3.5" />}
       <span className="relative" aria-live="polite">
