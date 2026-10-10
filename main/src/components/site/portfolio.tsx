@@ -20,7 +20,7 @@ import { RouteProfile } from "./route-profile"
 import { SpecimenCards } from "./specimen-cards"
 import { SplitWords } from "./reveal"
 import { LinkedInIcon, TechIcon } from "./tech-icon"
-import { HoldToCopy } from "./hold-to-copy"
+import { CopyButton } from "./copy-button"
 
 export async function Portfolio({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
@@ -327,7 +327,7 @@ function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
                     <a href={href} className="underline decoration-primary-foreground/40 underline-offset-4 hover:decoration-primary-foreground">
                       {value}
                     </a>
-                    <HoldToCopy text={value} label={t.hold} done={t.copied} />
+                    <CopyButton text={value} label={t.copy} done={t.copied} />
                   </>
                 ) : (
                   value

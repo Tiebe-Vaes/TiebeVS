@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import DriftWall from "@/components/reactbits/DriftWall"
-import { Kbd } from "@/components/ui/kbd"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project, ProjectKind } from "@/content/types"
@@ -71,7 +70,7 @@ export function Catalogue({
               >
                 <span className="font-mono text-xs text-muted-foreground tabular">{project.artNo}</span>
                 <span className="flex min-w-0 flex-col">
-                  <span className="truncate font-display text-xl leading-tight font-bold sm:text-2xl [word-spacing:inherit] group-hover:text-tag-ink">
+                  <span className="truncate font-display text-xl leading-tight font-bold sm:text-2xl group-hover:text-tag-ink">
                     {project.name}
                   </span>
                   <span className="truncate text-xs text-muted-foreground">{project.category[locale]}</span>
@@ -81,10 +80,6 @@ export function Catalogue({
             </li>
           ))}
         </ol>
-
-        <p className="hidden items-center gap-1.5 text-sm text-muted-foreground md:flex">
-          {t.keysHint} <Kbd>1</Kbd>–<Kbd>9</Kbd>
-        </p>
       </div>
 
       {/* content-visibility keeps the wall's 3D tiles out of every frame while it is off screen. */}

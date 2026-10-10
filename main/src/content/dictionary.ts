@@ -42,7 +42,6 @@ const nl = {
   catalogue: {
     title: "Catalogus",
     intro: "Negen projecten, van klantwerk tot eigen experimenten.",
-    keysHint: "Vanuit de catalogus open je een project meteen met de toetsen",
     filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en desktop" },
     filterLabel: "Filter op type",
     shipped: "Opgeleverd",
@@ -100,7 +99,7 @@ const nl = {
     email: "E-mail",
     location: "Locatie",
     profiles: "Profielen",
-    hold: "Houd vast om te kopiëren",
+    copy: "Kopieer",
     copied: "Gekopieerd",
   },
 }
@@ -149,7 +148,6 @@ const en: Dictionary = {
   catalogue: {
     title: "Catalogue",
     intro: "Nine projects, from client work to personal experiments.",
-    keysHint: "Inside the catalogue, open a project straight away with the keys",
     filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and desktop" },
     filterLabel: "Filter by type",
     shipped: "Shipped",
@@ -207,7 +205,7 @@ const en: Dictionary = {
     email: "Email",
     location: "Location",
     profiles: "Profiles",
-    hold: "Hold to copy",
+    copy: "Copy",
     copied: "Copied",
   },
 }

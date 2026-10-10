@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Archivo, Martian_Mono } from "next/font/google"
+import { Barlow, Barlow_Condensed, IBM_Plex_Mono } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { RevealObserver } from "@/components/site/reveal"
@@ -10,17 +10,25 @@ import { SITE_URL, profile } from "@/content/profile"
 import type { Locale } from "@/content/types"
 import "@/app/globals.css"
 
-const archivo = Archivo({
+// Barlow: a grotesk drawn after road signs and plates; the condensed cut sets the headings.
+const barlow = Barlow({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-barlow",
   display: "swap",
 })
 
-const martian = Martian_Mono({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-martian",
+  weight: ["600", "700", "800"],
+  variable: "--font-barlow-condensed",
+  display: "swap",
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
   display: "swap",
 })
 
@@ -59,7 +67,7 @@ export function RootShell({ locale, children }: { locale: Locale; children: Reac
   return (
     <html
       lang={locale}
-      className={`${archivo.variable} ${martian.variable} antialiased`}
+      className={`${barlow.variable} ${barlowCondensed.variable} ${plexMono.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh overflow-x-clip">
