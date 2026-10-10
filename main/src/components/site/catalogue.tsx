@@ -1,9 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { AnimatePresence, motion, useReducedMotion } from "motion/react"
-import SpotlightCard from "@/components/SpotlightCard"
-import TiltedCard from "@/components/TiltedCard"
 import { Kbd } from "@/components/ui/kbd"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import type { Dictionary } from "@/content/dictionary"
@@ -26,14 +23,13 @@ export function Catalogue({
   t: Dictionary["catalogue"]
 }) {
   const [filter, setFilter] = useState<Filter>("all")
-  const reduceMotion = useReducedMotion()
   const visible = filter === "all" ? projects : projects.filter((p) => p.kind === filter)
 
   return (
     <section id="catalogue" aria-labelledby="catalogue-title" className="scroll-mt-20">
       <div className="flex flex-wrap items-end justify-between gap-6 border-b-2 border-foreground pb-5">
         <div className="flex max-w-xl flex-col gap-3">
-          <h2 id="catalogue-title" data-split className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
+          <h2 id="catalogue-title" className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
             {t.title}
           </h2>
           <p className="text-pretty text-muted-foreground">{t.intro}</p>
@@ -56,23 +52,13 @@ export function Catalogue({
         </ToggleGroup>
       </div>
 
-      <motion.ol layout={!reduceMotion} className="flex flex-col">
-        <AnimatePresence initial={false} mode="popLayout">
-          {visible.map((project) => (
-            <motion.li
-              key={project.slug}
-              layout={!reduceMotion}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="border-b"
-            >
-              <CatalogueItem project={project} locale={locale} t={t} />
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </motion.ol>
+      <ol className="flex flex-col">
+        {visible.map((project) => (
+          <li key={project.slug} className="border-b">
+            <CatalogueItem project={project} locale={locale} t={t} />
+          </li>
+        ))}
+      </ol>
     </section>
   )
 }
@@ -81,8 +67,7 @@ function CatalogueItem({ project, locale, t }: { project: Project; locale: Local
   const { open } = useCatalogue()
 
   return (
-    // React Bits Spotlight: a soft amber light follows the pointer across the row.
-    <SpotlightCard className="group grid gap-x-10 gap-y-5 py-10 lg:grid-cols-[4rem_1fr_minmax(0,18rem)]">
+    <div className="group relative grid gap-x-10 gap-y-5 py-10 lg:grid-cols-[4rem_1fr_minmax(0,18rem)]">
       <span className="font-mono text-sm text-muted-foreground tabular lg:pt-2">{project.artNo}</span>
 
       <div className="flex flex-col gap-3">
@@ -116,18 +101,15 @@ function CatalogueItem({ project, locale, t }: { project: Project; locale: Local
         ) : null}
       </div>
 
-      {/* React Bits Tilted Card: the plate tilts toward the pointer. A click opens the spec sheet too;
-          keyboard users reach it through the title button. */}
-      <div className="relative cursor-pointer" onClick={() => open(project.slug)}>
-      <TiltedCard className="aspect-[16/11] w-full">
+      {/* A click on the plate opens the spec sheet too; keyboard users reach it through the title button. */}
+      <div className="relative aspect-[16/11] w-full cursor-pointer" onClick={() => open(project.slug)}>
         <Plate
           project={project}
           drawingLabel={t.drawingLabel}
           sizes="(min-width: 1024px) 288px, 100vw"
           className="size-full"
         />
-      </TiltedCard>
       </div>
-    </SpotlightCard>
+    </div>
   )
 }

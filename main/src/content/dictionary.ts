@@ -65,8 +65,7 @@ const nl = {
   },
   gear: {
     title: "Uitrusting",
-    intro: "Alles wat ik gebruik om te bouwen. Sleep de badges gerust rond.",
-    reset: "Opnieuw schikken",
+    intro: "Alles wat ik gebruik om te bouwen.",
   },
   github: {
     title: "Op GitHub",
@@ -164,8 +163,7 @@ const en: Dictionary = {
   },
   gear: {
     title: "Kit",
-    intro: "Everything I build with. Feel free to drag the patches around.",
-    reset: "Tidy up",
+    intro: "Everything I build with.",
   },
   github: {
     title: "On GitHub",

@@ -1,7 +1,6 @@
 "use client"
 
 import { useId, useRef, useState } from "react"
-import { motion, useReducedMotion, useSpring } from "motion/react"
 import { Slider } from "@/components/ui/slider"
 import { cn } from "@/lib/utils"
 
@@ -55,23 +54,15 @@ export function RouteProfile({
   sliderLabel: string
   waypoints: Waypoint[]
 }) {
-  const reduceMotion = useReducedMotion()
   const svgRef = useRef<SVGSVGElement>(null)
+  const hikerRef = useRef<SVGGElement>(null)
   const clipId = useId()
-  // React state changes only when the nearest stop changes; the hiker itself moves on motion values.
+  // React state changes only when the nearest stop changes; the hiker itself is moved directly.
   const [active, setActive] = useState(START)
-  const hikerX = useSpring(STOPS[START], { stiffness: 220, damping: 28 })
-  const hikerY = useSpring(ridgeY(STOPS[START]), { stiffness: 220, damping: 28 })
 
   function moveTo(x: number) {
     const clamped = Math.max(0, Math.min(W, x))
-    if (reduceMotion) {
-      hikerX.jump(clamped)
-      hikerY.jump(ridgeY(clamped))
-    } else {
-      hikerX.set(clamped)
-      hikerY.set(ridgeY(clamped))
-    }
+    hikerRef.current?.setAttribute("transform", `translate(${clamped} ${ridgeY(clamped)})`)
     const stop = nearestStop(clamped)
     if (stop !== active) setActive(stop)
   }
@@ -170,11 +161,11 @@ export function RouteProfile({
           })}
 
           {/* The hiker follows the pointer along the ridge. */}
-          <motion.g style={{ x: hikerX, y: hikerY }}>
+          <g ref={hikerRef} transform={`translate(${STOPS[START]} ${ridgeY(STOPS[START])})`}>
             <line x1="0" y1="0" x2="0" y2="-34" className="stroke-foreground" strokeWidth="2" />
             <path d="M0 -34 L22 -27 L0 -20 Z" className="fill-primary stroke-foreground" strokeWidth="1.5" strokeLinejoin="round" />
             <circle r="4" className="fill-foreground" />
-          </motion.g>
+          </g>
         </svg>
       </div>
 

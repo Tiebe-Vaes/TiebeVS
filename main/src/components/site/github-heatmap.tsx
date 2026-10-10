@@ -74,6 +74,7 @@ export default function GithubHeatmap({
                 className="w-full"
                 data={data}
                 layout="fluid"
+                animate={false}
                 binSize={CELL}
                 gap={3}
                 margin={MARGIN}

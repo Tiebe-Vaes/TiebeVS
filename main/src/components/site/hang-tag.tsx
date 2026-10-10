@@ -1,7 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useReducedMotion, useSpring } from "motion/react"
+import { useEffect, useState } from "react"
 import { MailIcon } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -27,40 +26,16 @@ function useLocalTime() {
 }
 
 export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] }) {
-  const reduceMotion = useReducedMotion()
   const time = useLocalTime()
-  const tagRef = useRef<HTMLDivElement>(null)
-  // The tag hangs from its punch hole and swings toward the pointer.
-  const rotate = useSpring(-2.5, { stiffness: 60, damping: 14, mass: 1.2 })
-
-  useEffect(() => {
-    if (reduceMotion) return
-    // Mouse only: on touch the tag would stay tilted wherever the last finger left it.
-    function onPointerMove(event: PointerEvent) {
-      if (event.pointerType !== "mouse") return
-      const rect = tagRef.current?.getBoundingClientRect()
-      if (!rect) return
-      const dx = event.clientX - (rect.left + rect.width / 2)
-      rotate.set(Math.max(-7, Math.min(7, dx / 60)))
-    }
-    const settle = () => rotate.set(-2.5)
-    window.addEventListener("pointermove", onPointerMove, { passive: true })
-    document.documentElement.addEventListener("mouseleave", settle)
-    return () => {
-      window.removeEventListener("pointermove", onPointerMove)
-      document.documentElement.removeEventListener("mouseleave", settle)
-    }
-  }, [reduceMotion, rotate])
 
   return (
     <div className="relative flex flex-col items-center pt-2">
       <Carabiner />
       {/* Cord from carabiner to the punch hole. */}
       <div aria-hidden="true" className="h-8 w-px bg-foreground/70" />
-      <motion.div
-        ref={tagRef}
-        style={{ rotate, transformOrigin: "50% 0%" }}
-        className="relative w-full max-w-md rounded-sm bg-primary px-6 pt-9 pb-6 text-primary-foreground shadow-[0_18px_40px_-18px_oklch(0.25_0.05_60/0.55)] sm:px-8 dark:shadow-[0_24px_60px_-20px_oklch(0_0_0/0.85)] [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
+      {/* The tag hangs slightly crooked from its punch hole. */}
+      <div
+        className="relative origin-top -rotate-[2.5deg] w-full max-w-md rounded-sm bg-primary px-6 pt-9 pb-6 text-primary-foreground shadow-[0_18px_40px_-18px_oklch(0.25_0.05_60/0.55)] sm:px-8 dark:shadow-[0_24px_60px_-20px_oklch(0_0_0/0.85)] [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
       >
         <span
           aria-hidden="true"
@@ -98,7 +73,7 @@ export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] })
             {t.contact}
           </a>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }
