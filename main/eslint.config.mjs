@@ -12,9 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Vendored registry code (shadcn/ui, bklit); updated through the shadcn CLI, not edited by hand.
+    // Vendored registry code (shadcn/ui, bklit, React Bits); updated through the shadcn CLI, not edited by hand.
     "src/components/ui/**",
     "src/components/charts/**",
+    "src/components/reactbits/**",
   ]),
 ]);
 

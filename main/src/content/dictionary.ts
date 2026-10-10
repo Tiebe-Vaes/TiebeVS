@@ -42,6 +42,7 @@ const nl = {
   catalogue: {
     title: "Catalogus",
     intro: "Negen projecten, van klantwerk tot eigen experimenten.",
+    carouselLabel: "Schermafbeeldingen van projecten, klik om te openen",
     keysHint: "Vanuit de catalogus open je een project meteen met de toetsen",
     filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en desktop" },
     filterLabel: "Filter op type",
@@ -66,6 +67,7 @@ const nl = {
   gear: {
     title: "Uitrusting",
     intro: "Alles wat ik gebruik om te bouwen.",
+    loopLabel: "Technologieën die ik gebruik",
   },
   github: {
     title: "Op GitHub",
@@ -140,6 +142,7 @@ const en: Dictionary = {
   catalogue: {
     title: "Catalogue",
     intro: "Nine projects, from client work to personal experiments.",
+    carouselLabel: "Project screenshots, click to open",
     keysHint: "Inside the catalogue, open a project straight away with the keys",
     filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and desktop" },
     filterLabel: "Filter by type",
@@ -164,6 +167,7 @@ const en: Dictionary = {
   gear: {
     title: "Kit",
     intro: "Everything I build with.",
+    loopLabel: "Technologies I use",
   },
   github: {
     title: "On GitHub",

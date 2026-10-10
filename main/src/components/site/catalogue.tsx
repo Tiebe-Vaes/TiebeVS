@@ -6,7 +6,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project, ProjectKind } from "@/content/types"
 import { useCatalogue } from "./catalogue-provider"
-import { Plate } from "./plate"
+import { ProjectCarousel } from "./project-carousel"
 import { StatusLabel } from "./status-label"
 import { TechIcon } from "./tech-icon"
 
@@ -52,6 +52,8 @@ export function Catalogue({
         </ToggleGroup>
       </div>
 
+      <ProjectCarousel projects={visible} locale={locale} label={t.carouselLabel} />
+
       <ol className="flex flex-col">
         {visible.map((project) => (
           <li key={project.slug} className="border-b">
@@ -67,7 +69,7 @@ function CatalogueItem({ project, locale, t }: { project: Project; locale: Local
   const { open } = useCatalogue()
 
   return (
-    <div className="group relative grid gap-x-10 gap-y-5 py-10 lg:grid-cols-[4rem_1fr_minmax(0,18rem)]">
+    <div className="group relative grid gap-x-10 gap-y-5 py-10 lg:grid-cols-[4rem_1fr]">
       <span className="font-mono text-sm text-muted-foreground tabular lg:pt-2">{project.artNo}</span>
 
       <div className="flex flex-col gap-3">
@@ -101,15 +103,6 @@ function CatalogueItem({ project, locale, t }: { project: Project; locale: Local
         ) : null}
       </div>
 
-      {/* A click on the plate opens the spec sheet too; keyboard users reach it through the title button. */}
-      <div className="relative aspect-[16/11] w-full cursor-pointer" onClick={() => open(project.slug)}>
-        <Plate
-          project={project}
-          drawingLabel={t.drawingLabel}
-          sizes="(min-width: 1024px) 288px, 100vw"
-          className="size-full"
-        />
-      </div>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowUpRightIcon, MailIcon, MapPinIcon } from "lucide-react"
 import SlideTextButton from "@/components/kokonutui/slide-text-button"
 import SwitchButton from "@/components/kokonutui/switch-button"
+import LogoLoop from "@/components/reactbits/LogoLoop"
 import { buttonVariants } from "@/components/ui/button"
 import { getDictionary, type Dictionary } from "@/content/dictionary"
 import { SITE_URL, education, profile, skillGroups, spokenLanguages } from "@/content/profile"
@@ -10,6 +11,7 @@ import type { Locale } from "@/content/types"
 import { getContributions } from "@/lib/github"
 import { Catalogue } from "./catalogue"
 import { CatalogueProvider } from "./catalogue-provider"
+import { ContactSea } from "./contact-sea"
 import { GearBoard } from "./gear-board"
 import GithubHeatmap, { type HeatmapDay } from "./github-heatmap"
 import { HangTag } from "./hang-tag"
@@ -69,6 +71,29 @@ export async function Portfolio({ locale }: { locale: Locale }) {
               </dl>
             </div>
           </section>
+
+          {/* Full-bleed band of the whole kit, between the hero and the catalogue. */}
+          <div className="relative left-1/2 -my-20 w-screen -translate-x-1/2 border-y py-5 lg:-my-28">
+            <LogoLoop
+              logos={skillGroups.flatMap((g) => g.items).map((item) => ({
+                title: item,
+                node: (
+                  <span className="flex items-center gap-2 font-mono text-sm whitespace-nowrap text-muted-foreground">
+                    <TechIcon name={item} className="size-5 text-foreground" />
+                    {item}
+                  </span>
+                ),
+              }))}
+              speed={40}
+              gap={40}
+              logoHeight={24}
+              pauseOnHover
+              scaleOnHover
+              fadeOut
+              fadeOutColor="var(--background)"
+              ariaLabel={t.gear.loopLabel}
+            />
+          </div>
 
           <Catalogue projects={projects} locale={locale} t={t.catalogue} />
 
@@ -270,8 +295,9 @@ function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="scroll-mt-20 grid gap-10 rounded-sm bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-14 lg:grid-cols-12 [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
+      className="relative isolate scroll-mt-20 grid gap-10 overflow-hidden rounded-sm bg-primary px-6 pt-10 pb-40 text-primary-foreground sm:px-10 sm:pt-14 sm:pb-48 lg:grid-cols-12 [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
     >
+      <ContactSea className="absolute inset-x-0 bottom-0 -z-10 h-40 opacity-70 sm:h-56 [mask-image:linear-gradient(to_bottom,transparent,black_45%)]" />
       <div className="flex flex-col gap-5 lg:col-span-6">
         <h2 id="contact-title" className="font-display text-7xl leading-none font-extrabold sm:text-8xl">
           {t.title}
