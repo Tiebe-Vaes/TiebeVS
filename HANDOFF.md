@@ -1,6 +1,6 @@
 # HANDOFF: portfolio redesign tiebe.vercel.app
 
-Written 2026-10-10 for a fresh session. Read this whole file first. Talk to Tiebe in Dutch (he writes Dutch; TVerse `me.md` asks for English answers in vault context, but this project chat has been Dutch throughout). Keep answers short.
+Written 2026-10-10, updated the same day after the second session. Read this whole file first. Talk to Tiebe in Dutch (he writes Dutch; TVerse `me.md` asks for English answers in vault context, but this project chat has been Dutch throughout). Keep answers short.
 
 ## Where things are
 
@@ -50,19 +50,21 @@ Design/tech choices
 - Removed at his request: "Route Hoboken – Oslo" title (route merged into "Over mij"), materials bar chart (replaced by GitHub heatmap), footer "Gebouwd met..." credit, Next dev indicator badge (`devIndicators: false`), name hover effect.
 - Use impeccable for reviews.
 
-## LATEST requests (not done yet — do these next, in this order)
+## Status 2026-10-10 (second session)
 
-1. **Site is "gigantisch laggy". Find which components cause lag and REMOVE the unnecessary ones.** Prime suspects (measure first with rAF fps / Performance trace in the browser pane at 1440×900):
-   - `topo-background.tsx` Vanta TOPOLOGY (p5 redraws a full-screen canvas every frame) — most likely culprit; the static `hero-map.tsx` already carries the topo look, so Vanta can probably go (also uninstall `vanta`, `p5`, delete `src/types/vanta.d.ts` declarations).
-   - Lenis smooth scroll (`motion-shell.tsx` SmoothScroll, lerp 0.12) — can feel laggy; consider removing (keep GSAP reveals with native scroll).
-   - GitHub heatmap: ~370 cells each with motion + mount animation (`charts/heatmap/heatmap-cells.tsx`); consider `animate={false}` on HeatmapChart.
-   - gear-board springs + parallax, SpotlightCard per row, TiltedCard springs, hang-tag window pointermove.
-   Report measurements before/after.
-2. **Look at these effects and recommend some to implement:** https://demos.gsap.com/demo/motionpath-waypoints (GSAP MotionPathPlugin, an object following a path through waypoints — fits the route profile / hiker) and https://www.dqnamo.com/kitchen (a "kitchen sink" of UI effects). Browse both, list concrete recommendations, let Tiebe choose. Do not let new effects reintroduce lag.
-3. **`npm i @lucasmarkes/hairline` and definitely use it** (read its README/npm page first to see what it does, then apply it in the site).
-4. **Install the apple-design skill "everywhere"**: https://github.com/emilkowalski/skills/tree/main/skills/apple-design — e.g. `npx skills add emilkowalski/skills --skill apple-design -g` for all agents (Claude Code, Codex, etc.). Per TVerse skill-map rule: move the installed skill folder to `C:\TVerse\AIOS\skills\apple-design` and put a junction back in `C:\Users\tiebe\.claude\skills\apple-design`, then add a row to `C:\TVerse\AIOS\skill-map.md`. Then use it when refining the UI.
-5. **"Favorite tech right now" section** (Tiebe's idea): a new section showcasing his current favourite skills/libraries with a cool effect. Proposals given (not chosen yet): lab band with live mini demos; tech orbit; scroll-velocity marquee + "now" log; experiments bento wall. Ask which, and which technologies are his favourites.
-6. **Push / deploy to Vercel** (he asked "push naar vercel"). State: Vercel CLI is NOT logged in on this machine (never enter credentials yourself). The Vercel project must have **Root Directory = `main`** in the dashboard (old root `vercel.json` was deleted) — Tiebe sets that himself. Safe path: push `redesign/next` to origin (gives a preview deploy if the repo is connected), let him check, then merge to `main` for production. Ask before merging/force anything.
+Plan: `docs/superpowers/plans/2026-10-10-portfolio-fase2.md`. Commits on `redesign/next` (not pushed): `c588a3f` lag fix, `125f81b` Lenis + logo loop + carousel + slats, `ba2dd4a` ranking, `b478daf` effects, `315de83` detector fixes.
+
+- **Lag fixed.** Vanta/p5, GSAP, Spotlight, Tilt, gear-board drag/springs, heatmap animation removed. Prod, CPU 4x: hero 3.3 → 120 fps, scroll 8.9 → 74+ fps, heap 50 → 13 MB. Measuring: `scratchpad/perf/fps-late.mjs` (puppeteer-core + local Chrome against `preview_start portfolio-prod`, port 3100, after `npm run build`). Watch out: anything with many 3D layers makes every frame on the page pay for Layerize (the curved carousel did: kit section 11 fps), hence `curve={0}` + `content-visibility:auto` on the carousel.
+- **Added:** light Lenis (`smooth-scroll.tsx`); React Bits in `src/components/reactbits/` (vendored, lint-ignored): Logo Loop (full-bleed band under the hero, patched to pause off screen), Circular Carousel (catalogue, projects with screenshots only; rows no longer show plates), Micro Slats (fjord at the bottom of the contact block, ogl, lazy). "Waar ik nu mee speel" ranking (`content/playing.ts`, `now-playing.tsx`, one hairline figure via `hairline-figure.tsx`). Effects 1,2,3,6,7,8,9 back (`reveal.tsx`, hang tag, route hiker walk, `hold-to-copy.tsx`); 4 and 5 skipped as redundant.
+- **Rule:** never mention TVerse/the vault on the site (Obsidian is fine).
+
+## Open, in this order
+
+1. **Topo Field** (21st.dev/@mengto/components/topo-field) needs a 21st.dev login for its code. Tiebe pastes the code into `main/src/components/topo-field.tsx`; then put it behind `HeroMap` in the hero, paused off screen, and measure (hero ≥ 55 fps).
+2. **Fonts:** proposal given in chat (Archivo + Martian Mono now); switch only after Tiebe picks.
+3. **apple-design skill** install (handoff item 4 of the first session) still to do.
+4. **Push / deploy:** Vercel is connected with Root Directory = `main`. Push `redesign/next` to origin for a preview; merge to `main` only after Tiebe's OK.
+5. impeccable finish-reviewer round on prod captures was not run this session (detector is clean).
 
 ## Still-open items (lower priority)
 
