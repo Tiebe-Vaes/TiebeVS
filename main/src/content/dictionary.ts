@@ -42,7 +42,6 @@ const nl = {
   catalogue: {
     title: "Catalogus",
     intro: "Negen projecten, van klantwerk tot eigen experimenten.",
-    carouselLabel: "Schermafbeeldingen van projecten, klik om te openen",
     keysHint: "Vanuit de catalogus open je een project meteen met de toetsen",
     filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en desktop" },
     filterLabel: "Filter op type",
@@ -66,7 +65,7 @@ const nl = {
   },
   playing: {
     title: "Waar ik nu mee speel",
-    intro: "Wat ik op dit moment het meest gebruik, van boven naar beneden. Volg een link om het zelf te proberen.",
+    intro: "Wat ik op dit moment het meest gebruik, het meest gebruikte eerst. Beweeg over een figuur, of volg een link om het zelf te proberen.",
     figureLabel: "lijntekening die op je muis reageert",
     newTab: "(opent in een nieuw tabblad)",
   },
@@ -150,7 +149,6 @@ const en: Dictionary = {
   catalogue: {
     title: "Catalogue",
     intro: "Nine projects, from client work to personal experiments.",
-    carouselLabel: "Project screenshots, click to open",
     keysHint: "Inside the catalogue, open a project straight away with the keys",
     filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and desktop" },
     filterLabel: "Filter by type",
@@ -174,7 +172,7 @@ const en: Dictionary = {
   },
   playing: {
     title: "What I'm playing with",
-    intro: "What I use most right now, top to bottom. Follow a link to try it yourself.",
+    intro: "What I use most right now, most used first. Move over a figure, or follow a link to try it yourself.",
     figureLabel: "line drawing that answers your pointer",
     newTab: "(opens in a new tab)",
   },

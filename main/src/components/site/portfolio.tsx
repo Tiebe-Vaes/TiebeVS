@@ -12,16 +12,14 @@ import type { Locale } from "@/content/types"
 import { getContributions } from "@/lib/github"
 import { Catalogue } from "./catalogue"
 import { CatalogueProvider } from "./catalogue-provider"
-import { ContactSea } from "./contact-sea"
 import { GearBoard } from "./gear-board"
 import GithubHeatmap, { type HeatmapDay } from "./github-heatmap"
 import { HangTag } from "./hang-tag"
 import { LanguageMeter } from "./language-meter"
-import { NowPlaying } from "./now-playing"
 import { RouteProfile } from "./route-profile"
+import { SpecimenCards } from "./specimen-cards"
 import { SplitWords } from "./reveal"
 import { LinkedInIcon, TechIcon } from "./tech-icon"
-import { HeroMap } from "./hero-map"
 import { HoldToCopy } from "./hold-to-copy"
 
 export async function Portfolio({ locale }: { locale: Locale }) {
@@ -58,8 +56,6 @@ export async function Portfolio({ locale }: { locale: Locale }) {
         <main id="main" className="mx-auto max-w-7xl px-4 pb-28 sm:px-8">
           <div className="flex flex-col gap-36 lg:gap-44">
           <section className="relative isolate grid min-h-[calc(100svh-3.5rem)] items-center gap-14 py-10 lg:grid-cols-12 lg:gap-12">
-            {/* Static map sheet behind the hero: contours, index lines, heights, ticks, scale, coordinates. */}
-            <HeroMap className="absolute inset-y-0 left-1/2 -z-10 h-full w-screen -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]" />
             <div className="lg:col-span-5">
               <HangTag locale={locale} t={t.tag} />
             </div>
@@ -105,7 +101,7 @@ export async function Portfolio({ locale }: { locale: Locale }) {
 
           <section aria-labelledby="playing-title" className="flex flex-col gap-10">
             <SectionHeading id="playing-title" title={t.playing.title} intro={t.playing.intro} />
-            <NowPlaying items={playing} locale={locale} t={t.playing} />
+            <SpecimenCards items={playing} locale={locale} t={t.playing} />
           </section>
 
           <section aria-labelledby="gear-title" className="flex flex-col gap-10">
@@ -305,9 +301,8 @@ function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
       id="contact"
       aria-labelledby="contact-title"
       data-reveal
-      className="relative isolate scroll-mt-20 grid gap-10 overflow-hidden rounded-sm bg-primary px-6 pt-10 pb-40 text-primary-foreground sm:px-10 sm:pt-14 sm:pb-48 lg:grid-cols-12 [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
+      className="scroll-mt-20 grid gap-10 rounded-sm bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-14 lg:grid-cols-12 [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
     >
-      <ContactSea className="absolute inset-x-0 bottom-0 -z-10 h-40 opacity-70 sm:h-56 [mask-image:linear-gradient(to_bottom,transparent,black_45%)]" />
       <div className="flex flex-col gap-5 lg:col-span-6">
         <h2 id="contact-title" data-split className="font-display text-7xl leading-none font-extrabold sm:text-8xl">
           <SplitWords text={t.title} />

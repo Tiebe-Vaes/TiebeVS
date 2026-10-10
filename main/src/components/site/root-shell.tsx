@@ -3,6 +3,7 @@ import { Archivo, Martian_Mono } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { RevealObserver } from "@/components/site/reveal"
+import { SiteBackground } from "@/components/site/site-background"
 import { SmoothScroll } from "@/components/site/smooth-scroll"
 import { getDictionary } from "@/content/dictionary"
 import { SITE_URL, profile } from "@/content/profile"
@@ -65,6 +66,7 @@ export function RootShell({ locale, children }: { locale: Locale; children: Reac
         {/* Before first paint: lets CSS hide reveal targets only when JavaScript runs. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('reveal-on')" }} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <SiteBackground />
           <TooltipProvider>{children}</TooltipProvider>
           <SmoothScroll />
           <RevealObserver />

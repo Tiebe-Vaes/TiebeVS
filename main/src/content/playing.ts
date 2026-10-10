@@ -1,19 +1,7 @@
 import type { Localized } from "./types"
 
 /** hairline figures used by the ranking; one per entry. */
-export type FigureName =
-  | "Terminal"
-  | "Hub"
-  | "Stack"
-  | "Rebuild"
-  | "Exploded"
-  | "Branches"
-  | "Relay"
-  | "Settle"
-  | "Format"
-  | "Keyboard"
-  | "Laptop"
-  | "Terrain"
+export type FigureName = "Terminal" | "Hub" | "Stack" | "Rebuild" | "Settle" | "Exploded" | "Format"
 
 export type PlayingItem = {
   name: string
@@ -25,7 +13,7 @@ export type PlayingItem = {
 
 const agentSkills: Localized = { nl: "Agent-skills", en: "Agent skills" }
 
-/** What Tiebe plays with most right now, most used first. */
+/** What Tiebe plays with most right now, most used first; one specimen card each. */
 export const playing: PlayingItem[] = [
   {
     name: "Claude Code",
@@ -68,6 +56,16 @@ export const playing: PlayingItem[] = [
     figure: "Rebuild",
   },
   {
+    name: "Matt Pocock skills",
+    kind: agentSkills,
+    blurb: {
+      nl: "Skills om een plan kritisch te laten bevragen, er een spec en tickets van te maken en test-first te bouwen.",
+      en: "Skills that grill a plan, turn it into a spec and tickets, and build it test-first.",
+    },
+    links: [{ label: "mattpocock/skills", href: "https://github.com/mattpocock/skills" }],
+    figure: "Settle",
+  },
+  {
     name: "Impeccable",
     kind: { nl: "Design-skill", en: "Design skill" },
     blurb: {
@@ -76,36 +74,6 @@ export const playing: PlayingItem[] = [
     },
     links: [{ label: "pbakaus/impeccable", href: "https://github.com/pbakaus/impeccable" }],
     figure: "Exploded",
-  },
-  {
-    name: "Subagents",
-    kind: { nl: "Werkwijze", en: "Workflow" },
-    blurb: {
-      nl: "Agents die parallel werken, elk met een eigen taak en verse context, en een aparte reviewer die het resultaat nakijkt.",
-      en: "Agents working in parallel, each with its own task and fresh context, and a separate reviewer that checks the result.",
-    },
-    links: [{ label: "Subagents", href: "https://code.claude.com/docs/en/sub-agents" }],
-    figure: "Branches",
-  },
-  {
-    name: "Agent Skills",
-    kind: agentSkills,
-    blurb: {
-      nl: "Engineering-skills van Addy Osmani, van spec tot livegang: performance, security, code review en meer.",
-      en: "Engineering skills by Addy Osmani, from spec to launch: performance, security, code review and more.",
-    },
-    links: [{ label: "addyosmani/agent-skills", href: "https://github.com/addyosmani/agent-skills" }],
-    figure: "Relay",
-  },
-  {
-    name: "Matt Pocock skills",
-    kind: agentSkills,
-    blurb: {
-      nl: "Skills om een plan kritisch te laten bevragen, er specs en tickets van te maken en test-first te bouwen.",
-      en: "Skills that grill a plan, turn it into specs and tickets, and build it test-first.",
-    },
-    links: [{ label: "mattpocock/skills", href: "https://github.com/mattpocock/skills" }],
-    figure: "Settle",
   },
   {
     name: "Caveman + Ponytail",
@@ -119,38 +87,5 @@ export const playing: PlayingItem[] = [
       { label: "ponytail", href: "https://github.com/DietrichGebert/ponytail" },
     ],
     figure: "Format",
-  },
-  {
-    name: "Make Interfaces Feel Better",
-    kind: { nl: "Design-skill", en: "Design skill" },
-    blurb: {
-      nl: "De kleine details die een interface af doen voelen: animaties, schaduwen, typografie.",
-      en: "The small details that make an interface feel finished: animation, shadows, typography.",
-    },
-    links: [{ label: "make-interfaces-feel-better", href: "https://github.com/jakubkrehel/make-interfaces-feel-better" }],
-    figure: "Keyboard",
-  },
-  {
-    name: "React Bits + hairline",
-    kind: { nl: "UI-bibliotheken", en: "UI libraries" },
-    blurb: {
-      nl: "De carrousel, de fjord onderaan en de figuur hiernaast komen hier vandaan.",
-      en: "The carousel, the fjord at the bottom and the figure next to this list come from here.",
-    },
-    links: [
-      { label: "React Bits", href: "https://reactbits.dev" },
-      { label: "hairline", href: "https://hairline.lucasmarkes.com" },
-    ],
-    figure: "Laptop",
-  },
-  {
-    name: "GSAP skills",
-    kind: agentSkills,
-    blurb: {
-      nl: "De officiële GSAP-skills, zodat agents animaties schrijven zoals GreenSock ze bedoelt.",
-      en: "The official GSAP skills, so agents write animation the way GreenSock intends.",
-    },
-    links: [{ label: "greensock/gsap-skills", href: "https://github.com/greensock/gsap-skills" }],
-    figure: "Terrain",
   },
 ]
