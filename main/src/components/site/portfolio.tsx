@@ -6,6 +6,7 @@ import LogoLoop from "@/components/reactbits/LogoLoop"
 import { buttonVariants } from "@/components/ui/button"
 import { getDictionary, type Dictionary } from "@/content/dictionary"
 import { SITE_URL, education, profile, skillGroups, spokenLanguages } from "@/content/profile"
+import { playing } from "@/content/playing"
 import { projects } from "@/content/projects"
 import type { Locale } from "@/content/types"
 import { getContributions } from "@/lib/github"
@@ -16,6 +17,7 @@ import { GearBoard } from "./gear-board"
 import GithubHeatmap, { type HeatmapDay } from "./github-heatmap"
 import { HangTag } from "./hang-tag"
 import { LanguageMeter } from "./language-meter"
+import { NowPlaying } from "./now-playing"
 import { RouteProfile } from "./route-profile"
 import { LinkedInIcon, TechIcon } from "./tech-icon"
 import { HeroMap } from "./hero-map"
@@ -98,6 +100,11 @@ export async function Portfolio({ locale }: { locale: Locale }) {
           <Catalogue projects={projects} locale={locale} t={t.catalogue} />
 
           <About locale={locale} t={t} />
+
+          <section aria-labelledby="playing-title" className="flex flex-col gap-10">
+            <SectionHeading id="playing-title" title={t.playing.title} intro={t.playing.intro} />
+            <NowPlaying items={playing} locale={locale} t={t.playing} />
+          </section>
 
           <section aria-labelledby="gear-title" className="flex flex-col gap-10">
             <SectionHeading id="gear-title" title={t.gear.title} intro={t.gear.intro} />

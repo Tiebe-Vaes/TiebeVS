@@ -64,6 +64,12 @@ const nl = {
     prev: "Vorige afbeelding",
     next: "Volgende afbeelding",
   },
+  playing: {
+    title: "Waar ik nu mee speel",
+    intro: "Wat ik op dit moment het meest gebruik, van boven naar beneden. Volg een link om het zelf te proberen.",
+    figureLabel: "lijntekening die op je muis reageert",
+    newTab: "(opent in een nieuw tabblad)",
+  },
   gear: {
     title: "Uitrusting",
     intro: "Alles wat ik gebruik om te bouwen.",
@@ -163,6 +169,12 @@ const en: Dictionary = {
     noRepo: "Source code is private",
     prev: "Previous image",
     next: "Next image",
+  },
+  playing: {
+    title: "What I'm playing with",
+    intro: "What I use most right now, top to bottom. Follow a link to try it yourself.",
+    figureLabel: "line drawing that answers your pointer",
+    newTab: "(opens in a new tab)",
   },
   gear: {
     title: "Kit",

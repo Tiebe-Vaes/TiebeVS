@@ -241,4 +241,28 @@
   .tabular {
     font-variant-numeric: tabular-nums;
   }
+  /* hairline figures in the fjord palette; follows light and dark through the tokens. */
+  .hairline-plate {
+    --hairline-plate: var(--card);
+    --hairline-hi: var(--primary);
+    --hairline-edge: var(--foreground);
+    --hairline-mid: var(--line);
+    --hairline-lo: color-mix(in oklch, var(--line) 35%, var(--card));
+    --hairline-stroke: 1;
+  }
+  /* Outbound link: the underline draws in from the left on hover and focus. */
+  .trail-link {
+    background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0% 1px;
+    transition: background-size 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    padding-bottom: 2px;
+  }
+  .trail-link:hover,
+  .trail-link:focus-visible {
+    background-size: 100% 1px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trail-link {
+      transition: none;
+    }
+  }
 }
