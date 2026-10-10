@@ -58,13 +58,18 @@ Plan: `docs/superpowers/plans/2026-10-10-portfolio-fase2.md`. Commits on `redesi
 - **Added:** light Lenis (`smooth-scroll.tsx`); React Bits in `src/components/reactbits/` (vendored, lint-ignored): Logo Loop (full-bleed band under the hero, patched to pause off screen), Circular Carousel (catalogue, projects with screenshots only; rows no longer show plates), Micro Slats (fjord at the bottom of the contact block, ogl, lazy). "Waar ik nu mee speel" ranking (`content/playing.ts`, `now-playing.tsx`, one hairline figure via `hairline-figure.tsx`). Effects 1,2,3,6,7,8,9 back (`reveal.tsx`, hang tag, route hiker walk, `hold-to-copy.tsx`); 4 and 5 skipped as redundant.
 - **Rule:** never mention TVerse/the vault on the site (Obsidian is fine).
 
+## Phase 2b (same evening, commit `3391dd1`)
+
+- React Bits **Topography** is the fixed site background (`site-background.tsx`, capped at 30 fps). Micro Slats, the static hero map and the circular carousel are gone. Topo Field from 21st.dev was dropped because it is paid.
+- **Catalogue = one screen:** compact index of all 9 projects plus React Bits **Drift Wall** (`npx shadcn add @react-bits/DriftWall-JS-CSS`, moved to `components/reactbits/`, typed by `DriftWall.d.ts`). Keep tracks and tiles flat (`transform-style`): preserve-3d tiles cost ~35 fps.
+- "Waar ik nu mee speel" = **7 specimen cards** with the hairline figure as the image (Tiebe's pick). His active skills were trimmed via his own `route` skill; the full library is parked in TVerse.
+
 ## Open, in this order
 
-1. **Topo Field** (21st.dev/@mengto/components/topo-field) needs a 21st.dev login for its code. Tiebe pastes the code into `main/src/components/topo-field.tsx`; then put it behind `HeroMap` in the hero, paused off screen, and measure (hero ≥ 55 fps).
-2. **Fonts:** proposal given in chat (Archivo + Martian Mono now); switch only after Tiebe picks.
-3. **apple-design skill** install (handoff item 4 of the first session) still to do.
-4. **Push / deploy:** Vercel is connected with Root Directory = `main`. Push `redesign/next` to origin for a preview; merge to `main` only after Tiebe's OK.
-5. impeccable finish-reviewer round on prod captures was not run this session (detector is clean).
+1. **Fonts:** proposal in chat (Barlow Condensed + IBM Plex Mono / Big Shoulders Display + Martian Mono / Bricolage Grotesque + Geist Mono). Switch only after Tiebe picks.
+2. **Screenshots** for BMX, Ripple and Study Countdown (Tiebe adds them himself): they appear in the Drift Wall automatically.
+3. **apple-design skill** install is still to do.
+4. **Push / deploy:** push `redesign/next` for a Vercel preview; merge to `main` only after Tiebe's OK.
 
 ## Still-open items (lower priority)
 
