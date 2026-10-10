@@ -142,3 +142,24 @@ Re-add rule: an effect only comes back if it adds something new on top of tasks 
 - [ ] Run the impeccable detector on the changed files and fix what it finds. Then run a finish-reviewer round on prod captures (desktop and 375 px, light and dark).
 - [ ] Prod build, lint, fps report before and after for the whole phase.
 - [ ] Update `HANDOFF.md`. The Vercel push (handoff item 6) only happens after Tiebe's OK.
+
+---
+
+## Phase 2b (Tiebe's feedback, 2026-10-10 evening)
+
+Task 5 (21st.dev Topo Field) is cancelled because it is paid. The global constraints and the perf budget above still apply.
+
+### Task 10: Topography as the site background, Micro Slats out
+- [ ] Add React Bits Topography (ogl) from the registry. Place it as `fixed inset-0 -z-10` behind the whole page, with fjord colours per theme instead of purple. Use a low opacity and a reduced resolution (`pixelSize`), and pause it under reduced motion.
+- [ ] Remove `contact-sea.tsx` and `MicroSlats.tsx`, and restore the original contact padding. Check whether the static `HeroMap` and the gear-board rings now draw contours twice; tone them down or remove them if so.
+- [ ] Verify the fps budget in every section (a full-screen shader is the biggest risk). Check AA contrast on the text and check dark mode.
+
+### Task 11: Projects at one viewport height with DriftWall
+- [ ] `npx shadcn@latest add @react-bits/DriftWall-JS-CSS` (pipe `yes n`, then check `motion` and `globals.css`).
+- [ ] The catalogue section becomes `min-h-[calc(100svh-3.5rem)]`. On the left, a compact index of all 9 projects (art. no., name, status, kind; a click or keys 1–9 opens the spec sheet). On the right, a DriftWall of all screenshots, where a click opens the matching spec sheet. The circular carousel and the long project rows are removed. Projects without screenshots appear only in the index.
+- [ ] Verify that the section fits in 1440×900 and 375×812, check the fps budget (watch out for 3D layers and Layerize), and check keyboard operation.
+
+### Task 12: Specimen cards with hairline
+- [ ] Reduce `playing.ts` to 7 items: Claude Code (Terminal), Obsidian (Hub), Next.js + React (Stack), Superpowers (Rebuild), Matt Pocock skills (Settle), Impeccable (Exploded), Caveman + Ponytail (Format).
+- [ ] Replace the ranking with a grid of specimen cards. Each card shows "Fig. 0n", the kind, the hairline figure as its image, the name, one sentence and the links (trail-link). Three columns on lg, with cards 1 and 7 spanning two columns; one column on phones. The figures load through `next/dynamic`.
+- [ ] Verify the fps budget with 7 figures mounted, then check keyboard use, both themes and 375 px.
