@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Archivo, Martian_Mono } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { RevealObserver } from "@/components/site/reveal"
 import { SmoothScroll } from "@/components/site/smooth-scroll"
 import { getDictionary } from "@/content/dictionary"
 import { SITE_URL, profile } from "@/content/profile"
@@ -61,9 +62,12 @@ export function RootShell({ locale, children }: { locale: Locale; children: Reac
       suppressHydrationWarning
     >
       <body className="min-h-dvh overflow-x-clip">
+        {/* Before first paint: lets CSS hide reveal targets only when JavaScript runs. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('reveal-on')" }} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TooltipProvider>{children}</TooltipProvider>
           <SmoothScroll />
+          <RevealObserver />
         </ThemeProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useId, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import { Slider } from "@/components/ui/slider"
 import { cn } from "@/lib/utils"
 
@@ -59,15 +59,47 @@ export function RouteProfile({
   const clipId = useId()
   // React state changes only when the nearest stop changes; the hiker itself is moved directly.
   const [active, setActive] = useState(START)
+  const touched = useRef(false)
 
   function moveTo(x: number) {
     const clamped = Math.max(0, Math.min(W, x))
     hikerRef.current?.setAttribute("transform", `translate(${clamped} ${ridgeY(clamped)})`)
-    const stop = nearestStop(clamped)
-    if (stop !== active) setActive(stop)
+    // React skips the render when the nearest stop is unchanged.
+    setActive(nearestStop(clamped))
   }
 
+  // First time the profile scrolls into view, the hiker walks from Hoboken up to the summit.
+  // Any pointer or slider input takes over at once.
+  useEffect(() => {
+    const svg = svgRef.current
+    if (!svg || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    let raf = 0
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || touched.current) return
+        io.disconnect()
+        const from = STOPS[0]
+        const to = STOPS[START]
+        const start = performance.now()
+        const walk = (now: number) => {
+          if (touched.current) return
+          const p = Math.min(1, (now - start) / 2600)
+          moveTo(from + (to - from) * (0.5 - Math.cos(Math.PI * p) / 2))
+          if (p < 1) raf = requestAnimationFrame(walk)
+        }
+        raf = requestAnimationFrame(walk)
+      },
+      { rootMargin: "0px 0px -25% 0px" },
+    )
+    io.observe(svg)
+    return () => {
+      io.disconnect()
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
   function fromPointer(clientX: number) {
+    touched.current = true
     const rect = svgRef.current?.getBoundingClientRect()
     if (!rect) return
     moveTo(((clientX - rect.left) / rect.width) * W)
@@ -176,6 +208,7 @@ export function RouteProfile({
           value={[active]}
           onValueChange={(v) => {
             const i = Array.isArray(v) ? v[0] : v
+            touched.current = true
             moveTo(STOPS[i])
             setActive(i)
           }}

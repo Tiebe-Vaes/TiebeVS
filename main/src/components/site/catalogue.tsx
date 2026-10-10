@@ -7,6 +7,7 @@ import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project, ProjectKind } from "@/content/types"
 import { useCatalogue } from "./catalogue-provider"
 import { ProjectCarousel } from "./project-carousel"
+import { SplitWords } from "./reveal"
 import { StatusLabel } from "./status-label"
 import { TechIcon } from "./tech-icon"
 
@@ -29,8 +30,8 @@ export function Catalogue({
     <section id="catalogue" aria-labelledby="catalogue-title" className="scroll-mt-20">
       <div className="flex flex-wrap items-end justify-between gap-6 border-b-2 border-foreground pb-5">
         <div className="flex max-w-xl flex-col gap-3">
-          <h2 id="catalogue-title" className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
-            {t.title}
+          <h2 id="catalogue-title" data-split className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
+            <SplitWords text={t.title} />
           </h2>
           <p className="text-pretty text-muted-foreground">{t.intro}</p>
           <p className="hidden items-center gap-1.5 text-sm text-muted-foreground md:flex">

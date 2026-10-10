@@ -265,4 +265,40 @@
       transition: none;
     }
   }
+  /* Scroll reveals (RevealObserver): blocks rise in, heading words rise out of their mask. */
+  .split-word {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+    vertical-align: top;
+  }
+  .split-word > span {
+    display: inline-block;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-on [data-reveal]:not(.is-in) {
+      opacity: 0;
+      translate: 0 3rem;
+    }
+    .reveal-on [data-reveal] {
+      transition:
+        opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+        translate 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on [data-split]:not(.is-in) .split-word > span {
+      translate: 0 110%;
+    }
+    .reveal-on [data-split] .split-word > span {
+      transition: translate 900ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: calc(var(--i, 0) * 60ms);
+    }
+  }
+  /* Ticket stub: a scalloped bottom edge cut out of the hang tag. */
+  .ticket-edge {
+    --scallop: 6px;
+    mask:
+      linear-gradient(#000, #000) top / 100% calc(100% - var(--scallop)) no-repeat,
+      radial-gradient(circle at 50% 100%, transparent calc(var(--scallop) - 0.5px), #000 var(--scallop)) bottom / 18px calc(var(--scallop) * 2) repeat-x;
+  }
 }

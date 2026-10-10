@@ -101,6 +101,8 @@ const nl = {
     email: "E-mail",
     location: "Locatie",
     profiles: "Profielen",
+    hold: "Houd vast om te kopiëren",
+    copied: "Gekopieerd",
   },
 }
 
@@ -207,6 +209,8 @@ const en: Dictionary = {
     email: "Email",
     location: "Location",
     profiles: "Profiles",
+    hold: "Hold to copy",
+    copied: "Copied",
   },
 }
 

@@ -19,8 +19,10 @@ import { HangTag } from "./hang-tag"
 import { LanguageMeter } from "./language-meter"
 import { NowPlaying } from "./now-playing"
 import { RouteProfile } from "./route-profile"
+import { SplitWords } from "./reveal"
 import { LinkedInIcon, TechIcon } from "./tech-icon"
 import { HeroMap } from "./hero-map"
+import { HoldToCopy } from "./hold-to-copy"
 
 export async function Portfolio({ locale }: { locale: Locale }) {
   const t = getDictionary(locale)
@@ -108,7 +110,7 @@ export async function Portfolio({ locale }: { locale: Locale }) {
 
           <section aria-labelledby="gear-title" className="flex flex-col gap-10">
             <SectionHeading id="gear-title" title={t.gear.title} intro={t.gear.intro} />
-            <div>
+            <div data-reveal>
               <GearBoard groups={skillGroups.map((g) => ({ label: g.label[locale], items: g.items }))} />
             </div>
           </section>
@@ -171,14 +173,14 @@ function About({ locale, t }: { locale: Locale; t: Dictionary }) {
       <SectionHeading id="about-title" title={t.about.title} />
 
       <div className="grid gap-14 lg:grid-cols-12">
-        <div className="flex flex-col gap-6 lg:col-span-5">
+        <div data-reveal className="flex flex-col gap-6 lg:col-span-5">
           {t.about.body.map((paragraph) => (
             <p key={paragraph} className="max-w-[60ch] text-pretty text-lg leading-relaxed">
               {paragraph}
             </p>
           ))}
         </div>
-        <div className="lg:col-span-7">
+        <div data-reveal className="lg:col-span-7">
           <RouteProfile
             label={t.route.label}
             hint={t.route.hint}
@@ -189,7 +191,7 @@ function About({ locale, t }: { locale: Locale; t: Dictionary }) {
       </div>
 
       <div className="grid gap-16 lg:grid-cols-2">
-        <div className="flex flex-col gap-2">
+        <div data-reveal className="flex flex-col gap-2">
           <h3 className="border-b-2 border-foreground pb-3 font-display text-3xl font-bold">{t.about.education}</h3>
           <ol className="flex flex-col">
             {education.map((item) => (
@@ -203,7 +205,7 @@ function About({ locale, t }: { locale: Locale; t: Dictionary }) {
             ))}
           </ol>
         </div>
-        <div className="flex flex-col gap-2">
+        <div data-reveal className="flex flex-col gap-2">
           <h3 className="border-b-2 border-foreground pb-3 font-display text-3xl font-bold">{t.about.languages}</h3>
           <ul className="flex flex-col">
             {spokenLanguages.map((language) => (
@@ -223,12 +225,12 @@ function About({ locale, t }: { locale: Locale; t: Dictionary }) {
   )
 }
 
-/** Section heading with the catalogue's closing 2px rule. */
+/** Section heading with the catalogue's closing 2px rule; its words rise in once on scroll. */
 function SectionHeading({ id, title, intro }: { id: string; title: string; intro?: string }) {
   return (
     <div className="flex flex-col gap-4 border-b-2 border-foreground pb-6">
-      <h2 id={id} className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
-        {title}
+      <h2 id={id} data-split className="font-display text-6xl leading-none font-extrabold sm:text-7xl">
+        <SplitWords text={title} />
       </h2>
       {intro ? <p className="max-w-2xl text-lg text-pretty text-muted-foreground">{intro}</p> : null}
     </div>
@@ -248,7 +250,7 @@ function GithubSection({
   return (
     <section aria-labelledby="github-title" className="flex flex-col gap-10">
       <SectionHeading id="github-title" title={t.title} intro={days ? t.note : t.unavailable} />
-      <div className="flex flex-wrap items-end justify-between gap-6">
+      <div data-reveal className="flex flex-wrap items-end justify-between gap-6">
         {days ? (
           <dl className="flex flex-wrap gap-x-12 gap-y-4">
             {(
@@ -280,7 +282,7 @@ function GithubSection({
         </a>
       </div>
       {heatmapDays ? (
-        <div className="min-w-0 rounded-sm border bg-card p-5 sm:p-8">
+        <div data-reveal className="min-w-0 rounded-sm border bg-card p-5 sm:p-8">
           <GithubHeatmap days={heatmapDays} locale={t.intlLocale} labels={t.heatmap} />
         </div>
       ) : null}
@@ -302,12 +304,13 @@ function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
     <section
       id="contact"
       aria-labelledby="contact-title"
+      data-reveal
       className="relative isolate scroll-mt-20 grid gap-10 overflow-hidden rounded-sm bg-primary px-6 pt-10 pb-40 text-primary-foreground sm:px-10 sm:pt-14 sm:pb-48 lg:grid-cols-12 [&_:focus-visible]:outline-primary-foreground [&_:focus-visible]:ring-primary-foreground"
     >
       <ContactSea className="absolute inset-x-0 bottom-0 -z-10 h-40 opacity-70 sm:h-56 [mask-image:linear-gradient(to_bottom,transparent,black_45%)]" />
       <div className="flex flex-col gap-5 lg:col-span-6">
-        <h2 id="contact-title" className="font-display text-7xl leading-none font-extrabold sm:text-8xl">
-          {t.title}
+        <h2 id="contact-title" data-split className="font-display text-7xl leading-none font-extrabold sm:text-8xl">
+          <SplitWords text={t.title} />
         </h2>
         <p className="max-w-[44ch] text-lg">{t.body}</p>
         <div>
@@ -323,11 +326,14 @@ function Contact({ locale, t }: { locale: Locale; t: Dictionary["contact"] }) {
                 <Icon className="size-3.5" aria-hidden="true" />
                 {label}
               </dt>
-              <dd className="font-semibold">
+              <dd className="flex flex-wrap items-center gap-x-4 gap-y-2 font-semibold">
                 {href ? (
-                  <a href={href} className="underline decoration-primary-foreground/40 underline-offset-4 hover:decoration-primary-foreground">
-                    {value}
-                  </a>
+                  <>
+                    <a href={href} className="underline decoration-primary-foreground/40 underline-offset-4 hover:decoration-primary-foreground">
+                      {value}
+                    </a>
+                    <HoldToCopy text={value} label={t.hold} done={t.copied} />
+                  </>
                 ) : (
                   value
                 )}
