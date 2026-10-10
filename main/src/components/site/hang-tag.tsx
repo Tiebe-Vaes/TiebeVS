@@ -1,58 +1,15 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import { MailIcon } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 import type { Dictionary } from "@/content/dictionary"
 import { profile } from "@/content/profile"
 import type { Locale } from "@/content/types"
 
-const timeFormat = new Intl.DateTimeFormat("nl-BE", {
-  hour: "2-digit",
-  minute: "2-digit",
-  timeZone: profile.timeZone,
-})
-
-function useLocalTime() {
-  const [time, setTime] = useState<string | null>(null)
-  useEffect(() => {
-    const tick = () => setTime(timeFormat.format(new Date()))
-    tick()
-    const id = window.setInterval(tick, 15_000)
-    return () => window.clearInterval(id)
-  }, [])
-  return time
-}
-
-const GLYPHS = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789-"
-
-/** Scrambles into `text` once on mount, like a label printer finding its line. */
-function useScramble(text: string, duration = 700) {
-  const [shown, setShown] = useState(text)
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    let raf = 0
-    const start = performance.now()
-    const tick = (now: number) => {
-      const done = Math.min(1, (now - start) / duration)
-      const fixed = Math.floor(done * text.length)
-      setShown(
-        text.slice(0, fixed) +
-          [...text.slice(fixed)].map((c) => (c === " " ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)])).join(""),
-      )
-      if (done < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [text, duration])
-  return shown
-}
-
 const REST = -2.5
 
 export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] }) {
-  const time = useLocalTime()
-  const artNo = useScramble("TV-2027")
   const swingRef = useRef<HTMLDivElement>(null)
 
   // The tag swings toward the pointer, only while the pointer is on the tag itself; the
@@ -84,16 +41,7 @@ export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] })
             aria-hidden="true"
             className="absolute top-3 left-1/2 size-3.5 -translate-x-1/2 rounded-full bg-background ring-[3px] ring-primary-foreground/80"
           />
-          <div className="flex items-baseline justify-between font-mono text-xs tracking-wider uppercase tabular">
-            <span>
-              {t.artNo} <span aria-label="TV-2027">{artNo}</span>
-            </span>
-            <span>
-              {t.localTime} <time suppressHydrationWarning>{time ?? "--:--"}</time>
-            </span>
-          </div>
-
-          <h1 className="mt-6 font-display text-[clamp(3.4rem,9vw,6rem)] leading-[0.86] font-extrabold text-balance">
+          <h1 className="mt-4 font-display text-[clamp(3.4rem,9vw,6rem)] leading-[0.86] font-extrabold text-balance">
             {profile.name}
           </h1>
           <p className="mt-4 text-xl font-semibold">{profile.role[locale]}</p>
@@ -109,7 +57,7 @@ export function HangTag({ locale, t }: { locale: Locale; t: Dictionary["tag"] })
           {/* Perforation: where the stub would tear off. */}
           <div aria-hidden="true" className="my-5 border-t-2 border-dashed border-primary-foreground/35" />
 
-          <p className="font-mono text-xs tracking-wider uppercase">{t.graduates}</p>
+          <p className="font-mono text-xs tracking-wider uppercase">{t.available}</p>
           <div className="mt-5 flex flex-wrap gap-2">
             <a href="#catalogue" className={buttonVariants({ variant: "tag", size: "lg" })}>
               {t.viewCatalogue}

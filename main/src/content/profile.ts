@@ -8,7 +8,6 @@ export const profile = {
   stack: ["TypeScript", "React", "Next.js", "Java", "Spring Boot"],
   email: "tiebevaes@gmail.com",
   location: { nl: "2660 Hoboken, België", en: "2660 Hoboken, Belgium" } satisfies Localized,
-  timeZone: "Europe/Brussels",
   links: {
     github: "https://github.com/Tiebe-Vaes",
     githubUser: "Tiebe-Vaes",

@@ -38,8 +38,7 @@ export async function renderOgCard() {
             fontFamily: "Archivo",
           }}
         >
-          <div style={{ fontSize: 24, letterSpacing: 3 }}>ART. TV-2027</div>
-          <div style={{ fontFamily: "Archivo Display", fontSize: 128, lineHeight: 0.9, marginTop: 28, letterSpacing: -2 }}>
+          <div style={{ fontFamily: "Archivo Display", fontSize: 128, lineHeight: 0.9, letterSpacing: -2 }}>
             Tiebe Vaes
           </div>
           <div style={{ fontSize: 40, marginTop: 24 }}>Full-stack developer</div>

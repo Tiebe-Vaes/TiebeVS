@@ -11,8 +11,8 @@ export const projects: Project[] = [
     years: "2025 – 2026",
     team: { nl: "AP-teamproject voor GO! scholen", en: "AP team project for GO! schools" },
     summary: {
-      nl: "Bibliotheekplatform voor scholen met Smartschool-login, uitleenbeheer, beoordelingen en aanbevelingen over meerdere campussen.",
-      en: "Library platform for schools with Smartschool login, lending management, reviews and recommendations across multiple campuses.",
+      nl: "Bibliotheekplatform voor scholen. Smartschool-login, uitleningen, beoordelingen en aanbevelingen over meerdere campussen.",
+      en: "Library platform for schools. Smartschool sign-in, lending, reviews and recommendations across campuses.",
     },
     details: {
       nl: "GO!SmartLib combineert een gedeelde boekencatalogus, de volledige uitleenflow, sociale leesfeatures en aanbevelingen achter één responsieve webinterface. Inloggen verloopt via Smartschool OAuth 2.0 met stateless JWT's en vier rollen (leerling, leerkracht, admin, super admin), met strikte data-isolatie per school. De GitLab-repo is afgeschermd.",
@@ -35,8 +35,8 @@ export const projects: Project[] = [
     years: "2026 – 2027",
     team: { nl: "AP-teamproject, team van 4", en: "AP team project, team of 4" },
     summary: {
-      nl: "App om clubwedstrijden van Antwerp BMX te draaien: inschrijven, MOTO's samenstellen, starthek, finishregistratie en klassementen.",
-      en: "App to run Antwerp BMX club races: registration, building MOTOs, start gate, finish registration and standings.",
+      nl: "Wedstrijdbeheer voor Antwerp BMX: inschrijvingen, MOTO's, starthek, finish en klassementen.",
+      en: "Race management for Antwerp BMX: registration, MOTOs, start gate, finish and standings.",
     },
     details: {
       nl: "Antwerp BMX (±140 leden, riders van 5 tot 65 jaar) organiseert clubwedstrijden met 80 tot 500 riders en elke minuut een start. Vandaag loopt dat via Google Forms, een eigen tool en papier. De app vervangt die keten: accounts voor ouders en riders, verzekeringscontrole, rollen per wedstrijd (jury, parc fermé, starthek, finish, speaker) en traceerbare correcties. Een React-frontend met MUI werkt op kioskschermen langs de baan en op desktop; een Spring Boot-backend (Java 21) met PostgreSQL bewaakt de score- en knock-outlogica. Het live klassement komt binnen via WebSocket, en als PWA houdt de app een offline cache bij voor parc fermé. De opzet: tests met JUnit 5 en Testcontainers, uitrol met Docker en GitLab CI. Loopt in vijf sprints tot de eindpresentatie in januari 2027.",
@@ -54,8 +54,8 @@ export const projects: Project[] = [
     years: "2026",
     team: { nl: "Team van 4, Tectonic Hackathon 2026", en: "Team of 4, Tectonic Hackathon 2026" },
     summary: {
-      nl: "Trust layer voor versnipperde bedrijfskennis: vergelijkt documenten, geeft elke bron een score en wijst bij tegenspraak de juiste expert aan.",
-      en: "Trust layer for scattered company knowledge: compares documents, scores every source and points to the right expert when sources disagree.",
+      nl: "Trust layer voor bedrijfskennis. Vergelijkt documenten, scoort bronnen en wijst bij tegenspraak een expert aan.",
+      en: "Trust layer for company knowledge. Compares documents, scores sources and routes conflicts to an expert.",
     },
     details: {
       nl: "Gebouwd op de Tectonic Hackathon 2026 voor de case van SD Worx: hoe maak je versnipperde kennis vindbaar, betrouwbaar en deelbaar? Een consultant kiest bronnen, Ripple scoort ze op recentheid, autoriteit en tegenstrijdigheden. Is de beste score te laag, dan vraag je een expert om één feit te bevestigen en worden alle scores herrekend. Alleen projectleden zien een project.",
@@ -74,8 +74,8 @@ export const projects: Project[] = [
     years: "2026",
     team: { nl: "AP-team van 5", en: "AP team of 5" },
     summary: {
-      nl: "Architectuur-case voor een platform om samen reizen te plannen: modulaire monoliet, C4-modellen, ADR's en vijf proof-of-concepts.",
-      en: "Architecture case for a platform to plan trips together: modular monolith, C4 models, ADRs and five proofs of concept.",
+      nl: "Architectuurcase voor een platform om samen reizen te plannen. Modulaire monoliet, C4, ADR's en vijf proof-of-concepts.",
+      en: "Architecture case for a group trip-planning platform. Modular monolith, C4, ADRs and five proofs of concept.",
     },
     details: {
       nl: "Een platform waarmee vrienden samen reizen plannen met gedeelde budgetten, activiteiten en koppelingen met externe reisproviders. Gekozen stijl: een modulaire monoliet in Node.js, met ACID-transacties voor gedeelde budgetten en duidelijke modulegrenzen richting microservices. Uitgewerkt met zeven kwaliteitsattributen, een C4-model in Structurizr, zes ADR's (MADR) en vijf deploybare proof-of-concepts op Docker Swarm.",
@@ -97,8 +97,8 @@ export const projects: Project[] = [
     category: { nl: "Mobiele app", en: "Mobile app" },
     status: "shipped",
     summary: {
-      nl: "Verhuurapp waarmee buren toestellen en gereedschap uitlenen, met zoeken op kaart, boekingen en beoordelingen.",
-      en: "Rental app for neighbours to lend out appliances and tools, with map search, bookings and reviews.",
+      nl: "Buren lenen elkaar toestellen en gereedschap. Zoeken op kaart, boekingen en beoordelingen.",
+      en: "Neighbours lend each other appliances and tools. Map search, bookings and reviews.",
     },
     details: {
       nl: "Eigenaars plaatsen items met foto, prijs, categorie en een beschikbaarheidskalender. Huurders zoeken items in de buurt via een lijst of een interactieve Google Map, boeken de dagen die ze nodig hebben en laten achteraf een beoordeling achter. Realtime synchronisatie via Firestore, zodat boekingen meteen bij iedereen verschijnen.",
@@ -117,8 +117,8 @@ export const projects: Project[] = [
     status: "shipped",
     years: "2026",
     summary: {
-      nl: "App voor kartracers (RedLine): circuits bekijken, races aanmaken, een plek reserveren en live chatten met de deelnemers.",
-      en: "App for kart racers (RedLine): browse tracks, create races, reserve a spot and chat live with the participants.",
+      nl: "App voor kartracers (RedLine). Circuits, races, reservaties en live chat.",
+      en: "App for kart racers (RedLine). Tracks, races, bookings and live chat.",
     },
     details: {
       nl: "Je bekijkt beschikbare circuits, maakt zelf races aan op een circuit en reserveert een plek. Elke race heeft een eigen live chatroom zodat deelnemers kunnen afspreken, en je kunt circuits en races beoordelen. Authenticatie en data via Firebase Auth en Firestore.",
@@ -136,8 +136,8 @@ export const projects: Project[] = [
     category: { nl: "Browsergame", en: "Browser game" },
     status: "shipped",
     summary: {
-      nl: "Cozy theewinkelgame: zet thee voor kat-klanten, verdien fooien en ontgrendel nieuwe koppen en theesoorten.",
-      en: "Cozy tea-shop game: brew tea for cat customers, earn tips and unlock new cups and tea types.",
+      nl: "Cozy theewinkelgame. Thee zetten voor kat-klanten, fooien verdienen, nieuwe theesoorten ontgrendelen.",
+      en: "Cozy tea-shop game. Brew tea for cat customers, earn tips, unlock new teas.",
     },
     details: {
       nl: "Lees de wens in de tekstballon van elke kat en zet de juiste thee met de juiste kop, temperatuur en extra's. Een perfecte match levert een fooi op. Werk de wachtrij af, stijg in niveau, ontgrendel zeldzamere theesoorten en beheer je tuin om je voorraad aan te vullen. Gebouwd met React via CDN, zonder buildstap.",
@@ -157,8 +157,8 @@ export const projects: Project[] = [
     status: "shipped",
     years: "2025 – 2026",
     summary: {
-      nl: "2D-platformer: niveaus doorlopen, spikes en tornado's ontwijken en edelstenen verzamelen.",
-      en: "2D platformer: clear levels, dodge spikes and tornadoes and collect gems.",
+      nl: "2D-platformer. Niveaus, spikes, tornado's en edelstenen.",
+      en: "2D platformer. Levels, spikes, tornadoes and gems.",
     },
     details: {
       nl: "Gebouwd met C# en MonoGame op .NET 9. Eigen animaties, een systeem voor de spelfases en factories voor de obstakels. De moeilijkheid stijgt per niveau.",

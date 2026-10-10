@@ -19,8 +19,8 @@ export const playing: PlayingItem[] = [
     name: "Claude Code",
     kind: { nl: "AI-codeeragent", en: "AI coding agent" },
     blurb: {
-      nl: "Mijn dagelijkse pair programmer in de terminal. Ik plan, bouw en review er hele features mee, deze site inbegrepen.",
-      en: "My daily pair programmer in the terminal. I plan, build and review whole features with it, this site included.",
+      nl: "Dagelijkse pair programmer in de terminal. Plannen, bouwen en reviewen, ook voor deze site.",
+      en: "Daily pair programmer in the terminal. Planning, building and reviewing, this site included.",
     },
     links: [{ label: "Claude Code", href: "https://code.claude.com/docs/en/overview" }],
     figure: "Terminal",
@@ -29,8 +29,8 @@ export const playing: PlayingItem[] = [
     name: "Obsidian",
     kind: { nl: "Notities", en: "Notes" },
     blurb: {
-      nl: "Mijn second brain: notities, studie en projectcontext in gelinkte Markdown, die mijn agents ook kunnen lezen.",
-      en: "My second brain: notes, study material and project context in linked Markdown that my agents can read too.",
+      nl: "Second brain in gelinkte Markdown. Notities, studie en projectcontext, leesbaar voor mijn agents.",
+      en: "Second brain in linked Markdown. Notes, study and project context my agents can read.",
     },
     links: [{ label: "Obsidian", href: "https://obsidian.md" }],
     figure: "Hub",
@@ -39,8 +39,8 @@ export const playing: PlayingItem[] = [
     name: "Next.js + React",
     kind: { nl: "Framework", en: "Framework" },
     blurb: {
-      nl: "Mijn standaardstack voor het web. Deze portfolio draait op Next.js 16 met React 19.",
-      en: "My default stack for the web. This portfolio runs on Next.js 16 with React 19.",
+      nl: "Standaardstack voor het web. Deze site: Next.js 16 en React 19.",
+      en: "Default web stack. This site: Next.js 16 and React 19.",
     },
     links: [{ label: "Next.js", href: "https://nextjs.org" }],
     figure: "Stack",
@@ -49,8 +49,8 @@ export const playing: PlayingItem[] = [
     name: "Superpowers",
     kind: agentSkills,
     blurb: {
-      nl: "Een werkwijze voor agents: eerst brainstormen, dan een plan, dan test-first bouwen. Zo blijven grote taken beheersbaar.",
-      en: "A way of working for agents: brainstorm first, then a plan, then build test-first. It keeps big tasks manageable.",
+      nl: "Werkwijze voor agents: brainstormen, plannen, test-first bouwen.",
+      en: "Agent workflow: brainstorm, plan, build test-first.",
     },
     links: [{ label: "obra/superpowers", href: "https://github.com/obra/superpowers" }],
     figure: "Rebuild",
@@ -59,8 +59,8 @@ export const playing: PlayingItem[] = [
     name: "Matt Pocock skills",
     kind: agentSkills,
     blurb: {
-      nl: "Skills om een plan kritisch te laten bevragen, er een spec en tickets van te maken en test-first te bouwen.",
-      en: "Skills that grill a plan, turn it into a spec and tickets, and build it test-first.",
+      nl: "Plannen grillen, spec en tickets schrijven, test-first bouwen.",
+      en: "Grill the plan, write the spec and tickets, build test-first.",
     },
     links: [{ label: "mattpocock/skills", href: "https://github.com/mattpocock/skills" }],
     figure: "Settle",
@@ -69,8 +69,8 @@ export const playing: PlayingItem[] = [
     name: "Impeccable",
     kind: { nl: "Design-skill", en: "Design skill" },
     blurb: {
-      nl: "Design-reviews en afwerking voor interfaces. Deze site ging er sectie per sectie door.",
-      en: "Design reviews and polish for interfaces. This site went through it section by section.",
+      nl: "Design-review en afwerking. Elke sectie van deze site ging erdoor.",
+      en: "Design review and polish. Every section of this site went through it.",
     },
     links: [{ label: "pbakaus/impeccable", href: "https://github.com/pbakaus/impeccable" }],
     figure: "Exploded",
@@ -79,8 +79,8 @@ export const playing: PlayingItem[] = [
     name: "Caveman + Ponytail",
     kind: agentSkills,
     blurb: {
-      nl: "Caveman houdt de antwoorden van een agent kort, Ponytail houdt zijn code klein. Minder tokens, minder code.",
-      en: "Caveman keeps an agent's answers short, Ponytail keeps its code small. Fewer tokens, less code.",
+      nl: "Kortere antwoorden, kleinere code.",
+      en: "Shorter answers, smaller code.",
     },
     links: [
       { label: "caveman", href: "https://github.com/JuliusBrussee/caveman" },
