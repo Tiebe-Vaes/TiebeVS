@@ -32,7 +32,6 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-line: var(--line);
-  --color-shipped: var(--shipped);
   --color-tag-ink: var(--tag-ink);
   --color-contour: var(--contour);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -64,7 +63,7 @@
 
 /* Fjord & topo map. Light: topographic map paper with fjord ink, fjord-blue
    lines and an amber hang tag. Dark: fjord night with mist lines, the same
-   amber and aurora green for shipped work. */
+   amber and an aurora-green focus ring. */
 :root {
   --background: oklch(0.967 0.005 160);
   --foreground: oklch(0.235 0.035 245);
@@ -86,7 +85,6 @@
   --ring: oklch(0.5 0.13 245);
   --line: oklch(0.56 0.13 245);
   --contour: oklch(0.8 0.035 230);
-  --shipped: oklch(0.5 0.11 160);
   /* Amber for text on the paper ground (the tag amber itself is too light for small text). */
   --tag-ink: oklch(0.5 0.11 70);
   --radius: 0.25rem;
@@ -141,7 +139,6 @@
   --ring: oklch(0.86 0.16 160);
   --line: oklch(0.7 0.06 235);
   --contour: oklch(0.38 0.05 240);
-  --shipped: oklch(0.86 0.16 160);
   --tag-ink: oklch(0.84 0.14 80);
 
   --chart-2: oklch(0.7 0.06 235);
@@ -225,13 +222,9 @@
     background-size: 14px 14px;
     background-position: -1px -1px;
   }
-  /* Sewn label (shipped) and basted label (in development). */
+  /* Sewn label: a dashed stitch just inside the edge. */
   .stitch-sewn {
     outline: 1.5px dashed currentColor;
-    outline-offset: -5px;
-  }
-  .stitch-basted {
-    outline: 2px dotted currentColor;
     outline-offset: -5px;
   }
   .tabular {

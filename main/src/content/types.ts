@@ -3,8 +3,6 @@ export type Locale = (typeof locales)[number]
 
 export type Localized = Record<Locale, string>
 
-export type ProjectStatus = "shipped" | "in-development"
-
 export type ProjectKind = "web" | "mobile" | "other"
 
 export type Project = {
@@ -14,7 +12,6 @@ export type Project = {
   name: string
   kind: ProjectKind
   category: Localized
-  status: ProjectStatus
   years?: string
   team?: Localized
   summary: Localized

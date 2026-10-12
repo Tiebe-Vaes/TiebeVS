@@ -7,7 +7,6 @@ export const projects: Project[] = [
     kind: "web",
     name: "GO!SmartLib",
     category: { nl: "Full-stack webapp · klantproject", en: "Full-stack web app · client project" },
-    status: "shipped",
     years: "2025 – 2026",
     team: { nl: "AP-teamproject voor GO! scholen", en: "AP team project for GO! schools" },
     summary: {
@@ -31,7 +30,6 @@ export const projects: Project[] = [
     kind: "web",
     name: "Antwerp BMX Raceday",
     category: { nl: "Wedstrijdapp · klantproject", en: "Race-day app · client project" },
-    status: "in-development",
     years: "2026 – 2027",
     team: { nl: "AP-teamproject, team van 4", en: "AP team project, team of 4" },
     summary: {
@@ -50,7 +48,6 @@ export const projects: Project[] = [
     kind: "web",
     name: "Ripple",
     category: { nl: "Hackathon · SD Worx-case", en: "Hackathon · SD Worx case" },
-    status: "shipped",
     years: "2026",
     team: { nl: "Team van 4, Tectonic Hackathon 2026", en: "Team of 4, Tectonic Hackathon 2026" },
     summary: {
@@ -70,7 +67,6 @@ export const projects: Project[] = [
     kind: "web",
     name: "Travel Planning Platform",
     category: { nl: "Software-architectuur", en: "Software architecture" },
-    status: "shipped",
     years: "2026",
     team: { nl: "AP-team van 5", en: "AP team of 5" },
     summary: {
@@ -95,7 +91,6 @@ export const projects: Project[] = [
     kind: "mobile",
     name: "LocalLend",
     category: { nl: "Mobiele app", en: "Mobile app" },
-    status: "shipped",
     summary: {
       nl: "Buren lenen elkaar toestellen en gereedschap. Zoeken op kaart, boekingen en beoordelingen.",
       en: "Neighbours lend each other appliances and tools. Map search, bookings and reviews.",
@@ -114,7 +109,6 @@ export const projects: Project[] = [
     kind: "mobile",
     name: "Kart Race App",
     category: { nl: "Mobiele app", en: "Mobile app" },
-    status: "shipped",
     years: "2026",
     summary: {
       nl: "App voor kartracers (RedLine). Circuits, races, reservaties en live chat.",
@@ -134,7 +128,6 @@ export const projects: Project[] = [
     kind: "other",
     name: "PetalPurrs",
     category: { nl: "Browsergame", en: "Browser game" },
-    status: "shipped",
     summary: {
       nl: "Cozy theewinkelgame. Thee zetten voor kat-klanten, fooien verdienen, nieuwe theesoorten ontgrendelen.",
       en: "Cozy tea-shop game. Brew tea for cat customers, earn tips, unlock new teas.",
@@ -154,7 +147,6 @@ export const projects: Project[] = [
     kind: "other",
     name: "Mono",
     category: { nl: "2D-platformer", en: "2D platformer" },
-    status: "shipped",
     years: "2025 – 2026",
     summary: {
       nl: "2D-platformer. Niveaus, spikes, tornado's en edelstenen.",
@@ -174,7 +166,6 @@ export const projects: Project[] = [
     kind: "other",
     name: "Study Countdown",
     category: { nl: "Desktopapp", en: "Desktop app" },
-    status: "shipped",
     summary: {
       nl: "Desktopapp die aftelt naar deadlines en examens.",
       en: "Desktop app that counts down to deadlines and exams.",

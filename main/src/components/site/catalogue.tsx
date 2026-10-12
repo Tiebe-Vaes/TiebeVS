@@ -7,7 +7,6 @@ import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project, ProjectKind } from "@/content/types"
 import { useCatalogue } from "./catalogue-provider"
 import { SplitWords } from "./reveal"
-import { StatusLabel } from "./status-label"
 
 type Filter = "all" | ProjectKind
 const FILTERS: Filter[] = ["all", "web", "mobile", "other"]
@@ -66,7 +65,7 @@ export function Catalogue({
               <button
                 type="button"
                 onClick={() => open(project.slug)}
-                className="group grid w-full grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-3 py-2 text-left outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring"
+                className="group grid w-full grid-cols-[2.5rem_1fr] items-baseline gap-x-3 py-2 text-left outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring"
               >
                 <span className="font-mono text-xs text-muted-foreground tabular">{project.artNo}</span>
                 <span className="flex min-w-0 flex-col">
@@ -75,7 +74,6 @@ export function Catalogue({
                   </span>
                   <span className="truncate text-xs text-muted-foreground">{project.category[locale]}</span>
                 </span>
-                <StatusLabel status={project.status} labels={t} className="px-1.5 py-1 text-[10px]" />
               </button>
             </li>
           ))}

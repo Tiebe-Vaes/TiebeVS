@@ -15,7 +15,6 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project } from "@/content/types"
 import { Plate } from "./plate"
-import { StatusLabel } from "./status-label"
 import { TechIcon } from "./tech-icon"
 
 export function SpecSheet({
@@ -49,13 +48,6 @@ export function SpecSheet({
               <p className="text-base leading-relaxed text-pretty">{project.details[locale]}</p>
 
               <dl className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-2.5 border-t pt-4 text-sm">
-                <dt className="font-mono text-xs text-muted-foreground uppercase">{sheet.status}</dt>
-                <dd>
-                  <StatusLabel
-                    status={project.status}
-                    labels={{ shipped: catalogue.shipped, inDevelopment: catalogue.inDevelopment }}
-                  />
-                </dd>
                 {project.years ? (
                   <>
                     <dt className="font-mono text-xs text-muted-foreground uppercase">{sheet.years}</dt>
