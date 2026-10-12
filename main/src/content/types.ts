@@ -24,8 +24,11 @@ export type LibraryFigure =
   | "Phone"
   | "Lockers"
 
+/** Figures drawn for this site in the hairline style (components/site/figures). */
+export type OwnFigure = "StartGate" | "Teapot"
+
 /** Every line figure on the site: one per project and one per "Werkwijze" card. */
-export type FigureName = LibraryFigure
+export type FigureName = LibraryFigure | OwnFigure
 
 export type Project = {
   /** Stable catalogue number, also the keyboard shortcut (1 to 9). */

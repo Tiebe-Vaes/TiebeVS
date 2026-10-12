@@ -28,7 +28,7 @@ export const projects: Project[] = [
   {
     artNo: "02",
     slug: "antwerp-bmx-raceday",
-    figure: "Plot",
+    figure: "StartGate",
     kind: "web",
     name: "Antwerp BMX Raceday",
     category: { nl: "Wedstrijdapp · klantproject", en: "Race-day app · client project" },
@@ -131,7 +131,7 @@ export const projects: Project[] = [
   {
     artNo: "07",
     slug: "petalpurrs",
-    figure: "Basket",
+    figure: "Teapot",
     kind: "other",
     name: "PetalPurrs",
     category: { nl: "Browsergame", en: "Browser game" },
