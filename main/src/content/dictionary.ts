@@ -42,7 +42,6 @@ const nl = {
     intro: "Negen projecten: klantwerk en eigen experimenten.",
     filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en desktop" },
     filterLabel: "Filter op type",
-    drawingLabel: "Technische tekening van {name}",
     stackLabel: "Technologieën",
     figures: {
       gosmartlib: "Kaartenbak met laden die openschuiven",
@@ -67,6 +66,7 @@ const nl = {
     noRepo: "Privé-repository",
     prev: "Vorige afbeelding",
     next: "Volgende afbeelding",
+    images: "Beelden",
   },
   playing: {
     title: "Werkwijze",
@@ -155,7 +155,6 @@ const en: Dictionary = {
     intro: "Nine projects: client work and personal experiments.",
     filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and desktop" },
     filterLabel: "Filter by type",
-    drawingLabel: "Technical drawing of {name}",
     stackLabel: "Technologies",
     figures: {
       gosmartlib: "Card catalogue with drawers that slide out",
@@ -180,6 +179,7 @@ const en: Dictionary = {
     noRepo: "Private repository",
     prev: "Previous image",
     next: "Next image",
+    images: "Images",
   },
   playing: {
     title: "Workflow",

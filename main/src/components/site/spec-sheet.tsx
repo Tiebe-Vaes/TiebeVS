@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import { ArrowUpRightIcon, LockIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -14,8 +16,12 @@ import {
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project } from "@/content/types"
-import { Plate } from "./plate"
 import { TechIcon } from "./tech-icon"
+
+const HairlineFigure = dynamic(() => import("./hairline-figure"), {
+  ssr: false,
+  loading: () => <div className="aspect-[5/4] w-full" />,
+})
 
 export function SpecSheet({
   project,
@@ -34,7 +40,7 @@ export function SpecSheet({
       {project ? (
         <DialogContent closeLabel={sheet.close} className="max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto p-0 sm:max-w-4xl">
           <div className="grid md:grid-cols-[1.15fr_1fr]">
-            <Gallery project={project} drawingLabel={catalogue.drawingLabel} sheet={sheet} />
+            <FigurePanel project={project} label={(catalogue.figures as Record<string, string>)[project.slug]} />
 
             <div className="flex flex-col gap-5 p-5 md:p-7">
               <div className="flex flex-col gap-2">
@@ -112,51 +118,52 @@ export function SpecSheet({
               </div>
             </div>
           </div>
+          {project.images?.length ? <Gallery project={project} images={project.images} sheet={sheet} /> : null}
         </DialogContent>
       ) : null}
     </Dialog>
   )
 }
 
-function Gallery({
-  project,
-  drawingLabel,
-  sheet,
-}: {
-  project: Project
-  drawingLabel: string
-  sheet: Dictionary["sheet"]
-}) {
-  const images = project.images ?? []
-  if (images.length <= 1) {
-    return (
-      <Plate
-        project={project}
-        drawingLabel={drawingLabel}
-        sizes="(min-width: 768px) 480px, 100vw"
-        className="aspect-[4/3] rounded-none border-0 border-b md:aspect-auto md:min-h-full md:border-r md:border-b-0"
-      />
-    )
-  }
+/** The project's figure, first thing in the sheet; screenshots come below. */
+function FigurePanel({ project, label }: { project: Project; label: string }) {
+  const [reading, setReading] = useState("")
   return (
-    <div className="relative border-b bg-muted md:border-r md:border-b-0">
-      <Carousel opts={{ loop: true }} className="h-full">
+    <div className="hairline-plate flex flex-col justify-center border-b bg-card md:border-r md:border-b-0">
+      <div className="flex items-baseline justify-between gap-4 px-5 pt-4 font-mono text-xs text-muted-foreground uppercase tabular">
+        <span>Fig. {project.artNo}</span>
+        <span aria-hidden="true">{reading}</span>
+      </div>
+      <HairlineFigure name={project.figure} label={label} onRead={setReading} />
+    </div>
+  )
+}
+
+function Gallery({ project, images, sheet }: { project: Project; images: string[]; sheet: Dictionary["sheet"] }) {
+  return (
+    <section aria-label={sheet.images} className="flex flex-col gap-3 border-t p-5 md:p-7">
+      <h3 className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{sheet.images}</h3>
+      <Carousel opts={{ loop: images.length > 1 }} className="rounded-sm border bg-muted">
         <CarouselContent className="ml-0">
           {images.map((src, index) => (
-            <CarouselItem key={src} className="relative aspect-[4/3] pl-0 md:aspect-[4/5]">
+            <CarouselItem key={src} className="relative aspect-[16/10] pl-0">
               <Image
                 src={src}
                 alt={`${project.name} ${index + 1}/${images.length}`}
                 fill
-                sizes="(min-width: 768px) 480px, 100vw"
+                sizes="(min-width: 896px) 832px, 100vw"
                 className="object-contain"
               />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious aria-label={sheet.prev} className="left-3" />
-        <CarouselNext aria-label={sheet.next} className="right-3" />
+        {images.length > 1 ? (
+          <>
+            <CarouselPrevious aria-label={sheet.prev} className="left-3" />
+            <CarouselNext aria-label={sheet.next} className="right-3" />
+          </>
+        ) : null}
       </Carousel>
-    </div>
+    </section>
   )
 }
