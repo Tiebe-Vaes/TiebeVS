@@ -253,7 +253,7 @@
     width: 100%;
     height: 100%;
   }
-  [data-figure] :where(path, polygon, polyline, ellipse, line, circle) {
+  [data-figure] :where(path, polygon, polyline, ellipse, line, circle, rect) {
     fill: var(--hairline-plate);
     stroke: var(--hairline-mid);
     stroke-width: var(--hairline-stroke);

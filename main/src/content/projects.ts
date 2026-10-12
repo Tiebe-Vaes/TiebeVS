@@ -92,7 +92,7 @@ export const projects: Project[] = [
   {
     artNo: "05",
     slug: "locallend",
-    figure: "Lockers",
+    figure: "Lend",
     kind: "mobile",
     name: "LocalLend",
     category: { nl: "Mobiele app", en: "Mobile app" },

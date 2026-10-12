@@ -18,14 +18,9 @@ export type LibraryFigure =
   | "Sieve"
   | "Exploded"
   | "Phosphor"
-  | "Plot"
-  | "Basket"
-  | "Laptop"
-  | "Phone"
-  | "Lockers"
 
 /** Figures drawn for this site in the hairline style (components/site/figures). */
-export type OwnFigure = "StartGate" | "Teapot" | "FlipClock" | "Kart"
+export type OwnFigure = "StartGate" | "Teapot" | "FlipClock" | "Kart" | "Lend"
 
 /** Every line figure on the site: one per project and one per "Werkwijze" card. */
 export type FigureName = LibraryFigure | OwnFigure

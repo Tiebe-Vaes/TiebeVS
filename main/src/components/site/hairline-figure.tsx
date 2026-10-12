@@ -1,17 +1,12 @@
 "use client"
 
 import {
-  Basket,
   Drawer,
   Exploded,
   Format,
   Hub,
-  Laptop,
-  Lockers,
   Loupe,
-  Phone,
   Phosphor,
-  Plot,
   Rebuild,
   Settle,
   Sieve,
@@ -21,21 +16,17 @@ import {
 import type { FigureName, OwnFigure } from "@/content/types"
 import FlipClock from "./figures/flip-clock"
 import Kart from "./figures/kart"
+import Lend from "./figures/lend"
 import StartGate from "./figures/start-gate"
 import Teapot from "./figures/teapot"
 
 const FIGURES = {
-  Basket,
   Drawer,
   Exploded,
   Format,
   Hub,
-  Laptop,
-  Lockers,
   Loupe,
-  Phone,
   Phosphor,
-  Plot,
   Rebuild,
   Settle,
   Sieve,
@@ -43,7 +34,7 @@ const FIGURES = {
   Terminal,
 }
 
-const OWN: Record<OwnFigure, typeof StartGate> = { StartGate, Teapot, FlipClock, Kart }
+const OWN: Record<OwnFigure, typeof StartGate> = { StartGate, Teapot, FlipClock, Kart, Lend }
 
 const isOwn = (name: FigureName): name is OwnFigure => name in OWN
 
