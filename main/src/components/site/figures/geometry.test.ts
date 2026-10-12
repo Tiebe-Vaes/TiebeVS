@@ -3,11 +3,13 @@ import assert from "node:assert/strict"
 import {
   box,
   countdownReadout,
+  digitSegments,
   gateReadout,
   isSettled,
   iso,
   lendReadout,
   pourReadout,
+  prism,
   springStep,
   steerReadout,
 } from "./geometry.ts"
@@ -28,6 +30,21 @@ test("box returns three faces of four points each", () => {
   for (const face of [faces.top, faces.left, faces.right]) {
     assert.equal(face.trim().split(/\s+/).length, 4)
   }
+})
+
+test("prism shows the top and only the sides that face the viewer", () => {
+  const square = prism([[0, 0], [10, 0], [10, 10], [0, 10]], 0, 5)
+  assert.equal(square.top.trim().split(/\s+/).length, 4)
+  assert.equal(square.sides.length, 2)
+  const diamond = prism([[0, -7], [7, 0], [0, 7], [-7, 0]], 0, 5)
+  assert.equal(diamond.sides.length, 1)
+})
+
+test("digitSegments lists the lit segments of a seven-segment digit", () => {
+  assert.equal(digitSegments(8), "abcdefg")
+  assert.equal(digitSegments(1), "bc")
+  assert.equal(digitSegments(0), "abcdef")
+  assert.equal(digitSegments(4), "bcfg")
 })
 
 test("springStep settles on the target within two seconds without big overshoot", () => {

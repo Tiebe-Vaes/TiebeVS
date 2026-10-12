@@ -19,6 +19,8 @@ import {
   Terminal,
 } from "@lucasmarkes/hairline/react"
 import type { FigureName, OwnFigure } from "@/content/types"
+import FlipClock from "./figures/flip-clock"
+import Kart from "./figures/kart"
 import StartGate from "./figures/start-gate"
 import Teapot from "./figures/teapot"
 
@@ -41,7 +43,7 @@ const FIGURES = {
   Terminal,
 }
 
-const OWN: Record<OwnFigure, typeof StartGate> = { StartGate, Teapot }
+const OWN: Record<OwnFigure, typeof StartGate> = { StartGate, Teapot, FlipClock, Kart }
 
 const isOwn = (name: FigureName): name is OwnFigure => name in OWN
 

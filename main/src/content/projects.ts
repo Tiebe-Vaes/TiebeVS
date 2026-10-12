@@ -111,7 +111,7 @@ export const projects: Project[] = [
   {
     artNo: "06",
     slug: "kart-race-app",
-    figure: "Phone",
+    figure: "Kart",
     kind: "mobile",
     name: "Kart Race App",
     category: { nl: "Mobiele app", en: "Mobile app" },
@@ -171,7 +171,7 @@ export const projects: Project[] = [
   {
     artNo: "09",
     slug: "study-countdown",
-    figure: "Laptop",
+    figure: "FlipClock",
     kind: "other",
     name: "Study Countdown",
     category: { nl: "Desktopapp", en: "Desktop app" },

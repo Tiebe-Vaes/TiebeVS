@@ -26,6 +26,36 @@ export function box(x: number, y: number, z: number, w: number, d: number, h: nu
   }
 }
 
+/**
+ * An upright prism over a floor outline (counter-clockwise in x/y, seen from above): its top and
+ * the side faces that turn towards the viewer (+x/+y), painted after anything behind them.
+ */
+export function prism(outline: [number, number][], z: number, h: number) {
+  const sides: string[] = []
+  outline.forEach(([x1, y1], i) => {
+    const [x2, y2] = outline[(i + 1) % outline.length]
+    // Outward normal of a counter-clockwise edge is (dy, −dx); the viewer looks along −(1, 1).
+    if (y2 - y1 - (x2 - x1) > 1e-9) sides.push(pts([x1, y1, z], [x2, y2, z], [x2, y2, z + h], [x1, y1, z + h]))
+  })
+  return { top: pts(...outline.map(([x, y]): Point3 => [x, y, z + h])), sides }
+}
+
+/** Rotate floor points about (cx, cy) by `deg`, counter-clockwise seen from above. */
+export function turn(points: [number, number][], deg: number, cx: number, cy: number): [number, number][] {
+  const r = (deg * Math.PI) / 180
+  return points.map(([x, y]) => [
+    cx + (x - cx) * Math.cos(r) - (y - cy) * Math.sin(r),
+    cy + (x - cx) * Math.sin(r) + (y - cy) * Math.cos(r),
+  ])
+}
+
+const DIGITS = ["abcdef", "bc", "abdeg", "abcdg", "bcfg", "acdfg", "acdefg", "abc", "abcdefg", "abcdfg"]
+
+/** Lit segments of a seven-segment digit (a top, b top right, c bottom right, d bottom, e bottom left, f top left, g middle). */
+export function digitSegments(digit: number): string {
+  return DIGITS[digit]
+}
+
 export function clamp01(n: number): number {
   return Math.min(1, Math.max(0, n))
 }
