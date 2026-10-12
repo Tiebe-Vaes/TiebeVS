@@ -5,6 +5,28 @@ export type Localized = Record<Locale, string>
 
 export type ProjectKind = "web" | "mobile" | "other"
 
+/** Figures from @lucasmarkes/hairline that the site uses. */
+export type LibraryFigure =
+  | "Terminal"
+  | "Hub"
+  | "Stack"
+  | "Rebuild"
+  | "Settle"
+  | "Loupe"
+  | "Format"
+  | "Drawer"
+  | "Sieve"
+  | "Exploded"
+  | "Phosphor"
+  | "Plot"
+  | "Basket"
+  | "Laptop"
+  | "Phone"
+  | "Lockers"
+
+/** Every line figure on the site: one per project and one per "Werkwijze" card. */
+export type FigureName = LibraryFigure
+
 export type Project = {
   /** Stable catalogue number, also the keyboard shortcut (1 to 9). */
   artNo: string
@@ -19,7 +41,9 @@ export type Project = {
   /** Tiebe's own part, shown on team projects. */
   role?: Localized
   tech: string[]
-  /** Screenshots in /public. Without them the catalogue shows the project's technical drawing. */
+  /** Line figure shown on the card and first in the spec sheet. */
+  figure: FigureName
+  /** Screenshots in /public, shown below the figure in the spec sheet. */
   images?: string[]
   repoUrl?: string
   liveUrl?: string

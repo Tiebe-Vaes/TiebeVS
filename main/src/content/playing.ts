@@ -1,7 +1,4 @@
-import type { Localized } from "./types"
-
-/** hairline figures used by the ranking; one per entry. */
-export type FigureName = "Terminal" | "Hub" | "Stack" | "Rebuild" | "Settle" | "Exploded" | "Format"
+import type { FigureName, Localized } from "./types"
 
 export type PlayingItem = {
   name: string
@@ -73,7 +70,7 @@ export const playing: PlayingItem[] = [
       en: "Design review and polish. Every section of this site went through it.",
     },
     links: [{ label: "pbakaus/impeccable", href: "https://github.com/pbakaus/impeccable" }],
-    figure: "Exploded",
+    figure: "Loupe",
   },
   {
     name: "Caveman + Ponytail",

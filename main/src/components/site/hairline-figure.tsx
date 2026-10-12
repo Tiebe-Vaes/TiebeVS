@@ -1,11 +1,45 @@
 "use client"
 
-import { Exploded, Format, Hub, Rebuild, Settle, Stack, Terminal } from "@lucasmarkes/hairline/react"
-import type { FigureName } from "@/content/playing"
+import {
+  Basket,
+  Drawer,
+  Exploded,
+  Format,
+  Hub,
+  Laptop,
+  Lockers,
+  Loupe,
+  Phone,
+  Phosphor,
+  Plot,
+  Rebuild,
+  Settle,
+  Sieve,
+  Stack,
+  Terminal,
+} from "@lucasmarkes/hairline/react"
+import type { FigureName } from "@/content/types"
 
-const FIGURES = { Exploded, Format, Hub, Rebuild, Settle, Stack, Terminal }
+const FIGURES = {
+  Basket,
+  Drawer,
+  Exploded,
+  Format,
+  Hub,
+  Laptop,
+  Lockers,
+  Loupe,
+  Phone,
+  Phosphor,
+  Plot,
+  Rebuild,
+  Settle,
+  Sieve,
+  Stack,
+  Terminal,
+}
 
-/** One hairline figure by name. Loaded on demand by the specimen cards, so the engine stays out of the main bundle. */
+/** One line figure by name. Loaded on demand by the cards, so the figure code stays out of the main bundle. */
 export default function HairlineFigure({
   name,
   label,

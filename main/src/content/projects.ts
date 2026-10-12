@@ -4,6 +4,7 @@ export const projects: Project[] = [
   {
     artNo: "01",
     slug: "gosmartlib",
+    figure: "Drawer",
     kind: "web",
     name: "GO!SmartLib",
     category: { nl: "Full-stack webapp · klantproject", en: "Full-stack web app · client project" },
@@ -27,6 +28,7 @@ export const projects: Project[] = [
   {
     artNo: "02",
     slug: "antwerp-bmx-raceday",
+    figure: "Plot",
     kind: "web",
     name: "Antwerp BMX Raceday",
     category: { nl: "Wedstrijdapp · klantproject", en: "Race-day app · client project" },
@@ -45,6 +47,7 @@ export const projects: Project[] = [
   {
     artNo: "03",
     slug: "ripple",
+    figure: "Sieve",
     kind: "web",
     name: "Ripple",
     category: { nl: "Hackathon · SD Worx-case", en: "Hackathon · SD Worx case" },
@@ -64,6 +67,7 @@ export const projects: Project[] = [
   {
     artNo: "04",
     slug: "travel-planning-architecture",
+    figure: "Exploded",
     kind: "web",
     name: "Travel Planning Platform",
     category: { nl: "Software-architectuur", en: "Software architecture" },
@@ -88,6 +92,7 @@ export const projects: Project[] = [
   {
     artNo: "05",
     slug: "locallend",
+    figure: "Lockers",
     kind: "mobile",
     name: "LocalLend",
     category: { nl: "Mobiele app", en: "Mobile app" },
@@ -106,6 +111,7 @@ export const projects: Project[] = [
   {
     artNo: "06",
     slug: "kart-race-app",
+    figure: "Phone",
     kind: "mobile",
     name: "Kart Race App",
     category: { nl: "Mobiele app", en: "Mobile app" },
@@ -125,6 +131,7 @@ export const projects: Project[] = [
   {
     artNo: "07",
     slug: "petalpurrs",
+    figure: "Basket",
     kind: "other",
     name: "PetalPurrs",
     category: { nl: "Browsergame", en: "Browser game" },
@@ -144,6 +151,7 @@ export const projects: Project[] = [
   {
     artNo: "08",
     slug: "mono",
+    figure: "Phosphor",
     kind: "other",
     name: "Mono",
     category: { nl: "2D-platformer", en: "2D platformer" },
@@ -163,6 +171,7 @@ export const projects: Project[] = [
   {
     artNo: "09",
     slug: "study-countdown",
+    figure: "Laptop",
     kind: "other",
     name: "Study Countdown",
     category: { nl: "Desktopapp", en: "Desktop app" },
