@@ -168,21 +168,4 @@ export const projects: Project[] = [
     images: ["/MONOSS1.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/Mono",
   },
-  {
-    artNo: "09",
-    slug: "study-countdown",
-    figure: "FlipClock",
-    kind: "other",
-    name: "Study Countdown",
-    category: { nl: "Desktopapp", en: "Desktop app" },
-    summary: {
-      nl: "Desktopapp die aftelt naar deadlines en examens.",
-      en: "Desktop app that counts down to deadlines and exams.",
-    },
-    details: {
-      nl: "Een eigen desktopapp die deadlines en examens bijhoudt en zichtbaar aftelt, gebouwd met Angular 20 en Electron.",
-      en: "A personal desktop app that tracks deadlines and exams and counts down to them, built with Angular 20 and Electron.",
-    },
-    tech: ["TypeScript", "Angular", "Electron"],
-  },
 ]

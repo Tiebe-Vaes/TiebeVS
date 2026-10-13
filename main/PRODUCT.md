@@ -51,7 +51,7 @@ Visitors come from profile links on desktop and phone. Content must match the Li
 ## Evidence on Hand
 
 - Screenshots: GO!SmartLib (`GSLSS*.png`), Kart Race App / RedLine (`Redline*.jpeg`), LocalLend (`LLSS*.png`), Mono (`MONOSS1.png`), PetalPurrs (`PPSS1.png`), Travel planning C4 diagrams (`c4-*.png`).
-- No screenshots yet for Antwerp BMX Raceday, Ripple or Study Countdown; their spec sheet shows only the figure. Do not fabricate screenshots.
+- No screenshots yet for Antwerp BMX Raceday or Ripple; their spec sheet shows only the figure. Do not fabricate screenshots.
 - Project facts: vault context notes (GoSmartLib, Antwerp BMX Raceday, Ripple, TravelTogether, Eigen projecten) and the descriptions from the previous site.
 - Interests on the route: Hoboken, AP Hogeschool, scouts (leader 2024–2026), maker lab (3D printers, laser cutters), photography, mountains/hiking, side projects and new technology, Oslo 2027.
 - Antwerp BMX Raceday stack (Stack A): React + TypeScript + MUI, Spring Boot (Java 21), PostgreSQL, WebSocket/STOMP, PWA, JUnit 5 + Testcontainers, Docker + GitLab CI.

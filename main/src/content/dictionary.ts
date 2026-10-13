@@ -39,7 +39,7 @@ const nl = {
   },
   catalogue: {
     title: "Projecten",
-    intro: "Negen projecten: klantwerk en eigen experimenten.",
+    intro: "Klantwerk, schoolprojecten en eigen experimenten.",
     filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en desktop" },
     filterLabel: "Filter op type",
     stackLabel: "Technologieën",
@@ -52,7 +52,6 @@ const nl = {
       "kart-race-app": "Kart op een bocht die je muis volgt",
       petalpurrs: "Theepot die een kopje vol schenkt",
       mono: "Pixelscherm dat een loop speelt",
-      "study-countdown": "Flipklok die de dagen aftelt",
     },
   },
   sheet: {
@@ -152,7 +151,7 @@ const en: Dictionary = {
   },
   catalogue: {
     title: "Projects",
-    intro: "Nine projects: client work and personal experiments.",
+    intro: "Client work, school projects and personal experiments.",
     filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and desktop" },
     filterLabel: "Filter by type",
     stackLabel: "Technologies",
@@ -165,7 +164,6 @@ const en: Dictionary = {
       "kart-race-app": "Kart on a bend that follows your pointer",
       petalpurrs: "Teapot pouring a cup",
       mono: "Pixel screen playing a loop",
-      "study-countdown": "Flip clock counting down the days",
     },
   },
   sheet: {

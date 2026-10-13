@@ -2,8 +2,6 @@ import { test } from "node:test"
 import assert from "node:assert/strict"
 import {
   box,
-  countdownReadout,
-  digitSegments,
   gateReadout,
   isSettled,
   iso,
@@ -40,13 +38,6 @@ test("prism shows the top and only the sides that face the viewer", () => {
   assert.equal(diamond.sides.length, 1)
 })
 
-test("digitSegments lists the lit segments of a seven-segment digit", () => {
-  assert.equal(digitSegments(8), "abcdefg")
-  assert.equal(digitSegments(1), "bc")
-  assert.equal(digitSegments(0), "abcdef")
-  assert.equal(digitSegments(4), "bcfg")
-})
-
 test("springStep settles on the target within two seconds without big overshoot", () => {
   let value = 0
   let velocity = 0
@@ -70,12 +61,6 @@ test("gateReadout", () => {
 test("pourReadout", () => {
   assert.equal(pourReadout(0), "pour 0%")
   assert.equal(pourReadout(0.374), "pour 37%")
-})
-
-test("countdownReadout", () => {
-  assert.equal(countdownReadout(0), "T−42d")
-  assert.equal(countdownReadout(1), "T−0d")
-  assert.equal(countdownReadout(0.5), "T−21d")
 })
 
 test("steerReadout", () => {

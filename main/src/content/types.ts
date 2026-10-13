@@ -20,7 +20,7 @@ export type LibraryFigure =
   | "Phosphor"
 
 /** Figures drawn for this site in the hairline style (components/site/figures). */
-export type OwnFigure = "StartGate" | "Teapot" | "FlipClock" | "Kart" | "Lend"
+export type OwnFigure = "StartGate" | "Teapot" | "Kart" | "Lend"
 
 /** Every line figure on the site: one per project and one per "Werkwijze" card. */
 export type FigureName = LibraryFigure | OwnFigure

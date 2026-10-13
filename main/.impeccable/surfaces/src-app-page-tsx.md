@@ -12,7 +12,7 @@ Audience and job: recruiters from LinkedIn, GitHub or Google decide in under a m
 Proof: curated projects with real descriptions and Tiebe's own part; every project as its own interactive line figure, screenshots only below it in the spec sheet. Real public GitHub activity.
 Constraints: see PRODUCT.md. No invented metrics, clients or quotes. No age. No tieboard. No cleaning-company website. No GitLab link. No phone number, no CV. No project is featured above the others. Reduced motion respected (no smooth scroll, no reveals, no Vanta, no tilt).
 Memorable moment: the topographic contours flowing behind the amber hang tag; walking the hiker along the ridge of interests; name letters that widen toward the pointer.
-Unresolved: screenshots for Antwerp BMX Raceday, Ripple and Study Countdown (Tiebe will provide). A new "favourite tech right now" showcase section is proposed, not built.
+Unresolved: screenshots for Antwerp BMX Raceday and Ripple (Tiebe will provide). A new "favourite tech right now" showcase section is proposed, not built.
 
 ## Direction contract
 

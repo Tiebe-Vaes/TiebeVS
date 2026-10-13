@@ -49,13 +49,6 @@ export function turn(points: [number, number][], deg: number, cx: number, cy: nu
   ])
 }
 
-const DIGITS = ["abcdef", "bc", "abdeg", "abcdg", "bcfg", "acdfg", "acdefg", "abc", "abcdefg", "abcdfg"]
-
-/** Lit segments of a seven-segment digit (a top, b top right, c bottom right, d bottom, e bottom left, f top left, g middle). */
-export function digitSegments(digit: number): string {
-  return DIGITS[digit]
-}
-
 export function clamp01(n: number): number {
   return Math.min(1, Math.max(0, n))
 }
@@ -83,16 +76,6 @@ export function gateReadout(v: number): string {
 
 export function pourReadout(v: number): string {
   return `pour ${Math.round(clamp01(v) * 100)}%`
-}
-
-export const COUNTDOWN_DAYS = 42
-
-export function countdownDays(v: number): number {
-  return Math.round(COUNTDOWN_DAYS * (1 - clamp01(v)))
-}
-
-export function countdownReadout(v: number): string {
-  return `T${MINUS}${countdownDays(v)}d`
 }
 
 /** Steering angle in degrees, −30 to +30, for a pointer value 0..1. */
