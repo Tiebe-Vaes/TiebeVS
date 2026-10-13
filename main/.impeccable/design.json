@@ -15,7 +15,6 @@
       "scree": { "role": "neutral", "displayName": "Scree", "canonical": "oklch(0.47 0.03 240)", "dark": "oklch(0.76 0.03 230)", "tonalRamp": ["oklch(0.15 0.02 240)", "oklch(0.25 0.025 240)", "oklch(0.36 0.03 240)", "oklch(0.47 0.03 240)", "oklch(0.58 0.03 240)", "oklch(0.7 0.03 235)", "oklch(0.83 0.02 230)", "oklch(0.95 0.01 230)"] },
       "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "oklch(0.87 0.014 220)", "dark": "oklch(1 0 0 / 12%)", "tonalRamp": ["oklch(0.15 0.01 220)", "oklch(0.3 0.01 220)", "oklch(0.45 0.01 220)", "oklch(0.6 0.012 220)", "oklch(0.72 0.013 220)", "oklch(0.87 0.014 220)", "oklch(0.93 0.01 220)", "oklch(0.97 0.005 220)"] },
       "muted": { "role": "neutral", "displayName": "Muted", "canonical": "oklch(0.935 0.008 220)", "dark": "oklch(0.3 0.045 245)", "tonalRamp": ["oklch(0.15 0.008 220)", "oklch(0.3 0.008 220)", "oklch(0.45 0.008 220)", "oklch(0.6 0.008 220)", "oklch(0.75 0.008 220)", "oklch(0.85 0.008 220)", "oklch(0.92 0.008 220)", "oklch(0.935 0.008 220)"] },
-      "map-green": { "role": "tertiary", "displayName": "Map Green", "canonical": "oklch(0.5 0.11 160)", "dark": "oklch(0.86 0.16 160)", "tonalRamp": ["oklch(0.15 0.03 160)", "oklch(0.28 0.06 160)", "oklch(0.38 0.08 160)", "oklch(0.5 0.11 160)", "oklch(0.62 0.12 160)", "oklch(0.74 0.12 160)", "oklch(0.86 0.06 160)", "oklch(0.95 0.02 160)"] },
       "focus-ring": { "role": "neutral", "displayName": "Focus Ring", "canonical": "oklch(0.5 0.13 245)", "dark": "oklch(0.86 0.16 160)", "tonalRamp": ["oklch(0.15 0.05 245)", "oklch(0.27 0.08 245)", "oklch(0.38 0.11 245)", "oklch(0.5 0.13 245)", "oklch(0.6 0.12 245)", "oklch(0.72 0.1 245)", "oklch(0.85 0.06 245)", "oklch(0.95 0.02 245)"] }
     },
     "typographyMeta": {
@@ -32,11 +31,10 @@
       { "name": "lifted-patch", "value": "0 14px 28px -12px oklch(0.25 0.02 255 / 0.45)", "purpose": "Only while a kit patch is being dragged." }
     ],
     "motion": [
-      { "name": "ease-expo-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Catalogue filter fade (250ms), stack drawing explode (700ms), language meter fill (1400ms)." },
+      { "name": "ease-expo-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Catalogue filter fade (250ms), language meter fill (1400ms)." },
       { "name": "spring-tag-sway", "value": "stiffness 60, damping 14, mass 1.2", "purpose": "Hang tag swings toward the pointer, clamped to ±7deg, offset divided by 60px, pivot at the punch hole, mouse only, rests at -2.5deg." },
       { "name": "spring-hiker", "value": "stiffness 220, damping 28", "purpose": "Hiker follows the pointer along the route ridge." },
       { "name": "spring-patch", "value": "stiffness 260, damping 20", "purpose": "Kit patches settling into view and on drag." },
-      { "name": "explode", "value": "--explode: 0.45 rest, 0.95 on row hover or focus, 700ms", "purpose": "Single registered number property driving every stack drawing." },
       { "name": "reveal-words", "value": "GSAP SplitText words, yPercent 110, 0.9s expo.out, stagger 0.06, trigger top 88%", "purpose": "Headings marked data-split rise word by word, once." },
       { "name": "reveal-blocks", "value": "GSAP y 48, autoAlpha 0, 1s expo.out, trigger top 90%", "purpose": "Blocks marked data-reveal rise into place, once." },
       { "name": "smooth-scroll", "value": "Lenis lerp 0.12 on the GSAP ticker", "purpose": "Shared clock for Lenis and ScrollTrigger." },
@@ -88,14 +86,6 @@
       "css": ".ds-btn-outline { display: inline-flex; align-items: center; height: 36px; padding: 0 10px; border-radius: 4px; border: 1px solid oklch(0.87 0.014 220); background: oklch(0.967 0.005 160); color: oklch(0.235 0.035 245); font-family: Archivo, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 150ms; } .ds-btn-outline:hover { background: oklch(0.935 0.008 220); } .ds-btn-outline:focus-visible { outline: 2px solid oklch(0.5 0.13 245); outline-offset: 3px; }"
     },
     {
-      "name": "Status Labels",
-      "kind": "chip",
-      "refersTo": "status-sewn",
-      "description": "Sewn (shipped, map green, dashed) and basted (in development, tag ink, dotted). No fill.",
-      "html": "<span class=\"ds-status ds-status-sewn\">Shipped</span> <span class=\"ds-status ds-status-basted\">In development</span>",
-      "css": ".ds-status { display: inline-flex; align-items: center; padding: 6px 10px; font-family: 'Martian Mono', monospace; font-size: 0.75rem; line-height: 1; letter-spacing: 0.05em; text-transform: uppercase; font-variant-numeric: tabular-nums; } .ds-status-sewn { color: oklch(0.5 0.11 160); outline: 1.5px dashed currentColor; outline-offset: -5px; } .ds-status-basted { color: oklch(0.5 0.11 70); outline: 2px dotted currentColor; outline-offset: -5px; }"
-    },
-    {
       "name": "Kit Patch",
       "kind": "chip",
       "refersTo": "kit-patch",
@@ -115,9 +105,9 @@
       "name": "Panel",
       "kind": "card",
       "refersTo": "panel",
-      "description": "Flat bordered card for figures, the kit board and the heatmap; ripstop variant for drawing plates only.",
-      "html": "<div class=\"ds-panel\"><span class=\"ds-panel-art\">Art. 03</span></div> <div class=\"ds-panel ds-ripstop\"><span class=\"ds-panel-art\">Art. 07</span></div>",
-      "css": ".ds-panel { position: relative; display: inline-block; width: 240px; height: 165px; border: 1px solid oklch(0.87 0.014 220); border-radius: 2.4px; background: oklch(0.988 0.003 160); } .ds-ripstop { background-image: linear-gradient(oklch(0.87 0.014 220) 1px, transparent 1px), linear-gradient(90deg, oklch(0.87 0.014 220) 1px, transparent 1px); background-size: 14px 14px; background-position: -1px -1px; } .ds-panel-art { position: absolute; top: 10px; left: 12px; font-family: 'Martian Mono', monospace; font-size: 0.75rem; color: oklch(0.47 0.03 240); font-variant-numeric: tabular-nums; }"
+      "description": "Flat bordered card for figures, the kit board and the heatmap.",
+      "html": "<div class=\"ds-panel\"><span class=\"ds-panel-art\">Art. 03</span></div>",
+      "css": ".ds-panel { position: relative; display: inline-block; width: 240px; height: 165px; border: 1px solid oklch(0.87 0.014 220); border-radius: 2.4px; background: oklch(0.988 0.003 160); } .ds-panel-art { position: absolute; top: 10px; left: 12px; font-family: 'Martian Mono', monospace; font-size: 0.75rem; color: oklch(0.47 0.03 240); font-variant-numeric: tabular-nums; }"
     },
     {
       "name": "Header Navigation",
@@ -129,19 +119,18 @@
   ],
   "narrative": {
     "northStar": "The Topo Sheet Catalogue",
-    "overview": "The site is a technical outdoor gear catalogue printed on a topographic map. The maker is a product with an amber hang tag; his interests are a route drawn as an elevation profile in About; his work is a numbered list of catalogue articles (art. 01 to 09), each with a spec sheet and a plate. The ground is topographic map paper in light mode and fjord night in dark mode. Everything is printed matter or sewn material. The one warm colour, amber, is kept for what a visitor should see first: the tag, the active waypoint, the contact panel.\n\nDensity is catalogue density: ruled lists separated by hairlines, large condensed headings closed by a 2px rule, and small mono readouts for article numbers, times and field names. Depth comes from borders and tone. Only objects that physically leave the surface cast a shadow: the swaying tag and a patch in the hand. Technical lines are fjord-blue hairlines: the route ridge, the stack drawings, the rings on the kit board, and the static contour sheet behind the hero. On tablet and desktop a live Vanta topology also draws contours behind the hero. Motion is physical and sparse: the tag swings toward the pointer on a spring, the hiker follows the ridge, drawings open on row hover, headings rise word by word on scroll. All of it is switched off under reduced motion.\n\nNight mode keeps the same world: the ground turns fjord, the amber stays the same amber, the lines lighten to mist, and shipped status changes from map green to aurora green. The confirmed anti-reference is the dark neon developer portfolio with a bento grid and glowing cards.",
+    "overview": "The site is a technical outdoor gear catalogue printed on a topographic map. The maker is a product with an amber hang tag; his interests are a route drawn as an elevation profile in About; his work is a grid of catalogue articles (art. 01 to 09), each a line figure that answers the pointer and opens a spec sheet. The ground is topographic map paper in light mode and fjord night in dark mode. Everything is printed matter or sewn material. The one warm colour, amber, is kept for what a visitor should see first: the tag, the active waypoint, the contact panel.\n\nDensity is catalogue density: ruled lists separated by hairlines, large condensed headings closed by a 2px rule, and small mono readouts for article numbers, times and field names. Depth comes from borders and tone. Only objects that physically leave the surface cast a shadow: the swaying tag and a patch in the hand. Technical lines are fjord-blue hairlines: the route ridge, the project figures, the rings on the kit board, and the static contour sheet behind the hero. On tablet and desktop a live Vanta topology also draws contours behind the hero. Motion is physical and sparse: the tag swings toward the pointer on a spring, the hiker follows the ridge, project figures answer the pointer, headings rise word by word on scroll. All of it is switched off under reduced motion.\n\nNight mode keeps the same world: the ground turns fjord, the amber stays the same amber, the lines lighten to mist, and the focus ring turns aurora green. The confirmed anti-reference is the dark neon developer portfolio with a bento grid and glowing cards.",
     "keyCharacteristics": [
       "Map-paper ground with fjord ink; one amber accent used as material, not as text.",
       "Condensed Archivo (width 62, extrabold) for display; Archivo at normal width for reading; Martian Mono for data.",
-      "Status is stitching: dashed sewn for shipped, dotted basted for in development.",
-      "Fjord-blue hairline drawings: route profile, static contour sheet, isometric stack plates, kit board rings.",
+      "Fjord-blue hairline drawings: route profile, static contour sheet, isometric project figures, kit board rings.",
       "Flat bordered panels with 2.4px corners; shadows only on the hang tag and a dragged kit patch.",
       "Ruled catalogue rows with fixed article numbers 01 to 09, each reachable with the keys 1 to 9."
     ],
     "rules": [
       { "name": "The Amber Material Rule", "body": "Amber is a material: the tag, the contact panel, the active waypoint, the active stack layer. Amber text on the light ground uses Tag Ink, because the amber itself is too light to read there.", "section": "colors" },
       { "name": "The Fjord-on-Amber Rule", "body": "Anything placed on amber is On Amber in both themes. The amber never changes between day and night.", "section": "colors" },
-      { "name": "The Stitch Status Rule", "body": "Shipped is a dashed sewn stitch in Map Green; in development is a dotted basted stitch in Tag Ink. Status is never a filled pill or a coloured dot.", "section": "colors" },
+      { "name": "The No Status Rule", "body": "Projects carry no shipped or in-development status anywhere on the site.", "section": "colors" },
       { "name": "The Condensed Display Rule", "body": "Every heading uses the condensed face: Archivo at width 62 with -0.02em tracking and 0.14em word spacing added back, because the condensed width swallows word gaps. Buttons inside headings inherit that word spacing.", "section": "typography" },
       { "name": "The Mono Is Data Rule", "body": "Martian Mono is for things a catalogue would stamp or measure: article numbers, times, dates, counts, field names, levels. Numbers in it are tabular. It never sets prose or headings. The GitHub totals are the one count set in the display face instead.", "section": "typography" },
       { "name": "The Hanging Object Rule", "body": "Only objects that physically leave the surface cast a shadow: the swaying tag and a patch in the hand. Panels and rows never do.", "section": "elevation" }
@@ -149,7 +138,7 @@
     "dos": [
       "**Do** keep amber identical in both themes and put On Amber on it.",
       "**Do** use Tag Ink, not amber, for any amber text on the light ground.",
-      "**Do** mark project status with the sewn (shipped, Map Green) or basted (in development, Tag Ink) stitch label.",
+      "**Do** give every project its own line figure; screenshots go below it in the spec sheet, never first.",
       "**Do** draw technical content (profiles, contours, stacks, leader lines) as fjord hairlines, and drive any exploded drawing through the single `--explode` property.",
       "**Do** set every heading in condensed Archivo (width 62) with the restored 0.14em word spacing, and every number, date and article code in tabular Martian Mono.",
       "**Do** separate list items with hairlines and keep panels flat with a 1px border and 2.4px corners.",
@@ -159,8 +148,7 @@
     "donts": [
       "**Don't** build a dark neon developer portfolio: no bento grids, no glowing cards, no neon.",
       "**Don't** put shadows on panels, rows or cards; shadows belong only to the hanging tag and a dragged patch.",
-      "**Don't** use the ripstop grid outside technical-drawing plates.",
-      "**Don't** set prose or headings in Martian Mono, and don't put mono labels above section headings; mono labels belong to data.",
+            "**Don't** set prose or headings in Martian Mono, and don't put mono labels above section headings; mono labels belong to data.",
       "**Don't** show status as a coloured dot or filled pill.",
       "**Don't** feature one catalogue item above the others; every article gets the same row.",
       "**Don't** add decorative gradients to panels or chrome. The pointer spotlight on catalogue rows and the edge fades on the hero sheet are the only gradients."

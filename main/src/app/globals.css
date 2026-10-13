@@ -214,14 +214,6 @@
     font-family: var(--font-barlow-condensed);
     letter-spacing: -0.01em;
   }
-  /* Faint ripstop weave on panels. */
-  .ripstop {
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 14px 14px;
-    background-position: -1px -1px;
-  }
   /* Sewn label: a dashed stitch just inside the edge. */
   .stitch-sewn {
     outline: 1.5px dashed currentColor;
