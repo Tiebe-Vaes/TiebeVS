@@ -2,20 +2,13 @@
 
 import { useState } from "react"
 import dynamic from "next/dynamic"
-import Image from "next/image"
 import { ArrowUpRightIcon, Gamepad2Icon, LockIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project } from "@/content/types"
+import { DeviceGallery } from "./device-gallery"
 import { TechIcon } from "./tech-icon"
 
 const HairlineFigure = dynamic(() => import("./hairline-figure"), {
@@ -129,7 +122,7 @@ export function SpecSheet({
               </div>
             </div>
           </div>
-          {project.images?.length ? <Gallery project={project} images={project.images} sheet={sheet} /> : null}
+          {project.images?.length ? <Gallery project={project} sheet={sheet} /> : null}
         </DialogContent>
       ) : null}
     </Dialog>
@@ -150,31 +143,11 @@ function FigurePanel({ project, label }: { project: Project; label: string }) {
   )
 }
 
-function Gallery({ project, images, sheet }: { project: Project; images: string[]; sheet: Dictionary["sheet"] }) {
+function Gallery({ project, sheet }: { project: Project; sheet: Dictionary["sheet"] }) {
   return (
-    <section aria-label={sheet.images} className="flex flex-col gap-3 border-t p-5 md:p-7">
+    <section aria-label={sheet.images} className="flex flex-col gap-4 border-t p-5 md:p-7">
       <h3 className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{sheet.images}</h3>
-      <Carousel opts={{ loop: images.length > 1 }} className="rounded-sm border bg-muted">
-        <CarouselContent className="ml-0">
-          {images.map((src, index) => (
-            <CarouselItem key={src} className="relative aspect-[16/10] pl-0">
-              <Image
-                src={src}
-                alt={`${project.name} ${index + 1}/${images.length}`}
-                fill
-                sizes="(min-width: 896px) 832px, 100vw"
-                className="object-contain"
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        {images.length > 1 ? (
-          <>
-            <CarouselPrevious aria-label={sheet.prev} className="left-3" />
-            <CarouselNext aria-label={sheet.next} className="right-3" />
-          </>
-        ) : null}
-      </Carousel>
+      <DeviceGallery project={project} labels={{ title: sheet.images, image: sheet.imageOf }} />
     </section>
   )
 }

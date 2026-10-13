@@ -5,7 +5,7 @@ import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project } from "@/content/types"
 import dynamic from "next/dynamic"
 
-// The dialog and its carousel (embla) load only once a project is opened.
+// The dialog and its device gallery load only once a project is opened.
 const SpecSheet = dynamic(() => import("./spec-sheet").then((m) => m.SpecSheet), { ssr: false })
 
 type CatalogueContextValue = { open: (slug: string) => void }

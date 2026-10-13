@@ -65,8 +65,7 @@ const nl = {
     live: "Live site",
     demo: "Speel de demo",
     noRepo: "Privé-repository",
-    prev: "Vorige afbeelding",
-    next: "Volgende afbeelding",
+    imageOf: "Afbeelding {n} van {total}",
     images: "Beelden",
   },
   playing: {
@@ -179,8 +178,7 @@ const en: Dictionary = {
     live: "Live site",
     demo: "Play the demo",
     noRepo: "Private repository",
-    prev: "Previous image",
-    next: "Next image",
+    imageOf: "Image {n} of {total}",
     images: "Images",
   },
   playing: {

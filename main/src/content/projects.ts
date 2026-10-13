@@ -67,6 +67,7 @@ export const projects: Project[] = [
   {
     artNo: "04",
     slug: "travel-planning-architecture",
+    frame: "sheet",
     figure: "Exploded",
     kind: "web",
     name: "Travel Planning Platform",

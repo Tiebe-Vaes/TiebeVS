@@ -42,6 +42,8 @@ export type Project = {
   tech: string[]
   /** Line figure shown on the card and first in the spec sheet. */
   figure: FigureName
+  /** How the spec sheet presents the screenshots. Defaults: mobile projects in a phone, the rest in a laptop. */
+  frame?: "laptop" | "phone" | "sheet"
   /** Screenshots in /public, shown below the figure in the spec sheet. */
   images?: string[]
   repoUrl?: string
