@@ -18,6 +18,7 @@ export type LibraryFigure =
   | "Sieve"
   | "Exploded"
   | "Phosphor"
+  | "Plot"
 
 /** Figures drawn for this site in the hairline style (components/site/figures). */
 export type OwnFigure = "StartGate" | "Teapot" | "Kart" | "Lend"

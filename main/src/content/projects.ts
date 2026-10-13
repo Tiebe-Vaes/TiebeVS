@@ -168,4 +168,23 @@ export const projects: Project[] = [
     images: ["/MONOSS1.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/Mono",
   },
+  {
+    artNo: "09",
+    slug: "dashboard",
+    figure: "Plot",
+    kind: "web",
+    name: "Dashboard",
+    category: { nl: "Full-stack webapp · eigen tool", en: "Full-stack web app · personal tool" },
+    years: "2026",
+    summary: {
+      nl: "Persoonlijk dagdashboard. Training, agenda, taken, mail, weer en gezondheidsdata op één scherm, op gsm en laptop.",
+      en: "Personal daily dashboard. Training, calendar, tasks, mail, weather and health data on one screen, on phone and laptop.",
+    },
+    details: {
+      nl: "Elke ochtend één blik: de training van vandaag uit een plan dat uit de agenda van mijn coach gegenereerd wordt, Google Agenda, Google Taken, het aantal ongelezen mails (alleen tellingen, nooit inhoud), het weer en een countdown naar de volgende race. Stats toont slaap, stappen en rusthartslag uit geïmporteerde Samsung Health-exports. Eén eigenaar via Google-login, data in Postgres, installeerbaar als PWA. De beelden tonen de demomodus met voorbeelddata.",
+      en: "One look every morning: today's training from a plan generated from my coach's calendar, Google Calendar, Google Tasks, the unread mail count (counts only, never content), the weather and a countdown to the next race. Stats shows sleep, steps and resting heart rate from imported Samsung Health exports. One owner via Google sign-in, data in Postgres, installable as a PWA. The images show demo mode with sample data.",
+    },
+    tech: ["TypeScript", "Next.js", "React", "PostgreSQL", "Drizzle", "Tailwind CSS", "shadcn/ui", "Vitest"],
+    images: ["/DASH1.webp", "/DASH2.webp", "/DASH3.webp"],
+  },
 ]

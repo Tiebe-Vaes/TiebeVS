@@ -37,7 +37,7 @@ Identity/content
 - Interests (route waypoints): Hoboken, AP, Scouts (leader 2024–2026), Makerlab (3D printers, laser cutters), Fotografie (replaced fitness), Bergen/hiking, Experimenten (side projects, new tech), Oslo 2027.
 - Contact: e-mail tiebevaes@gmail.com, location 2660 Hoboken, GitHub, LinkedIn (linkedin.com/in/tiebevaes). **No phone number, no CV, no GitLab link.**
 - **Never mention the cleaning-company website (SR Schoonmaak), not even anonymously** — anywhere public. Rule is also in TVerse `AIOS/me.md` and in Claude memory. It is still listed on his LinkedIn (he removes it himself).
-- tieboard is never listed.
+- Tiebe's dashboard app (Tieboard) is listed only as "Dashboard" (since 2026-10-13): never the name Tieboard or its URL, demo-mode screenshots only.
 - No project is featured/highlighted above others.
 - Projects (9): GO!SmartLib, Antwerp BMX Raceday (stack: React+TS+MUI, Spring Boot Java 21, PostgreSQL, WebSocket/STOMP, PWA, JUnit 5 + Testcontainers, Docker + GitLab CI), Ripple (team of 4, Tectonic Hackathon 2026, SD Worx case; repo github.com/dylanhavelaerts/Tectonic-Hackaton — never commit there), Travel Planning Platform, LocalLend, Kart Race App, PetalPurrs, Mono, Study Countdown.
 - Screenshots: Tiebe adds them himself (do NOT spawn agents to take them). Missing: BMX, Ripple, Study Countdown. Put in `main/public/`, list in `images` in `projects.ts`.

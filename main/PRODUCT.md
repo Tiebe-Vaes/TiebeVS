@@ -40,7 +40,7 @@ Visitors come from profile links on desktop and phone. Content must match the Li
 - The website for the cleaning company is never mentioned, not even anonymously (rule in TVerse `AIOS/me.md`).
 - Hosting: Vercel Hobby (non-commercial personal site).
 - Routes: `/` Dutch, `/en` English.
-- No age on the site. tieboard is never listed.
+- No age on the site. Tiebe's own dashboard app is listed only as "Dashboard": never its own name (Tieboard) or its URL, and only with demo-mode screenshots (rule changed 2026-10-13).
 - Ripple was a team of 4 at Tectonic Hackathon 2026 (SD Worx case).
 
 ## Brand Commitments

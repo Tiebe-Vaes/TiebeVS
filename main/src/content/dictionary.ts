@@ -52,6 +52,7 @@ const nl = {
       "kart-race-app": "Kart op een bocht die je muis volgt",
       petalpurrs: "Theepot die een kopje vol schenkt",
       mono: "Pixelscherm dat een loop speelt",
+      dashboard: "Staafdiagram waarvan de balken opveren onder je muis",
     },
   },
   sheet: {
@@ -164,6 +165,7 @@ const en: Dictionary = {
       "kart-race-app": "Kart on a bend that follows your pointer",
       petalpurrs: "Teapot pouring a cup",
       mono: "Pixel screen playing a loop",
+      dashboard: "Bar chart whose bars lift under your pointer",
     },
   },
   sheet: {
