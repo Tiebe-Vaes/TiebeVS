@@ -46,4 +46,6 @@ export type Project = {
   images?: string[]
   repoUrl?: string
   liveUrl?: string
+  /** A playable build served from /public, opened in a new tab. */
+  demoUrl?: string
 }

@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     "src/components/ui/**",
     "src/components/charts/**",
     "src/components/reactbits/**",
+    // Playable demos copied as-is from their own repos (browser-compiled JSX with shared globals).
+    "public/play/**",
   ]),
 ]);
 

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
-import { ArrowUpRightIcon, LockIcon } from "lucide-react"
+import { ArrowUpRightIcon, Gamepad2Icon, LockIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import {
@@ -88,6 +88,17 @@ export function SpecSheet({
               </dl>
 
               <div className="mt-auto flex flex-wrap gap-2 pt-2">
+                {project.demoUrl ? (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={buttonVariants({ variant: "tag", size: "lg" })}
+                  >
+                    <Gamepad2Icon data-icon="inline-start" aria-hidden="true" />
+                    {sheet.demo}
+                  </a>
+                ) : null}
                 {project.repoUrl ? (
                   <a
                     href={project.repoUrl}

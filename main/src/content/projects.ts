@@ -147,6 +147,7 @@ export const projects: Project[] = [
     images: ["/PPSS1.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/PetalPurrs",
     liveUrl: "https://petalpurrs.wordpress.com/",
+    demoUrl: "/play/petalpurrs/index.html",
   },
   {
     artNo: "08",
