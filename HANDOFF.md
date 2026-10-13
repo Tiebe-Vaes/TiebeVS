@@ -74,7 +74,6 @@ Plan: `docs/superpowers/plans/2026-10-10-portfolio-fase2.md`. Commits on `redesi
 ## Still-open items (lower priority)
 
 - Phone number and CV are still in the public git history of `main` (old commits). Removing needs a history rewrite + force push — only if Tiebe explicitly asks.
-- PetalPurrs `liveUrl` points to a WordPress blog — fine as is.
 - Tiebe's own part ("Mijn deel") is missing for BMX, Ripple and others; ask him for facts, never invent.
 - Study Countdown has no concrete detail; ask him.
 - LinkedIn still lists the cleaning-company project (he removes it).

@@ -146,7 +146,6 @@ export const projects: Project[] = [
     tech: ["JavaScript", "React", "CSS"],
     images: ["/PPSS1.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/PetalPurrs",
-    liveUrl: "https://petalpurrs.wordpress.com/",
     demoUrl: "/play/petalpurrs/index.html",
   },
   {
