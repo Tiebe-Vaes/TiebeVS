@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react"
+import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type ReactNode } from "react"
 import Image from "next/image"
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react"
 import { Iphone } from "@/components/ui/iphone"
@@ -102,7 +102,7 @@ export function DeviceGallery({
                 i === active ? "border-foreground opacity-100" : "border-border opacity-55 hover:opacity-90"
               )}
             >
-              <Image src={src} alt="" fill sizes="64px" className="object-cover object-top" />
+              <Image src={isVideo(src) ? posterOf(src) : src} alt="" fill sizes="64px" className="object-cover object-top" />
             </button>
           ))}
         </div>
@@ -126,22 +126,62 @@ function Screens({
   return (
     <div className="relative size-full">
       {images.map((src, i) => (
-        <Image
-          key={src}
-          src={src}
-          alt={alt(i)}
-          fill
-          sizes={frame === "phone" ? "240px" : "(min-width: 896px) 672px, 90vw"}
-          aria-hidden={i !== active}
-          className={cn(
-            "transition-opacity duration-300 ease-out motion-reduce:transition-none",
-            // Laptop and sheet show the whole shot; a phone screen is filled from the top.
-            frame === "sheet" ? "object-contain" : frame === "phone" ? "object-cover object-top" : "object-contain",
-            i === active ? "opacity-100" : "opacity-0"
-          )}
-        />
+        isVideo(src) ? (
+          <Video key={src} src={src} label={alt(i)} active={i === active} />
+        ) : (
+          <Image
+            key={src}
+            src={src}
+            alt={alt(i)}
+            fill
+            sizes={frame === "phone" ? "240px" : "(min-width: 896px) 672px, 90vw"}
+            aria-hidden={i !== active}
+            className={cn(
+              "transition-opacity duration-300 ease-out motion-reduce:transition-none",
+              // Laptop and sheet show the whole shot; a phone screen is filled from the top.
+              frame === "sheet" ? "object-contain" : frame === "phone" ? "object-cover object-top" : "object-contain",
+              i === active ? "opacity-100" : "opacity-0"
+            )}
+          />
+        )
       ))}
     </div>
+  )
+}
+
+/** A .mp4 in `images` plays as a clip; its poster is the .webp with the same name. */
+const isVideo = (src: string) => src.endsWith(".mp4")
+const posterOf = (src: string) => src.replace(/\.mp4$/, ".webp")
+
+/** Muted autoplay loop while it is the active screen; reduced motion gets the poster and controls. */
+function Video({ src, label, active }: { src: string; label: string; active: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  const reduced = useReducedMotion()
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v) return
+    if (active && !reduced) v.play().catch(() => {})
+    else v.pause()
+  }, [active, reduced])
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      poster={posterOf(src)}
+      aria-label={label}
+      aria-hidden={!active}
+      muted
+      loop
+      playsInline
+      controls
+      preload="metadata"
+      className={cn(
+        "absolute inset-0 size-full object-contain transition-opacity duration-300 ease-out motion-reduce:transition-none",
+        active ? "opacity-100" : "pointer-events-none opacity-0"
+      )}
+    />
   )
 }
 

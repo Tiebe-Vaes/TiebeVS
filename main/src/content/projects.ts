@@ -186,6 +186,6 @@ export const projects: Project[] = [
       en: "One look every morning: today's training from a plan generated from my coach's calendar, Google Calendar, Google Tasks, the unread mail count (counts only, never content), the weather and a countdown to the next race. Stats shows sleep, steps and resting heart rate from imported Samsung Health exports. One owner via Google sign-in, data in Postgres, installable as a PWA. The images show demo mode with sample data.",
     },
     tech: ["TypeScript", "Next.js", "React", "PostgreSQL", "Drizzle", "Tailwind CSS", "shadcn/ui", "Vitest"],
-    images: ["/DASH1.webp", "/DASH2.webp", "/DASH3.webp"],
+    images: ["/DASHVID.mp4", "/DASH1.webp", "/DASH2.webp", "/DASH3.webp"],
   },
 ]

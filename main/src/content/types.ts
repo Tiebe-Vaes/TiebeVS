@@ -44,7 +44,7 @@ export type Project = {
   figure: FigureName
   /** How the spec sheet presents the screenshots. Defaults: mobile projects in a phone, the rest in a laptop. */
   frame?: "laptop" | "phone" | "sheet"
-  /** Screenshots in /public, shown below the figure in the spec sheet. */
+  /** Screenshots in /public, shown below the figure in the spec sheet. A .mp4 plays as a clip, with the same-named .webp as poster. */
   images?: string[]
   repoUrl?: string
   liveUrl?: string
