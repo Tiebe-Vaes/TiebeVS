@@ -25,3 +25,9 @@ pnpm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Claude Code working files: local only, never published
+/CLAUDE.md
+/HANDOFF.md
+/.claude/
+/.superpowers/
