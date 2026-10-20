@@ -3,6 +3,25 @@ import type { Project } from "./types"
 export const projects: Project[] = [
   {
     artNo: "01",
+    slug: "playlist-builder",
+    figure: "Turntable",
+    kind: "other",
+    name: "Playlist Builder",
+    category: { nl: "Claude-skill · open source", en: "Claude skill · open source" },
+    years: "2026",
+    summary: {
+      nl: "Claude-skill die je eerst bevraagt en voorbeeldnummers laat beoordelen voor hij een Spotify-playlist bouwt.",
+      en: "Claude skill that interviews you and has you rate sample tracks before it builds a Spotify playlist.",
+    },
+    details: {
+      nl: "De Spotify-connector in Claude maakt een playlist uit één zin tekst, en \"een chill playlist\" geeft een generieke lijst. Deze skill maakt van een kort gesprek een precieze beschrijving. Claude stelt drie tot zes vragen, laat je echte nummers beoordelen, kiest seed-playlists uit je eigen bibliotheek en schrijft dan één prompt voor Spotify's playlistgenerator. Er zijn ook modi om alleen nummers te zoeken of je eigen playlists samen te voegen. Installeerbaar als Claude Code-plugin of als zip in claude.ai, MIT-licentie.",
+      en: "The Spotify connector in Claude builds a playlist from one sentence, and \"a chill playlist\" gets you a generic one. This skill turns a short conversation into a precise description. Claude asks three to six questions, lets you rate real tracks, picks seed playlists from your own library and then writes one prompt for Spotify's playlist generator. Other modes only find songs or merge your own playlists. Installs as a Claude Code plugin or as a zip in claude.ai, MIT licence.",
+    },
+    tech: ["Claude Skills", "Claude Code plugin", "Spotify connector", "GitHub Actions"],
+    repoUrl: "https://github.com/Tiebe-Vaes/playlist-builder-for-spotify",
+  },
+  {
+    artNo: "02",
     slug: "gosmartlib",
     figure: "Drawer",
     kind: "web",
@@ -26,7 +45,7 @@ export const projects: Project[] = [
     images: ["/GSLSS.webp", "/GSLSS2.webp", "/GSLSS3.webp"],
   },
   {
-    artNo: "02",
+    artNo: "03",
     slug: "antwerp-bmx-raceday",
     figure: "StartGate",
     kind: "web",
@@ -45,7 +64,7 @@ export const projects: Project[] = [
     tech: ["TypeScript", "React", "MUI", "Java", "Spring Boot", "PostgreSQL", "WebSocket", "Docker", "GitLab CI"],
   },
   {
-    artNo: "03",
+    artNo: "04",
     slug: "ripple",
     figure: "Sieve",
     kind: "web",
@@ -65,7 +84,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/dylanhavelaerts/Tectonic-Hackaton",
   },
   {
-    artNo: "04",
+    artNo: "05",
     slug: "travel-planning-architecture",
     frame: "sheet",
     figure: "Exploded",
@@ -91,7 +110,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Tiebe-Vaes/travel-planning-architecture",
   },
   {
-    artNo: "05",
+    artNo: "06",
     slug: "locallend",
     figure: "Lend",
     kind: "mobile",
@@ -110,7 +129,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Tiebe-Vaes/LocalLend",
   },
   {
-    artNo: "06",
+    artNo: "07",
     slug: "kart-race-app",
     figure: "Kart",
     kind: "mobile",
@@ -130,7 +149,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Tiebe-Vaes/kart-race-app",
   },
   {
-    artNo: "07",
+    artNo: "08",
     slug: "petalpurrs",
     figure: "Teapot",
     kind: "other",
@@ -150,7 +169,7 @@ export const projects: Project[] = [
     demoUrl: "/play/petalpurrs/index.html",
   },
   {
-    artNo: "08",
+    artNo: "09",
     slug: "mono",
     figure: "Phosphor",
     kind: "other",
@@ -170,7 +189,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Tiebe-Vaes/Mono",
   },
   {
-    artNo: "09",
+    artNo: "10",
     slug: "dashboard",
     figure: "Plot",
     kind: "web",

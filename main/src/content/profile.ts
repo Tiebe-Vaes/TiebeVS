@@ -58,7 +58,7 @@ export const education: { title: Localized; detail?: Localized; period: Localize
 export const skillGroups: { label: Localized; items: string[] }[] = [
   {
     label: { nl: "Talen", en: "Languages" },
-    items: ["TypeScript", "JavaScript", "Java", "C#", "Dart", "SQL", "HTML", "CSS"],
+    items: ["TypeScript", "JavaScript", "Java", "C#", "Kotlin", "Dart", "Python", "SQL", "HTML", "CSS"],
   },
   {
     label: { nl: "Frontend", en: "Frontend" },
@@ -66,23 +66,23 @@ export const skillGroups: { label: Localized; items: string[] }[] = [
   },
   {
     label: { nl: "Mobiel", en: "Mobile" },
-    items: ["React Native", "Expo", "Flutter"],
+    items: ["React Native", "Expo", "Flutter", "Jetpack Compose"],
   },
   {
     label: { nl: "Backend", en: "Backend" },
-    items: ["Spring Boot", "Node.js", "Express", ".NET"],
+    items: ["Spring Boot", "Spring Security", "Hibernate", "Node.js", "Express", "NestJS", ".NET", "ASP.NET Core"],
   },
   {
     label: { nl: "Data", en: "Data" },
-    items: ["MySQL", "PostgreSQL", "Firebase"],
+    items: ["MySQL", "PostgreSQL", "Microsoft SQL Server", "MongoDB", "Redis", "Firebase", "RabbitMQ"],
   },
   {
     label: { nl: "DevOps en tools", en: "DevOps and tools" },
-    items: ["Docker", "Traefik", "Git", "GitHub", "GitLab", "Vercel"],
+    items: ["Docker", "Docker Swarm", "Traefik", "Nginx", "Linux", "Git", "GitHub", "GitHub Actions", "GitLab", "Jenkins", "Vercel"],
   },
   {
     label: { nl: "Testen", en: "Testing" },
-    items: ["JUnit 5", "Jest", "Vitest"],
+    items: ["JUnit 5", "Mockito", "Jest", "Vitest", "React Testing Library"],
   },
 ]
 

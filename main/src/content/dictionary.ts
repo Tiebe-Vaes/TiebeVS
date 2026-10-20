@@ -15,7 +15,7 @@ const nl = {
     contact: "Contact",
   },
   hero: {
-    pitch: "Ik bouw webapps van interface tot database.",
+    pitch: "Ik bouw wat de klant nodig heeft, met de nieuwste technologie.",
     facts: [
       { label: "Opleiding", value: "Toegepaste Informatica · AP Hogeschool → OsloMet" },
       { label: "Diploma", value: "Juni 2027" },
@@ -40,10 +40,11 @@ const nl = {
   catalogue: {
     title: "Projecten",
     intro: "Klantwerk, schoolprojecten en eigen experimenten.",
-    filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en desktop" },
+    filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en tools" },
     filterLabel: "Filter op type",
     stackLabel: "Technologieën",
     figures: {
+      "playlist-builder": "Draaitafel met een plaat",
       gosmartlib: "Kaartenbak met laden die openschuiven",
       "antwerp-bmx-raceday": "Starthek dat neerklapt boven acht baanlijnen",
       ripple: "Gestapelde zeven die bronnen filteren",
@@ -71,7 +72,7 @@ const nl = {
   playing: {
     title: "Werkwijze",
     intro: "Dagelijks gereedschap, meest gebruikt eerst.",
-    figureLabel: "lijntekening die je muis volgt",
+    hint: "Sleep de bol of gebruik de pijltjestoetsen.",
     newTab: "(opent in een nieuw tabblad)",
   },
   gear: {
@@ -128,7 +129,7 @@ const en: Dictionary = {
     contact: "Contact",
   },
   hero: {
-    pitch: "I build web apps, from interface to database.",
+    pitch: "I build what clients need, with the newest technology.",
     facts: [
       { label: "Education", value: "Applied Computer Science · AP University → OsloMet" },
       { label: "Degree", value: "June 2027" },
@@ -153,10 +154,11 @@ const en: Dictionary = {
   catalogue: {
     title: "Projects",
     intro: "Client work, school projects and personal experiments.",
-    filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and desktop" },
+    filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and tools" },
     filterLabel: "Filter by type",
     stackLabel: "Technologies",
     figures: {
+      "playlist-builder": "Turntable with a record",
       gosmartlib: "Card catalogue with drawers that slide out",
       "antwerp-bmx-raceday": "Start gate dropping over eight lanes",
       ripple: "Stacked sieves filtering sources",
@@ -184,7 +186,7 @@ const en: Dictionary = {
   playing: {
     title: "Workflow",
     intro: "Everyday tools, most used first.",
-    figureLabel: "line drawing that follows your pointer",
+    hint: "Drag the globe or use the arrow keys.",
     newTab: "(opens in a new tab)",
   },
   gear: {

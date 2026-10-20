@@ -37,14 +37,14 @@ export function CatalogueProvider({
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const open = useCallback((slug: string) => setOpenSlug(slug), [])
 
-  // Keys 1-9 open catalogue items 01-09 directly, only while focus is inside the catalogue,
+  // Keys 1-9 and 0 open catalogue items 01-10 directly, only while focus is inside the catalogue,
   // so single-key shortcuts never fire elsewhere on the page (WCAG 2.1.4).
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.metaKey || event.ctrlKey || event.altKey || isTypingTarget(event.target)) return
-      if (!/^[1-9]$/.test(event.key)) return
+      if (!/^[0-9]$/.test(event.key)) return
       if (!(event.target instanceof Element) || !event.target.closest("#catalogue")) return
-      const artNo = `0${event.key}`
+      const artNo = event.key === "0" ? "10" : `0${event.key}`
       const match = projects.find((p) => p.artNo === artNo)
       if (match) setOpenSlug(match.slug)
     }

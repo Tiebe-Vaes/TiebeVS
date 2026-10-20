@@ -1,5 +1,8 @@
 import {
+  siAndroid,
   siAngular,
+  siClaude,
+  siClaudecode,
   siCss,
   siDart,
   siDocker,
@@ -12,33 +15,48 @@ import {
   siFlutter,
   siGit,
   siGithub,
+  siGithubactions,
   siGitlab,
   siGooglegemini,
   siGooglemaps,
+  siHibernate,
   siHtml5,
   siJavascript,
+  siJenkins,
+  siJetpackcompose,
   siJest,
   siJunit5,
+  siKotlin,
+  siLinux,
+  siMongodb,
   siMonogame,
   siMui,
   siMysql,
+  siNestjs,
   siNextdotjs,
+  siNginx,
   siNodedotjs,
   siOpenjdk,
   siPostgresql,
+  siPython,
+  siRabbitmq,
   siRadixui,
   siReact,
+  siRedis,
   siShadcnui,
+  siSpotify,
   siSpringboot,
+  siSpringsecurity,
   siTailwindcss,
   siTanstack,
+  siTestinglibrary,
   siTraefikproxy,
   siTypescript,
   siVercel,
   siVitest,
   type SimpleIcon,
 } from "simple-icons"
-import { BracesIcon } from "lucide-react"
+import { BracesIcon, DatabaseIcon, FlaskConicalIcon, HashIcon, PlugZapIcon, WaypointsIcon, type LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const ICONS: Record<string, SimpleIcon> = {
@@ -81,16 +99,49 @@ const ICONS: Record<string, SimpleIcon> = {
   Gemini: siGooglegemini,
   "TanStack Start": siTanstack,
   MonoGame: siMonogame,
+  Kotlin: siKotlin,
+  Python: siPython,
+  "Jetpack Compose": siJetpackcompose,
+  Android: siAndroid,
+  "Spring Security": siSpringsecurity,
+  Hibernate: siHibernate,
+  NestJS: siNestjs,
+  "ASP.NET Core": siDotnet,
+  MongoDB: siMongodb,
+  Redis: siRedis,
+  RabbitMQ: siRabbitmq,
+  "Docker Swarm": siDocker,
+  Nginx: siNginx,
+  Linux: siLinux,
+  "GitHub Actions": siGithubactions,
+  Jenkins: siJenkins,
+  "React Testing Library": siTestinglibrary,
+  "Claude Skills": siClaude,
+  "Claude Code plugin": siClaudecode,
+  "Spotify connector": siSpotify,
+}
+
+// No brand mark in simple-icons (C#, SQL Server, Mockito, ...): a plain glyph for what it is.
+const GLYPHS: Record<string, LucideIcon> = {
+  "C#": HashIcon,
+  SQL: DatabaseIcon,
+  "Microsoft SQL Server": DatabaseIcon,
+  Mockito: FlaskConicalIcon,
+  WebSocket: PlugZapIcon,
+  Riverpod: WaypointsIcon,
 }
 
 export function techIconPath(name: string) {
   return ICONS[name]?.path
 }
 
-/** Brand mark when simple-icons has the right one; otherwise a neutral braces glyph, never a stand-in brand. */
+/** Brand mark when simple-icons has the right one; otherwise a plain glyph, never a stand-in brand. */
 export function TechIcon({ name, className }: { name: string; className?: string }) {
   const icon = ICONS[name]
-  if (!icon) return <BracesIcon aria-hidden="true" className={cn("size-3.5 shrink-0 opacity-70", className)} />
+  if (!icon) {
+    const Glyph = GLYPHS[name] ?? BracesIcon
+    return <Glyph aria-hidden="true" className={cn("size-3.5 shrink-0", className)} />
+  }
 
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className={cn("size-3.5 shrink-0 fill-current", className)}>

@@ -3,16 +3,10 @@
 import {
   Drawer,
   Exploded,
-  Format,
-  Hub,
-  Loupe,
   Phosphor,
   Plot,
-  Rebuild,
-  Settle,
   Sieve,
-  Stack,
-  Terminal,
+  Turntable,
 } from "@lucasmarkes/hairline/react"
 import type { FigureName, OwnFigure } from "@/content/types"
 import Kart from "./figures/kart"
@@ -23,16 +17,10 @@ import Teapot from "./figures/teapot"
 const FIGURES = {
   Drawer,
   Exploded,
-  Format,
-  Hub,
-  Loupe,
   Phosphor,
   Plot,
-  Rebuild,
-  Settle,
   Sieve,
-  Stack,
-  Terminal,
+  Turntable,
 }
 
 const OWN: Record<OwnFigure, typeof StartGate> = { StartGate, Teapot, Kart, Lend }

@@ -1,16 +1,15 @@
-import type { FigureName, Localized } from "./types"
+import type { Localized } from "./types"
 
 export type PlayingItem = {
   name: string
   kind: Localized
   blurb: Localized
   links: { label: string; href: string }[]
-  figure: FigureName
 }
 
 const agentSkills: Localized = { nl: "Agent-skills", en: "Agent skills" }
 
-/** What Tiebe plays with most right now, most used first; one specimen card each. */
+/** What Tiebe plays with most right now, most used first; one tile each on the globe. */
 export const playing: PlayingItem[] = [
   {
     name: "Claude Code",
@@ -20,7 +19,6 @@ export const playing: PlayingItem[] = [
       en: "Daily pair programmer in the terminal. Planning, building and reviewing, this site included.",
     },
     links: [{ label: "Claude Code", href: "https://code.claude.com/docs/en/overview" }],
-    figure: "Terminal",
   },
   {
     name: "Obsidian",
@@ -30,7 +28,6 @@ export const playing: PlayingItem[] = [
       en: "Second brain in linked Markdown. Notes, study and project context my agents can read.",
     },
     links: [{ label: "Obsidian", href: "https://obsidian.md" }],
-    figure: "Hub",
   },
   {
     name: "Next.js + React",
@@ -40,7 +37,6 @@ export const playing: PlayingItem[] = [
       en: "Default web stack. This site: Next.js 16 and React 19.",
     },
     links: [{ label: "Next.js", href: "https://nextjs.org" }],
-    figure: "Stack",
   },
   {
     name: "Superpowers",
@@ -50,17 +46,6 @@ export const playing: PlayingItem[] = [
       en: "Agent workflow: brainstorm, plan, build test-first.",
     },
     links: [{ label: "obra/superpowers", href: "https://github.com/obra/superpowers" }],
-    figure: "Rebuild",
-  },
-  {
-    name: "Matt Pocock skills",
-    kind: agentSkills,
-    blurb: {
-      nl: "Plannen grillen, spec en tickets schrijven, test-first bouwen.",
-      en: "Grill the plan, write the spec and tickets, build test-first.",
-    },
-    links: [{ label: "mattpocock/skills", href: "https://github.com/mattpocock/skills" }],
-    figure: "Settle",
   },
   {
     name: "Impeccable",
@@ -70,7 +55,6 @@ export const playing: PlayingItem[] = [
       en: "Design review and polish. Every section of this site went through it.",
     },
     links: [{ label: "pbakaus/impeccable", href: "https://github.com/pbakaus/impeccable" }],
-    figure: "Loupe",
   },
   {
     name: "Caveman + Ponytail",
@@ -83,6 +67,5 @@ export const playing: PlayingItem[] = [
       { label: "caveman", href: "https://github.com/JuliusBrussee/caveman" },
       { label: "ponytail", href: "https://github.com/DietrichGebert/ponytail" },
     ],
-    figure: "Format",
   },
 ]

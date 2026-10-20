@@ -17,7 +17,7 @@ import GithubHeatmap, { type HeatmapDay } from "./github-heatmap"
 import { HangTag } from "./hang-tag"
 import { LanguageMeter } from "./language-meter"
 import { RouteProfile } from "./route-profile"
-import { SpecimenCards } from "./specimen-cards"
+import { PlayingMenu } from "./playing-menu"
 import { SplitWords } from "./reveal"
 import { LinkedInIcon, TechIcon } from "./tech-icon"
 import { CopyButton } from "./copy-button"
@@ -101,7 +101,7 @@ export async function Portfolio({ locale }: { locale: Locale }) {
 
           <section aria-labelledby="playing-title" className="flex flex-col gap-10">
             <SectionHeading id="playing-title" title={t.playing.title} intro={t.playing.intro} />
-            <SpecimenCards items={playing} locale={locale} t={t.playing} />
+            <PlayingMenu items={playing} locale={locale} t={t.playing} />
           </section>
 
           <section aria-labelledby="gear-title" className="flex flex-col gap-10">

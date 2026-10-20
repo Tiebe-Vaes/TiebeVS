@@ -7,27 +7,21 @@ export type ProjectKind = "web" | "mobile" | "other"
 
 /** Figures from @lucasmarkes/hairline that the site uses. */
 export type LibraryFigure =
-  | "Terminal"
-  | "Hub"
-  | "Stack"
-  | "Rebuild"
-  | "Settle"
-  | "Loupe"
-  | "Format"
   | "Drawer"
   | "Sieve"
   | "Exploded"
   | "Phosphor"
   | "Plot"
+  | "Turntable"
 
 /** Figures drawn for this site in the hairline style (components/site/figures). */
 export type OwnFigure = "StartGate" | "Teapot" | "Kart" | "Lend"
 
-/** Every line figure on the site: one per project and one per "Werkwijze" card. */
+/** Every line figure on the site: one per project. */
 export type FigureName = LibraryFigure | OwnFigure
 
 export type Project = {
-  /** Stable catalogue number, also the keyboard shortcut (1 to 9). */
+  /** Stable catalogue number, also the keyboard shortcut (1 to 9, 0 for 10). */
   artNo: string
   slug: string
   name: string

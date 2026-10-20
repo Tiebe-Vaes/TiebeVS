@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import ScrollStack from "@/components/reactbits/ScrollStack"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project, ProjectKind } from "@/content/types"
@@ -10,7 +11,7 @@ import { SplitWords } from "./reveal"
 type Filter = "all" | ProjectKind
 const FILTERS: Filter[] = ["all", "web", "mobile", "other"]
 
-/** Every project as a figure card, three across on wide screens; filters narrow the grid. */
+/** Every project as a wide figure card in a scroll stack: each card pins and the next slides over it. Filters narrow the stack. */
 export function Catalogue({
   projects,
   locale,
@@ -51,13 +52,28 @@ export function Catalogue({
         </ToggleGroup>
       </div>
 
-      <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Window scroll: Lenis already smooths the page, so the stack only reads it. */}
+      <ScrollStack
+        key={filter}
+        useWindowScroll
+        smoothScroll={false}
+        stackPosition={96}
+        itemDistance={48}
+        itemStackDistance={14}
+        itemScale={0.03}
+        baseScale={0.88}
+        dimAmount={0.25}
+        holdDistance={24}
+      >
         {visible.map((project) => (
-          <li key={project.slug}>
-            <ProjectCard project={project} locale={locale} figureLabel={figureLabels[project.slug]} />
-          </li>
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            locale={locale}
+            figureLabel={figureLabels[project.slug]}
+          />
         ))}
-      </ol>
+      </ScrollStack>
     </section>
   )
 }
