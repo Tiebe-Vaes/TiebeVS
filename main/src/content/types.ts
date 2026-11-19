@@ -9,13 +9,12 @@ export type ProjectKind = "web" | "mobile" | "other"
 export type LibraryFigure =
   | "Drawer"
   | "Sieve"
-  | "Exploded"
-  | "Phosphor"
   | "Plot"
+  | "Riffle"
   | "Turntable"
 
 /** Figures drawn for this site in the hairline style (components/site/figures). */
-export type OwnFigure = "StartGate" | "Teapot" | "Kart" | "Lend"
+export type OwnFigure = "StartGate" | "Teapot"
 
 /** Every line figure on the site: one per project. */
 export type FigureName = LibraryFigure | OwnFigure

@@ -2,28 +2,24 @@
 
 import {
   Drawer,
-  Exploded,
-  Phosphor,
   Plot,
+  Riffle,
   Sieve,
   Turntable,
 } from "@lucasmarkes/hairline/react"
 import type { FigureName, OwnFigure } from "@/content/types"
-import Kart from "./figures/kart"
-import Lend from "./figures/lend"
 import StartGate from "./figures/start-gate"
 import Teapot from "./figures/teapot"
 
 const FIGURES = {
   Drawer,
-  Exploded,
-  Phosphor,
   Plot,
+  Riffle,
   Sieve,
   Turntable,
 }
 
-const OWN: Record<OwnFigure, typeof StartGate> = { StartGate, Teapot, Kart, Lend }
+const OWN: Record<OwnFigure, typeof StartGate> = { StartGate, Teapot }
 
 const isOwn = (name: FigureName): name is OwnFigure => name in OWN
 

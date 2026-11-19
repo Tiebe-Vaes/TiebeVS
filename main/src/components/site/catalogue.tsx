@@ -9,7 +9,8 @@ import { ProjectCard } from "./project-card"
 import { SplitWords } from "./reveal"
 
 type Filter = "all" | ProjectKind
-const FILTERS: Filter[] = ["all", "web", "mobile", "other"]
+// No mobile project is listed right now, so its filter stays hidden.
+const FILTERS: Filter[] = ["all", "web", "other"]
 
 /** Every project as a wide figure card in a scroll stack: each card pins and the next slides over it. Filters narrow the stack. */
 export function Catalogue({
