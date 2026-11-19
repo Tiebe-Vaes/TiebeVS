@@ -13,7 +13,8 @@ import { getContributions } from "@/lib/github"
 import { Catalogue } from "./catalogue"
 import { CatalogueProvider } from "./catalogue-provider"
 import { GearBoard } from "./gear-board"
-import GithubHeatmap, { type HeatmapDay } from "./github-heatmap"
+import type { HeatmapDay } from "./github-heatmap"
+import { LazyHeatmap } from "./lazy-heatmap"
 import { HangTag } from "./hang-tag"
 import { LanguageMeter } from "./language-meter"
 import { RouteProfile } from "./route-profile"
@@ -279,7 +280,7 @@ function GithubSection({
       </div>
       {heatmapDays ? (
         <div data-reveal className="min-w-0 rounded-sm border bg-card p-5 sm:p-8">
-          <GithubHeatmap days={heatmapDays} locale={t.intlLocale} labels={t.heatmap} />
+          <LazyHeatmap days={heatmapDays} locale={t.intlLocale} labels={t.heatmap} />
         </div>
       ) : null}
     </section>

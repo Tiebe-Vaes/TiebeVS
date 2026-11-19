@@ -10,6 +10,8 @@
   --font-sans: var(--font-barlow);
   --font-mono: var(--font-plex-mono);
   --font-heading: var(--font-barlow-condensed);
+  /* One house curve for every transition utility: fast out, soft landing. */
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   --color-chart-5: var(--chart-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
@@ -161,6 +163,15 @@
   html {
     @apply font-sans;
     scrollbar-color: var(--muted-foreground) var(--background);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur: 200ms;
+    --dur-slow: 600ms;
+  }
+  /* Native scroll; only anchor jumps glide, and not under reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
   body {
     @apply bg-background text-foreground;
@@ -193,7 +204,7 @@
   /* Project plates: half open at rest, open fully while their catalogue row is hovered. */
   .plate-drawing {
     --explode: 0.45;
-    transition: --explode 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: --explode 500ms var(--ease);
   }
   /* Hover only on real pointers, so a tap on a phone does not leave the drawing open. */
   @media (hover: hover) {
@@ -252,7 +263,7 @@
     vector-effect: non-scaling-stroke;
     stroke-linejoin: round;
     stroke-linecap: round;
-    transition: stroke 260ms cubic-bezier(0.5, 0, 0.1, 1);
+    transition: stroke var(--dur) var(--ease);
   }
   [data-figure] :where(.nf) {
     fill: none;
@@ -276,7 +287,7 @@
   /* Outbound link: the underline draws in from the left on hover and focus. */
   .trail-link {
     background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 0% 1px;
-    transition: background-size 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: background-size var(--dur) var(--ease);
     padding-bottom: 2px;
   }
   .trail-link:hover,
@@ -306,15 +317,15 @@
     }
     .reveal-on [data-reveal] {
       transition:
-        opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
-        translate 900ms cubic-bezier(0.16, 1, 0.3, 1);
+        opacity var(--dur-slow) var(--ease),
+        translate var(--dur-slow) var(--ease);
     }
     .reveal-on [data-split]:not(.is-in) .split-word > span {
       translate: 0 110%;
     }
     .reveal-on [data-split] .split-word > span {
-      transition: translate 900ms cubic-bezier(0.16, 1, 0.3, 1);
-      transition-delay: calc(var(--i, 0) * 60ms);
+      transition: translate var(--dur-slow) var(--ease);
+      transition-delay: calc(var(--i, 0) * 50ms);
     }
   }
   /* Ticket stub: a scalloped bottom edge cut out of the hang tag. */

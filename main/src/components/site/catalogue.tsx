@@ -53,7 +53,7 @@ export function Catalogue({
         </ToggleGroup>
       </div>
 
-      {/* Window scroll: Lenis already smooths the page, so the stack only reads it. */}
+      {/* Window scroll: the stack reads the page's native scroll. */}
       <ScrollStack
         key={filter}
         useWindowScroll

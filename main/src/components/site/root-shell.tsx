@@ -4,7 +4,6 @@ import { ThemeProvider } from "next-themes"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { RevealObserver } from "@/components/site/reveal"
 import { SiteBackground } from "@/components/site/site-background"
-import { SmoothScroll } from "@/components/site/smooth-scroll"
 import { getDictionary } from "@/content/dictionary"
 import { SITE_URL, profile } from "@/content/profile"
 import type { Locale } from "@/content/types"
@@ -76,7 +75,6 @@ export function RootShell({ locale, children }: { locale: Locale; children: Reac
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SiteBackground />
           <TooltipProvider>{children}</TooltipProvider>
-          <SmoothScroll />
           <RevealObserver />
         </ThemeProvider>
       </body>

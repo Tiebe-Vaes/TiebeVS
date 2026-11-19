@@ -137,7 +137,7 @@ function Screens({
             sizes={frame === "phone" ? "240px" : "(min-width: 896px) 672px, 90vw"}
             aria-hidden={i !== active}
             className={cn(
-              "transition-opacity duration-300 ease-out motion-reduce:transition-none",
+              "transition-opacity duration-300 motion-reduce:transition-none",
               // Laptop and sheet show the whole shot; a phone screen is filled from the top.
               frame === "sheet" ? "object-contain" : frame === "phone" ? "object-cover object-top" : "object-contain",
               i === active ? "opacity-100" : "opacity-0"
@@ -178,7 +178,7 @@ function Video({ src, label, active }: { src: string; label: string; active: boo
       controls
       preload="metadata"
       className={cn(
-        "absolute inset-0 size-full object-contain transition-opacity duration-300 ease-out motion-reduce:transition-none",
+        "absolute inset-0 size-full object-contain transition-opacity duration-300 motion-reduce:transition-none",
         active ? "opacity-100" : "pointer-events-none opacity-0"
       )}
     />
