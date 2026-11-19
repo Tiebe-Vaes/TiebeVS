@@ -68,8 +68,7 @@ const nl = {
   },
   playing: {
     title: "Werkwijze",
-    intro: "Dagelijks gereedschap, meest gebruikt eerst.",
-    hint: "Sleep de bol of gebruik de pijltjestoetsen.",
+    intro: "Hoe ik met AI-agents bouw, van idee tot review.",
     newTab: "(opent in een nieuw tabblad)",
   },
   gear: {
@@ -179,8 +178,7 @@ const en: Dictionary = {
   },
   playing: {
     title: "Workflow",
-    intro: "Everyday tools, most used first.",
-    hint: "Drag the globe or use the arrow keys.",
+    intro: "How I build with AI agents, from idea to review.",
     newTab: "(opens in a new tab)",
   },
   gear: {

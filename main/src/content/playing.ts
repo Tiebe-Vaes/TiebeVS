@@ -1,71 +1,71 @@
 import type { Localized } from "./types"
 
-export type PlayingItem = {
-  name: string
-  kind: Localized
+export type WorkflowTool = { name: string; href?: string }
+
+export type WorkflowStep = {
+  title: Localized
   blurb: Localized
-  links: { label: string; href: string }[]
+  tools: WorkflowTool[]
 }
 
-const agentSkills: Localized = { nl: "Agent-skills", en: "Agent skills" }
-
-/** What Tiebe plays with most right now, most used first; one tile each on the globe. */
-export const playing: PlayingItem[] = [
+/** How Tiebe builds with AI agents, from idea to review; one stop each on the trail. */
+export const workflow: WorkflowStep[] = [
   {
-    name: "Claude Code",
-    kind: { nl: "AI-codeeragent", en: "AI coding agent" },
+    title: { nl: "Idee scherpstellen", en: "Sharpen the idea" },
     blurb: {
-      nl: "Dagelijkse pair programmer in de terminal. Plannen, bouwen en reviewen, ook voor deze site.",
-      en: "Daily pair programmer in the terminal. Planning, building and reviewing, this site included.",
+      nl: "Eerst vragen, dan bouwen. De agent ondervraagt me tot doel, grenzen en randgevallen vastliggen.",
+      en: "Questions first, code second. The agent grills me until the goal, limits and edge cases are settled.",
     },
-    links: [{ label: "Claude Code", href: "https://code.claude.com/docs/en/overview" }],
+    tools: [{ name: "Superpowers", href: "https://github.com/obra/superpowers" }, { name: "grill-me" }],
   },
   {
-    name: "Obsidian",
-    kind: { nl: "Notities", en: "Notes" },
+    title: { nl: "Spec en tickets", en: "Spec and tickets" },
     blurb: {
-      nl: "Second brain in gelinkte Markdown. Notities, studie en projectcontext, leesbaar voor mijn agents.",
-      en: "Second brain in linked Markdown. Notes, study and project context my agents can read.",
+      nl: "Grotere apps krijgen een spec en losse tickets als GitHub-issues, zodat elk stuk werk in één sessie past.",
+      en: "Bigger apps get a spec and separate tickets as GitHub issues, so every piece of work fits one session.",
     },
-    links: [{ label: "Obsidian", href: "https://obsidian.md" }],
+    tools: [{ name: "to-spec" }, { name: "to-tickets" }, { name: "wayfinder" }],
   },
   {
-    name: "Next.js + React",
-    kind: { nl: "Framework", en: "Framework" },
+    title: { nl: "Bouwen", en: "Build" },
     blurb: {
-      nl: "Standaardstack voor het web. Deze site: Next.js 16 en React 19.",
-      en: "Default web stack. This site: Next.js 16 and React 19.",
+      nl: "Claude Code in de terminal. Test-first, in kleine stappen, met de kleinste diff die werkt.",
+      en: "Claude Code in the terminal. Test-first, in small steps, with the smallest diff that works.",
     },
-    links: [{ label: "Next.js", href: "https://nextjs.org" }],
+    tools: [
+      { name: "Claude Code", href: "https://code.claude.com/docs/en/overview" },
+      { name: "TDD" },
+      { name: "Ponytail", href: "https://github.com/DietrichGebert/ponytail" },
+    ],
   },
   {
-    name: "Superpowers",
-    kind: agentSkills,
+    title: { nl: "Design", en: "Design" },
     blurb: {
-      nl: "Werkwijze voor agents: brainstormen, plannen, test-first bouwen.",
-      en: "Agent workflow: brainstorm, plan, build test-first.",
+      nl: "Elke interface gaat door een design-review en een afwerkronde. Deze site ook.",
+      en: "Every interface goes through a design review and a polish pass. This site included.",
     },
-    links: [{ label: "obra/superpowers", href: "https://github.com/obra/superpowers" }],
+    tools: [
+      { name: "Impeccable", href: "https://github.com/pbakaus/impeccable" },
+      { name: "ui-ux-pro-max", href: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill" },
+    ],
   },
   {
-    name: "Impeccable",
-    kind: { nl: "Design-skill", en: "Design skill" },
+    title: { nl: "Review", en: "Review" },
     blurb: {
-      nl: "Design-review en afwerking. Elke sectie van deze site ging erdoor.",
-      en: "Design review and polish. Every section of this site went through it.",
+      nl: "Een tweede model leest mee: Codex reviewt wat Claude bouwt.",
+      en: "A second model reads along: Codex reviews what Claude builds.",
     },
-    links: [{ label: "pbakaus/impeccable", href: "https://github.com/pbakaus/impeccable" }],
+    tools: [{ name: "Codex" }, { name: "claudex-loop", href: "https://github.com/chaseai-yt/claudex-loop" }],
   },
   {
-    name: "Caveman + Ponytail",
-    kind: agentSkills,
+    title: { nl: "Kennis en eigen skills", en: "Knowledge and own skills" },
     blurb: {
-      nl: "Kortere antwoorden, kleinere code.",
-      en: "Shorter answers, smaller code.",
+      nl: "Obsidian als second brain die mijn agents kunnen lezen. Wat ik vaak doe, wordt een eigen skill: een opgeslagen reel als notitie bewaren, mijn dag plannen, playlists bouwen.",
+      en: "Obsidian as a second brain my agents can read. What I do often becomes my own skill: saving a reel as a note, planning my day, building playlists.",
     },
-    links: [
-      { label: "caveman", href: "https://github.com/JuliusBrussee/caveman" },
-      { label: "ponytail", href: "https://github.com/DietrichGebert/ponytail" },
+    tools: [
+      { name: "Obsidian", href: "https://obsidian.md" },
+      { name: "Playlist Builder", href: "https://github.com/Tiebe-Vaes/playlist-builder-for-spotify" },
     ],
   },
 ]
