@@ -68,7 +68,10 @@ const nl = {
   },
   playing: {
     title: "Werkwijze",
-    intro: "Hoe ik met AI-agents bouw, van idee tot review.",
+    intro: "Claude Code met eigen skills en subagents: Haiku voor klusjes, Sonnet voor browserchecks, Opus voor de eindreview.",
+    tabsLabel: "Soort sessie",
+    welcome: "Welcome to Claude Code!",
+    working: "Bezig…",
     newTab: "(opent in een nieuw tabblad)",
   },
   gear: {
@@ -178,7 +181,10 @@ const en: Dictionary = {
   },
   playing: {
     title: "Workflow",
-    intro: "How I build with AI agents, from idea to review.",
+    intro: "Claude Code with my own skills and subagents: Haiku for chores, Sonnet for browser checks, Opus for the final review.",
+    tabsLabel: "Kind of session",
+    welcome: "Welcome to Claude Code!",
+    working: "Working…",
     newTab: "(opens in a new tab)",
   },
   gear: {
