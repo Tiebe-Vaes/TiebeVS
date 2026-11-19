@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <path id="string" d="M256 156C256 110 296 82 330 48" fill="none" stroke="#f4b942" stroke-width="12" stroke-linecap="round"/>
+  <path id="tag" d="M192 112H320L384 176V448H128V176Z" fill="#111111"/>
+  <circle id="hole" cx="256" cy="176" r="22" fill="#ffffff"/>
+  <g id="monogram" fill="#ffffff">
+    <path d="M164 248H254V278H224V400H194V278H164Z"/>
+    <path d="M258 248H290L306 346L322 248H354L322 400H290Z"/>
+  </g>
+</svg>

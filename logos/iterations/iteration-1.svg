@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="frame"><rect width="512" height="512" rx="64"/></clipPath>
+  </defs>
+  <rect id="background" width="512" height="512" rx="64" fill="#111111"/>
+  <g id="contours" clip-path="url(#frame)" fill="none" stroke="#3a3a3a" stroke-width="12">
+    <path d="M20 340C10 180 150 60 262 62C400 64 500 180 496 300C492 430 360 490 256 488C130 486 26 470 20 340Z"/>
+    <path d="M76 330C70 220 160 130 262 128C372 126 446 210 440 300C434 390 350 424 256 420C160 416 80 400 76 330Z"/>
+    <path d="M128 322C126 246 190 182 266 184C344 186 392 244 388 306C384 364 326 380 260 378C194 376 130 372 128 322Z"/>
+    <path d="M184 314C184 270 222 238 266 240C312 242 336 276 334 310C332 342 300 340 262 338C224 336 184 344 184 314Z"/>
+  </g>
+  <g id="monogram-gap" fill="#111111" stroke="#111111" stroke-width="28" stroke-linejoin="round">
+    <path d="M80 128H256V184H196V392H140V184H80Z"/>
+    <path d="M256 128H316L352 300L388 128H448L384 392H320Z"/>
+  </g>
+  <g id="monogram" fill="#ffffff">
+    <path d="M80 128H256V184H196V392H140V184H80Z"/>
+    <path d="M256 128H316L352 300L388 128H448L384 392H320Z"/>
+  </g>
+  <rect id="rule" x="80" y="420" width="368" height="18" fill="#f4b942"/>
+</svg>

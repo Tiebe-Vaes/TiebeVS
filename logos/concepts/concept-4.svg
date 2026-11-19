@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect id="background" width="512" height="512" rx="64" fill="#111111"/>
+  <path id="mountain" d="M48 416L136 312L184 344L288 160L352 264L392 232L464 416Z" fill="#ffffff"/>
+  <path id="pole" d="M288 164V60" stroke="#ffffff" stroke-width="24" stroke-linecap="round"/>
+  <path id="flag" d="M288 56L380 88L288 120Z" fill="#f4b942"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect id="background" width="512" height="512" rx="64" fill="#111111"/>
+  <g id="monogram" fill="#ffffff">
+    <path d="M80 128H256V184H196V392H140V184H80Z"/>
+    <path d="M256 128H316L352 300L388 128H448L384 392H320Z"/>
+  </g>
+  <rect id="rule" x="80" y="420" width="368" height="18" fill="#f4b942"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect id="background" width="512" height="512" rx="64" fill="#111111"/>
+  <path id="trig" d="M256 116L408 380H104Z" fill="none" stroke="#ffffff" stroke-width="36" stroke-linejoin="round"/>
+  <circle id="station" cx="256" cy="292" r="34" fill="#f4b942"/>
+</svg>
