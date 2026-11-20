@@ -147,7 +147,7 @@ function Gallery({ project, sheet }: { project: Project; sheet: Dictionary["shee
   return (
     <section aria-label={sheet.images} className="flex flex-col gap-4 border-t p-5 md:p-7">
       <h3 className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{sheet.images}</h3>
-      <DeviceGallery project={project} labels={{ title: sheet.images, image: sheet.imageOf }} />
+      <DeviceGallery project={project} labels={sheet} />
     </section>
   )
 }

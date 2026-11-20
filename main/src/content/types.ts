@@ -24,6 +24,8 @@ export type Project = {
   artNo: string
   slug: string
   name: string
+  /** Shown large above the other projects (Tiebe's pick, 2026-11-20). */
+  featured?: boolean
   kind: ProjectKind
   category: Localized
   years?: string

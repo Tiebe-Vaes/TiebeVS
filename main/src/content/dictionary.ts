@@ -40,6 +40,8 @@ const nl = {
   catalogue: {
     title: "Projecten",
     intro: "Klantwerk, schoolprojecten en eigen experimenten.",
+    video: "Video",
+    more: "Meer projecten",
     stackLabel: "Technologieën",
     figures: {
       vinylytics: "Platenbak waarin de hoes onder je muis rechtop komt",
@@ -62,6 +64,12 @@ const nl = {
     demo: "Speel de demo",
     noRepo: "Privé-repository",
     imageOf: "Afbeelding {n} van {total}",
+    play: "Afspelen",
+    pause: "Pauzeren",
+    soundOn: "Geluid aan",
+    soundOff: "Geluid uit",
+    fullscreen: "Volledig scherm",
+    seek: "Positie in de video",
     images: "Beelden",
   },
   playing: {
@@ -151,6 +159,8 @@ const en: Dictionary = {
   catalogue: {
     title: "Projects",
     intro: "Client work, school projects and personal experiments.",
+    video: "Video",
+    more: "More projects",
     stackLabel: "Technologies",
     figures: {
       vinylytics: "Record crate where the sleeve under your pointer stands up",
@@ -173,6 +183,12 @@ const en: Dictionary = {
     demo: "Play the demo",
     noRepo: "Private repository",
     imageOf: "Image {n} of {total}",
+    play: "Play",
+    pause: "Pause",
+    soundOn: "Sound on",
+    soundOff: "Sound off",
+    fullscreen: "Full screen",
+    seek: "Position in the video",
     images: "Images",
   },
   playing: {

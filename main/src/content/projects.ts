@@ -4,6 +4,7 @@ export const projects: Project[] = [
   {
     artNo: "01",
     slug: "vinylytics",
+    featured: true,
     figure: "Riffle",
     kind: "web",
     name: "Vinylytics",
@@ -25,6 +26,7 @@ export const projects: Project[] = [
   {
     artNo: "02",
     slug: "antwerp-bmx-raceday",
+    featured: true,
     figure: "StartGate",
     kind: "web",
     name: "Antwerp BMX Raceday",

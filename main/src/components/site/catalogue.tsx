@@ -2,27 +2,107 @@
 
 import { useState } from "react"
 import dynamic from "next/dynamic"
+import { PlayIcon } from "lucide-react"
 import type { Dictionary } from "@/content/dictionary"
 import type { Locale, Project } from "@/content/types"
 import { useCatalogue } from "./catalogue-provider"
 import { SplitWords } from "./reveal"
 
-// The line figures load only when a project without a screenshot is previewed.
-const HairlineFigure = dynamic(() => import("./hairline-figure"), { ssr: false })
+const HairlineFigure = dynamic(() => import("./hairline-figure"), {
+  ssr: false,
+  loading: () => <div className="aspect-[5/4] w-full" />,
+})
 
 /** The still for a project: its first screenshot, or the poster of its clip. */
 const stillOf = (project: Project) => project.images?.[0]?.replace(/\.mp4$/, ".webp")
 
-/**
- * Every project as one row of an index, with a shared preview on wide screens.
- * Pointer or focus on a row swaps the preview; a click (or tap, or Enter) opens the spec sheet.
- */
-export function Catalogue({ projects, locale, t }: { projects: Project[]; locale: Locale; t: Dictionary["catalogue"] }) {
+/** The project's line figure with its live read-out, in a hairline plate. */
+function Figure({ project, label, className }: { project: Project; label: string; className?: string }) {
+  const [reading, setReading] = useState("")
+  return (
+    <span className={`hairline-plate flex flex-col rounded-sm border bg-card ${className ?? ""}`}>
+      <span className="flex items-baseline justify-between gap-2 px-3 pt-2 font-mono text-[10px] text-muted-foreground uppercase tabular">
+        <span>Fig. {project.artNo}</span>
+        <span aria-hidden="true">{reading}</span>
+      </span>
+      <HairlineFigure name={project.figure} label={label} onRead={setReading} />
+    </span>
+  )
+}
+
+/** A featured project: figure and text beside its whole screenshot. The card is one button that opens the spec sheet. */
+function Featured({ project, locale, label, video }: { project: Project; locale: Locale; label: string; video: string }) {
   const { open } = useCatalogue()
-  const [activeSlug, setActiveSlug] = useState(projects[0]?.slug)
-  const active = projects.find((p) => p.slug === activeSlug) ?? projects[0]
-  const figureLabels: Record<string, string> = t.figures
-  const still = active && stillOf(active)
+  const still = stillOf(project)
+  const hasVideo = project.images?.[0]?.endsWith(".mp4")
+  return (
+    <li>
+      <button
+        type="button"
+        onClick={() => open(project.slug)}
+        className="group grid w-full gap-6 rounded-sm border bg-card/60 p-4 text-left outline-offset-4 transition-colors hover:border-foreground/40 focus-visible:outline-2 focus-visible:outline-ring sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-8"
+      >
+        <span className="flex flex-col gap-4">
+          <Figure project={project} label={label} className="w-full max-w-[18rem]" />
+          <span className="flex flex-col gap-2">
+            <span className="font-mono text-xs tracking-wider text-muted-foreground uppercase">
+              Art. {project.artNo} · {project.category[locale]}
+              {project.years && ` · ${project.years}`}
+            </span>
+            <span className="font-display text-4xl leading-none font-bold text-balance transition-colors group-hover:text-tag-ink sm:text-5xl">
+              {project.name}
+            </span>
+            <span className="max-w-[56ch] text-pretty text-muted-foreground">{project.summary[locale]}</span>
+          </span>
+        </span>
+        {still && (
+          <span className="relative block aspect-[16/10] self-center overflow-hidden rounded-sm border bg-muted">
+            {/* eslint-disable-next-line @next/next/no-img-element -- local WebP stills, whole shot inside a fixed frame */}
+            <img src={still} alt="" loading="lazy" decoding="async" className="size-full object-contain" />
+            {hasVideo && (
+              <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-sm bg-background/90 px-2.5 py-1 font-mono text-xs uppercase">
+                <PlayIcon aria-hidden="true" className="size-3.5" />
+                {video}
+              </span>
+            )}
+          </span>
+        )}
+      </button>
+    </li>
+  )
+}
+
+/** A compact project row: small figure, name and summary, category and years. */
+function Row({ project, locale, label }: { project: Project; locale: Locale; label: string }) {
+  const { open } = useCatalogue()
+  return (
+    <li className="border-b">
+      <button
+        type="button"
+        onClick={() => open(project.slug)}
+        className="group grid w-full grid-cols-[5rem_1fr] items-center gap-x-4 gap-y-1 py-4 text-left outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring sm:grid-cols-[8rem_1fr_auto] sm:gap-x-6"
+      >
+        <Figure project={project} label={label} className="row-span-2 sm:row-span-1" />
+        <span className="flex min-w-0 flex-col gap-1">
+          <span className="font-display text-3xl leading-none font-bold text-balance transition-colors group-hover:text-tag-ink">
+            {project.name}
+          </span>
+          <span className="hidden max-w-[60ch] text-pretty text-muted-foreground sm:block">{project.summary[locale]}</span>
+        </span>
+        <span className="font-mono text-xs tracking-wider text-muted-foreground uppercase sm:text-right">
+          {project.category[locale]}
+          {project.years && <span className="block normal-case">{project.years}</span>}
+        </span>
+      </button>
+    </li>
+  )
+}
+
+/** Two featured projects, then the rest as compact rows; every project keeps its line figure. */
+export function Catalogue({ projects, locale, t }: { projects: Project[]; locale: Locale; t: Dictionary["catalogue"] }) {
+  const labels: Record<string, string> = t.figures
+  const featured = projects.filter((p) => p.featured)
+  const rest = projects.filter((p) => !p.featured)
 
   return (
     <section id="catalogue" aria-labelledby="catalogue-title" className="flex scroll-mt-20 flex-col gap-8">
@@ -33,74 +113,17 @@ export function Catalogue({ projects, locale, t }: { projects: Project[]; locale
         <p className="text-pretty text-muted-foreground">{t.intro}</p>
       </div>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] xl:grid-cols-[minmax(0,1fr)_minmax(0,32rem)]">
-        <ol className="flex flex-col">
-          {projects.map((project) => {
-            const isActive = project.slug === active?.slug
-            return (
-              <li key={project.slug} className="border-b">
-                <button
-                  type="button"
-                  onClick={() => open(project.slug)}
-                  onFocus={() => setActiveSlug(project.slug)}
-                  onPointerEnter={(e) => e.pointerType === "mouse" && setActiveSlug(project.slug)}
-                  className="group grid w-full grid-cols-[2.5rem_1fr] gap-x-4 gap-y-1 py-5 text-left outline-offset-4 focus-visible:outline-2 focus-visible:outline-ring sm:grid-cols-[3rem_1fr_auto] sm:py-6"
-                >
-                  <span className="pt-1.5 font-mono text-xs text-muted-foreground tabular">
-                    <span aria-hidden="true" className={isActive ? "invisible text-tag-ink lg:visible" : "invisible"}>
-                      ▸{" "}
-                    </span>
-                    {project.artNo}
-                  </span>
-                  <span className="flex min-w-0 flex-col gap-1">
-                    <span
-                      className={`font-display text-3xl leading-none font-bold text-balance transition-colors sm:text-4xl ${isActive ? "lg:text-tag-ink" : ""} group-hover:text-tag-ink`}
-                    >
-                      {project.name}
-                    </span>
-                    <span className="max-w-[60ch] text-pretty text-muted-foreground">{project.summary[locale]}</span>
-                  </span>
-                  <span className="col-start-2 font-mono text-xs tracking-wider text-muted-foreground uppercase sm:col-start-3 sm:pt-2 sm:text-right">
-                    {project.category[locale]}
-                    {project.years && <span className="block normal-case">{project.years}</span>}
-                  </span>
-                </button>
-              </li>
-            )
-          })}
-        </ol>
+      <ol className="flex flex-col gap-6">
+        {featured.map((p) => (
+          <Featured key={p.slug} project={p} locale={locale} label={labels[p.slug] ?? p.name} video={t.video} />
+        ))}
+      </ol>
 
-        {/* Decorative: the rows already carry every word, so the preview stays out of the reading order. */}
-        <div aria-hidden="true" className="hidden lg:block">
-          <div className="sticky top-24 flex flex-col gap-2">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-sm border bg-card">
-              {active &&
-                (still ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- local WebP stills, sized by the frame
-                  <img
-                    key={still}
-                    src={still}
-                    alt=""
-                    decoding="async"
-                    className="size-full animate-in object-cover object-top fade-in duration-200 motion-reduce:animate-none"
-                  />
-                ) : (
-                  <div key={active.slug} className="flex size-full items-center justify-center p-8 animate-in fade-in duration-200 motion-reduce:animate-none">
-                    <div className="w-full max-w-sm">
-                      <HairlineFigure name={active.figure} label={figureLabels[active.slug] ?? active.name} onRead={() => {}} />
-                    </div>
-                  </div>
-                ))}
-            </div>
-            {active && (
-              <p className="flex justify-between font-mono text-xs text-muted-foreground uppercase tabular">
-                <span>Art. {active.artNo}</span>
-                <span>{active.years}</span>
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
+      <ol className="flex flex-col border-t" aria-label={t.more}>
+        {rest.map((p) => (
+          <Row key={p.slug} project={p} locale={locale} label={labels[p.slug] ?? p.name} />
+        ))}
+      </ol>
     </section>
   )
 }
