@@ -40,8 +40,6 @@ const nl = {
   catalogue: {
     title: "Projecten",
     intro: "Klantwerk, schoolprojecten en eigen experimenten.",
-    filters: { all: "Alles", web: "Web", mobile: "Mobiel", other: "Games en tools" },
-    filterLabel: "Filter op type",
     stackLabel: "Technologieën",
     figures: {
       vinylytics: "Platenbak waarin de hoes onder je muis rechtop komt",
@@ -153,8 +151,6 @@ const en: Dictionary = {
   catalogue: {
     title: "Projects",
     intro: "Client work, school projects and personal experiments.",
-    filters: { all: "All", web: "Web", mobile: "Mobile", other: "Games and tools" },
-    filterLabel: "Filter by type",
     stackLabel: "Technologies",
     figures: {
       vinylytics: "Record crate where the sleeve under your pointer stands up",

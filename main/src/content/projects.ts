@@ -44,6 +44,7 @@ export const projects: Project[] = [
       en: "The results engine: MOTO lineups, points per heat, the day ranking, knockout rounds drawn from transfer schemas, gate choice for finalists and validation with corrections. Also the bilingual frontend, error messages and emails.",
     },
     tech: ["TypeScript", "React", "Vite", "Tailwind CSS", "shadcn/ui", "Java", "Spring Boot", "PostgreSQL", "Stripe", "Docker", "GitLab CI"],
+    images: ["/BMX1.webp", "/BMX2.webp"],
   },
   {
     artNo: "03",
@@ -106,6 +107,7 @@ export const projects: Project[] = [
       en: "Built at Tectonic Hackathon 2026 for the SD Worx case: how do you make scattered knowledge findable, trustworthy and shareable? A consultant picks sources and Ripple scores them on recency, authority and conflicts. When the best score is too low, you ask an expert to verify one fact and every score recalculates. Only project members can see a project.",
     },
     tech: ["TypeScript", "Next.js", "Tailwind CSS", "shadcn/ui", "Gemini"],
+    images: ["/RIPPLE1.webp"],
     repoUrl: "https://github.com/dylanhavelaerts/Tectonic-Hackaton",
   },
   {
