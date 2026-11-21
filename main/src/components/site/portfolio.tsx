@@ -6,7 +6,7 @@ import LogoLoop from "@/components/reactbits/LogoLoop"
 import { buttonVariants } from "@/components/ui/button"
 import { getDictionary, type Dictionary } from "@/content/dictionary"
 import { SITE_URL, education, profile, skillGroups, spokenLanguages } from "@/content/profile"
-import { sessions, workflowLinks } from "@/content/playing"
+import { sessions } from "@/content/playing"
 import { projects } from "@/content/projects"
 import type { Locale } from "@/content/types"
 import { getContributions } from "@/lib/github"
@@ -102,7 +102,7 @@ export async function Portfolio({ locale }: { locale: Locale }) {
 
           <section aria-labelledby="playing-title" className="flex flex-col gap-10">
             <SectionHeading id="playing-title" title={t.playing.title} intro={t.playing.intro} />
-            <WorkflowTerminal sessions={sessions} links={workflowLinks} locale={locale} t={t.playing} />
+            <WorkflowTerminal sessions={sessions} locale={locale} t={t.playing} />
           </section>
 
           <section aria-labelledby="gear-title" className="flex flex-col gap-10">

@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import dynamic from "next/dynamic"
 import { PlayIcon } from "lucide-react"
 import type { Dictionary } from "@/content/dictionary"
@@ -13,19 +12,17 @@ const HairlineFigure = dynamic(() => import("./hairline-figure"), {
   loading: () => <div className="aspect-[5/4] w-full" />,
 })
 
-/** The still for a project: its first screenshot, or the poster of its clip. */
-const stillOf = (project: Project) => project.images?.[0]?.replace(/\.mp4$/, ".webp")
+/** The still for a project: its first screenshot, else the poster of its clip. */
+const stillOf = (project: Project) =>
+  project.images?.find((src) => !src.endsWith(".mp4")) ?? project.images?.[0]?.replace(/\.mp4$/, ".webp")
 
-/** The project's line figure with its live read-out, in a hairline plate. */
+const ignore = () => {}
+
+/** The project's line figure in a hairline plate. */
 function Figure({ project, label, className }: { project: Project; label: string; className?: string }) {
-  const [reading, setReading] = useState("")
   return (
     <span className={`hairline-plate flex flex-col rounded-sm border bg-card ${className ?? ""}`}>
-      <span className="flex items-baseline justify-between gap-2 px-3 pt-2 font-mono text-[10px] text-muted-foreground uppercase tabular">
-        <span>Fig. {project.artNo}</span>
-        <span aria-hidden="true">{reading}</span>
-      </span>
-      <HairlineFigure name={project.figure} label={label} onRead={setReading} />
+      <HairlineFigure name={project.figure} label={label} onRead={ignore} />
     </span>
   )
 }
@@ -34,7 +31,7 @@ function Figure({ project, label, className }: { project: Project; label: string
 function Featured({ project, locale, label, video }: { project: Project; locale: Locale; label: string; video: string }) {
   const { open } = useCatalogue()
   const still = stillOf(project)
-  const hasVideo = project.images?.[0]?.endsWith(".mp4")
+  const hasVideo = project.images?.some((src) => src.endsWith(".mp4"))
   return (
     <li>
       <button

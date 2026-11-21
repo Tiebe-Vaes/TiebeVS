@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import dynamic from "next/dynamic"
 import { ArrowUpRightIcon, Gamepad2Icon, LockIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -122,7 +121,7 @@ export function SpecSheet({
               </div>
             </div>
           </div>
-          {project.images?.length ? <Gallery project={project} sheet={sheet} /> : null}
+          {project.images?.length ? <Gallery project={project} sheet={sheet} locale={locale} /> : null}
         </DialogContent>
       ) : null}
     </Dialog>
@@ -130,24 +129,22 @@ export function SpecSheet({
 }
 
 /** The project's figure, first thing in the sheet; screenshots come below. */
+const ignore = () => {}
+
 function FigurePanel({ project, label }: { project: Project; label: string }) {
-  const [reading, setReading] = useState("")
   return (
     <div className="hairline-plate flex flex-col justify-center border-b bg-card md:border-r md:border-b-0">
-      <div className="flex items-baseline justify-between gap-4 px-5 pt-4 font-mono text-xs text-muted-foreground uppercase tabular">
-        <span>Fig. {project.artNo}</span>
-        <span aria-hidden="true">{reading}</span>
-      </div>
-      <HairlineFigure name={project.figure} label={label} onRead={setReading} />
+      <HairlineFigure name={project.figure} label={label} onRead={ignore} />
     </div>
   )
 }
 
-function Gallery({ project, sheet }: { project: Project; sheet: Dictionary["sheet"] }) {
+function Gallery({ project, sheet, locale }: { project: Project; sheet: Dictionary["sheet"]; locale: Locale }) {
   return (
     <section aria-label={sheet.images} className="flex flex-col gap-4 border-t p-5 md:p-7">
       <h3 className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{sheet.images}</h3>
       <DeviceGallery project={project} labels={sheet} />
+      {project.credit && <p className="text-center text-xs text-pretty text-muted-foreground">{project.credit[locale]}</p>}
     </section>
   )
 }

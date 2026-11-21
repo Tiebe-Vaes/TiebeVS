@@ -33,6 +33,9 @@ export function DeviceGallery({
   // shortcut: one clip per project (all current data), drive the first if that ever changes
   const video = useRef<HTMLVideoElement>(null)
   const onVideo = isVideo(images[active] ?? "")
+  // A portrait clip plays on a phone, whatever device the screenshots use.
+  const [portrait, setPortrait] = useState(false)
+  const shown: Frame = onVideo && portrait ? "phone" : frame
 
   const px = useMotionValue(0)
   const py = useMotionValue(0)
@@ -59,7 +62,14 @@ export function DeviceGallery({
   }
 
   const screen = (
-    <Screens images={images} active={active} alt={(i) => `${project.name} ${i + 1}/${images.length}`} frame={frame} video={video} />
+    <Screens
+      images={images}
+      active={active}
+      alt={(i) => `${project.name} ${i + 1}/${images.length}`}
+      frame={shown}
+      video={video}
+      onPortrait={setPortrait}
+    />
   )
 
   return (
@@ -80,12 +90,12 @@ export function DeviceGallery({
           style={reduced || onVideo ? undefined : { rotateX, rotateY }}
           className={cn(
             "w-full will-change-transform",
-            frame === "phone" ? "max-w-[15rem]" : frame === "sheet" ? "max-w-xl" : "max-w-2xl"
+            shown === "phone" ? "max-w-[15rem]" : shown === "sheet" ? "max-w-xl" : "max-w-2xl"
           )}
         >
-          {frame === "phone" ? (
+          {shown === "phone" ? (
             <Iphone screen={screen} />
-          ) : frame === "sheet" ? (
+          ) : shown === "sheet" ? (
             <Sheet label={`Art. ${project.artNo} · ${active + 1}/${images.length}`}>{screen}</Sheet>
           ) : (
             <Laptop>{screen}</Laptop>
@@ -126,18 +136,20 @@ function Screens({
   alt,
   frame,
   video,
+  onPortrait,
 }: {
   images: string[]
   active: number
   alt: (i: number) => string
   frame: Frame
   video: RefObject<HTMLVideoElement | null>
+  onPortrait: (portrait: boolean) => void
 }) {
   return (
     <div className="relative size-full">
       {images.map((src, i) => (
         isVideo(src) ? (
-          <Video key={src} ref={video} src={src} label={alt(i)} active={i === active} />
+          <Video key={src} ref={video} src={src} label={alt(i)} active={i === active} onPortrait={onPortrait} />
         ) : (
           <Image
             key={src}
@@ -164,7 +176,19 @@ const isVideo = (src: string) => src.endsWith(".mp4")
 const posterOf = (src: string) => src.replace(/\.mp4$/, ".webp")
 
 /** Muted autoplay loop while it is the active screen; reduced motion starts on the poster. A click toggles play. */
-function Video({ ref, src, label, active }: { ref: RefObject<HTMLVideoElement | null>; src: string; label: string; active: boolean }) {
+function Video({
+  ref,
+  src,
+  label,
+  active,
+  onPortrait,
+}: {
+  ref: RefObject<HTMLVideoElement | null>
+  src: string
+  label: string
+  active: boolean
+  onPortrait: (portrait: boolean) => void
+}) {
   const reduced = useReducedMotion()
 
   useEffect(() => {
@@ -185,6 +209,7 @@ function Video({ ref, src, label, active }: { ref: RefObject<HTMLVideoElement | 
       loop
       playsInline
       preload="metadata"
+      onLoadedMetadata={(e) => onPortrait(e.currentTarget.videoHeight > e.currentTarget.videoWidth)}
       onClick={(e) => (e.currentTarget.paused ? e.currentTarget.play().catch(() => {}) : e.currentTarget.pause())}
       className={cn(
         "absolute inset-0 size-full cursor-pointer object-contain transition-opacity duration-300 motion-reduce:transition-none",
