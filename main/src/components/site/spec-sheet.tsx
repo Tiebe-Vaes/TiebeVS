@@ -121,7 +121,7 @@ export function SpecSheet({
               </div>
             </div>
           </div>
-          {project.images?.length ? <Gallery project={project} sheet={sheet} locale={locale} /> : null}
+          {project.images?.length ? <Gallery project={project} sheet={sheet} /> : null}
         </DialogContent>
       ) : null}
     </Dialog>
@@ -139,12 +139,11 @@ function FigurePanel({ project, label }: { project: Project; label: string }) {
   )
 }
 
-function Gallery({ project, sheet, locale }: { project: Project; sheet: Dictionary["sheet"]; locale: Locale }) {
+function Gallery({ project, sheet }: { project: Project; sheet: Dictionary["sheet"] }) {
   return (
     <section aria-label={sheet.images} className="flex flex-col gap-4 border-t p-5 md:p-7">
       <h3 className="font-mono text-xs tracking-wider text-muted-foreground uppercase">{sheet.images}</h3>
       <DeviceGallery project={project} labels={sheet} />
-      {project.credit && <p className="text-center text-xs text-pretty text-muted-foreground">{project.credit[locale]}</p>}
     </section>
   )
 }

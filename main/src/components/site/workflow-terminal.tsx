@@ -112,9 +112,9 @@ function Transcript({
         setAt(
           lineDone
             ? { line: at.line + 1, char: 0 }
-            : { line: at.line, char: at.char + 2 },
+            : { line: at.line, char: at.char + 1 },
         ),
-      lineDone ? 260 : 16,
+      lineDone ? 450 : 24,
     );
     return () => clearTimeout(id);
   }, [at, play, finished, lines, locale]);

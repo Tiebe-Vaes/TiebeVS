@@ -43,8 +43,6 @@ export type Project = {
   images?: string[]
   repoUrl?: string
   liveUrl?: string
-  /** Attribution shown under the images, e.g. for licensed music in a clip. */
-  credit?: Localized
   /** A playable build served from /public, opened in a new tab. */
   demoUrl?: string
 }

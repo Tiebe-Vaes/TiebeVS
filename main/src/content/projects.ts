@@ -19,11 +19,7 @@ export const projects: Project[] = [
       en: "Spotify Wrapped shows up once a year and your top lists only look back a few months. Vinylytics keeps every play, imports your full Extended Streaming History (the import resumes after a reload) and syncs every 30 minutes. It finds the artist who led each week and presses every run of three weeks or more into an era, as a record sleeve coloured from the cover. Also: charts you edit like a sentence, a year recap to tap through, a day-by-day history and pages per artist, song and album. Every view becomes a share card as a post or a story, in 64 inks. One owner per installation: the raw play log stays in your own database. Self-host with Docker or Vercel with Neon, or locally without an account on PGlite. MIT licence, with CI on GitHub Actions. The images show the synthetic demo history.",
     },
     tech: ["TypeScript", "Next.js", "React", "PostgreSQL", "Drizzle", "PGlite", "TanStack Query", "Tailwind CSS", "Vitest", "Docker"],
-    images: ["/VINYLCLIP.mp4", "/VINYL1.webp", "/VINYL2.webp", "/VINYL3.webp"],
-    credit: {
-      nl: "Muziek in de video: bewerkt uit “Funkorama” en “Cut and Run” van Kevin MacLeod (incompetech.com), CC BY 4.0.",
-      en: "Music in the video: edited from “Funkorama” and “Cut and Run” by Kevin MacLeod (incompetech.com), CC BY 4.0.",
-    },
+    images: ["/VINYLAD.mp4", "/VINYL1.webp", "/VINYL2.webp", "/VINYL3.webp"],
     repoUrl: "https://github.com/Tiebe-Vaes/vinylytics",
     liveUrl: "https://vinylytics.vercel.app",
   },
