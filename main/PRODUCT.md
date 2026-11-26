@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Next.js (App Router) + TypeScript, statically generated, hosted on Vercel at https://tiebe.vercel.app. Chosen by Tiebe on 2026-10-06 to replace the Vite + React JSX SPA. UI built from shadcn/ui plus registry components (Kokonut UI, bklit UI, 21st.dev), motion via motion.dev (`motion` package). Vercel's React/Next.js best practices apply.
+Next.js (App Router) + TypeScript, statically generated, hosted on Vercel at https://tiebe.is-a.dev. Chosen by Tiebe on 2026-10-06 to replace the Vite + React JSX SPA. UI built from shadcn/ui plus registry components (Kokonut UI, bklit UI, 21st.dev), motion via motion.dev (`motion` package). Vercel's React/Next.js best practices apply.
 
 ## Users
 

@@ -1,6 +1,6 @@
 import type { Localized } from "./types"
 
-export const SITE_URL = "https://tiebe.vercel.app"
+export const SITE_URL = "https://tiebe.is-a.dev"
 
 export const profile = {
   name: "Tiebe Vaes",

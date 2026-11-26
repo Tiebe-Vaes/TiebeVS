@@ -1,6 +1,6 @@
 # Tiebe Vaes · Portfolio
 
-My personal portfolio, live at **[tiebe.vercel.app](https://tiebe.vercel.app)**.
+My personal portfolio, live at **[tiebe.is-a.dev](https://tiebe.is-a.dev)**.
 
 The site presents me and my work as a technical outdoor gear catalogue on a topographic map: a hang tag for the maker, a route profile for the person and numbered catalogue items with spec sheets for the projects. Dutch on `/`, English on `/en`.
 
